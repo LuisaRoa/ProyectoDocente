@@ -34,7 +34,7 @@ public class Administrativo {
 	private String password;
 	
 	@Column(name = "admi_fecha_nacimiento", length = 30, nullable = false)
-	private String fechanacimiento;
+	private String fecha_nacimiento;
 	
 	@Column(name = "admi_sexo", length = 60, nullable = false)
 	private String sexo;
@@ -47,7 +47,7 @@ public class Administrativo {
 	private String celular;	
 	
 	@Column(name = "admi_fecha_ingreso", length = 60, nullable = false)
-	private String fechaingreso;	
+	private String fecha_ingreso;	
 	
 	@Column(name = "admi_correo", length = 60, nullable = false)
 	private String correo;	
@@ -97,11 +97,11 @@ public class Administrativo {
 	}
 
 	public String getFechanacimiento() {
-		return fechanacimiento;
+		return fecha_nacimiento;
 	}
 
-	public void setFechanacimiento(String fechanacimiento) {
-		this.fechanacimiento = fechanacimiento;
+	public void setFechanacimiento(String fecha_nacimiento) {
+		this.fecha_nacimiento = fecha_nacimiento;
 	}
 
 	public String getSexo() {
@@ -129,11 +129,11 @@ public class Administrativo {
 	}
 
 	public String getFechaingreso() {
-		return fechaingreso;
+		return fecha_ingreso;
 	}
 
-	public void setFechaingreso(String fechaingreso) {
-		this.fechaingreso = fechaingreso;
+	public void setFechaingreso(String fecha_ingreso) {
+		this.fecha_ingreso = fecha_ingreso;
 	}
 
 	public String getCorreo() {
