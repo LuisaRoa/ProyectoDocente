@@ -52,8 +52,8 @@ public class DocenteServiceImp implements IDocenteService {
 		Docente pro = this.buscarId(docente.getId());
 		pro.setDocumento(docente.getDocumento());
         pro.setNombre(docente.getNombre());
-        pro.setLugarexpedicion(docente.getLugarexpedicion());
-        pro.setLugarnacimiento(docente.getLugarnacimiento());
+        pro.setCodigo(docente.getCodigo());
+        pro.setPassword(docente.getPassword());
         pro.setFechanacimiento(docente.getFechanacimiento());
         pro.setSexo(docente.getSexo());
         pro.setDireccion(docente.getDireccion());

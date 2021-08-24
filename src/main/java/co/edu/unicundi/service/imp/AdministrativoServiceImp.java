@@ -41,7 +41,8 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 		Administrativo pro = this.buscarId(admi.getId());
 		pro.setDocumento(admi.getDocumento());
         pro.setNombre(admi.getNombre());
-        pro.setLugarnacimiento(admi.getLugarnacimiento());
+        pro.setCodigo(admi.getCodigo());
+        pro.setPassword(admi.getPassword());
         pro.setFechanacimiento(admi.getFechanacimiento());
         pro.setSexo(admi.getSexo());
         pro.setDireccion(admi.getDireccion());

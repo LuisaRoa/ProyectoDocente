@@ -41,6 +41,7 @@ public class CloudinaryService {
         File file = new File(multipartFile.getOriginalFilename());
         FileOutputStream fo = new FileOutputStream(file);
         fo.write(multipartFile.getBytes());
+       // fo.write((int) multipartFile.getSize());
         fo.close();
         return file;
     }

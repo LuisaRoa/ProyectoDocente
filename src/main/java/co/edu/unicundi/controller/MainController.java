@@ -44,14 +44,15 @@ public class MainController {
                 new Imagen((String)result.get("original_filename"),
                         (String)result.get("url"),
                         (String)result.get("public_id"));
+                       /* (String)result.get("size")*/
         imagenService.save(imagen);
-        return new ResponseEntity(new Mensaje("imagen subida"), HttpStatus.OK);
+        return new ResponseEntity<Object>(new Mensaje("imagen subida"), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id)throws IOException {
         if(!imagenService.exists(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Object>(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         Imagen imagen = imagenService.getOne(id).get();
         Map result = cloudinaryService.delete(imagen.getImagenId());
         imagenService.delete(id);

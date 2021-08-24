@@ -30,13 +30,13 @@ public class Docente {
 	private String nombre;
 
 	
-	@Column(name = "doce_lugarexpedicion", length = 30, nullable = false)
-	private String lugarexpedicion;
+	@Column(name = "doce_codigo", length = 60, nullable = false)
+	private String codigo;
 	
-	@Column(name = "doce_lugarnacimiento", length = 30, nullable = false)
-	private String lugarnacimiento;
+	@Column(name = "doce_password", length = 60, nullable = false)
+	private String password;
 	
-	@Column(name = "doce_fechanacimiento", length = 30, nullable = false)
+	@Column(name = "doce_fecha_nacimiento", length = 30, nullable = false)
 	private String fechanacimiento;
 	
 	@Column(name = "doce_sexo", length = 60, nullable = false)
@@ -49,7 +49,7 @@ public class Docente {
 	@Column(name = "doce_celular", length = 60, nullable = false)
 	private String celular;	
 	
-	@Column(name = "doce_fechaingreso", length = 60, nullable = false)
+	@Column(name = "doce_fecha_ingreso", length = 60, nullable = false)
 	private String fechaingreso;	
 	
 	@Column(name = "doce_correo", length = 60, nullable = false)
@@ -82,20 +82,22 @@ public class Docente {
 		this.nombre = nombre;
 	}
 
-	public String getLugarexpedicion() {
-		return lugarexpedicion;
+	
+
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setLugarexpedicion(String lugarexpedicion) {
-		this.lugarexpedicion = lugarexpedicion;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
-	public String getLugarnacimiento() {
-		return lugarnacimiento;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setLugarnacimiento(String lugarnacimiento) {
-		this.lugarnacimiento = lugarnacimiento;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFechanacimiento() {

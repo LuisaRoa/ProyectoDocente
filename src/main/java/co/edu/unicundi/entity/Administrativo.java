@@ -27,10 +27,13 @@ public class Administrativo {
 	private String nombre;
 
 	
-	@Column(name = "admi_lugarnacimiento", length = 30, nullable = false)
-	private String lugarnacimiento;
+	@Column(name = "admi_codigo", length = 60, nullable = false)
+	private String codigo;
 	
-	@Column(name = "admi_fechanacimiento", length = 30, nullable = false)
+	@Column(name = "admi_password", length = 60, nullable = false)
+	private String password;
+	
+	@Column(name = "admi_fecha_nacimiento", length = 30, nullable = false)
 	private String fechanacimiento;
 	
 	@Column(name = "admi_sexo", length = 60, nullable = false)
@@ -40,10 +43,10 @@ public class Administrativo {
 	private String direccion;	
 	
 	
-	@Column(name = "admi_telefono", length = 60, nullable = false)
-	private String telefono;	
+	@Column(name = "admi_celular", length = 60, nullable = false)
+	private String celular;	
 	
-	@Column(name = "admi_fechaingreso", length = 60, nullable = false)
+	@Column(name = "admi_fecha_ingreso", length = 60, nullable = false)
 	private String fechaingreso;	
 	
 	@Column(name = "admi_correo", length = 60, nullable = false)
@@ -77,13 +80,20 @@ public class Administrativo {
 	}
 
 
-
-	public String getLugarnacimiento() {
-		return lugarnacimiento;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setLugarnacimiento(String lugarnacimiento) {
-		this.lugarnacimiento = lugarnacimiento;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFechanacimiento() {
@@ -111,11 +121,11 @@ public class Administrativo {
 	}
 
 	public String getCelular() {
-		return telefono;
+		return celular;
 	}
 
-	public void setCelular(String telefono) {
-		this.telefono = telefono;
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 
 	public String getFechaingreso() {
