@@ -41,9 +41,9 @@ public class MainController {
         }*/
         Map result = cloudinaryService.upload(multipartFile);
         Imagen imagen =
-                new Imagen((String)result.get("original_filename"),
+                new Imagen(0, (String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"));
+                        (String)result.get("public_id"), null, null, null, null, null);
                        /* (String)result.get("size")*/
         imagenService.save(imagen);
         return new ResponseEntity<Object>(new Mensaje("imagen subida"), HttpStatus.OK);

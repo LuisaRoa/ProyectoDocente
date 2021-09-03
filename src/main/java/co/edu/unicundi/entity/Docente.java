@@ -1,16 +1,25 @@
 package co.edu.unicundi.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 @Table(name = "docente")
@@ -57,6 +66,56 @@ public class Docente {
 	
 	@Column(name = "doce_sede", length = 60, nullable = false)
 	private String sede;
+	
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@OneToOne
+	@JoinColumn(name = "administrativo_admi_id", nullable = false, foreignKey = @ForeignKey(name = "admi_id"))
+	private Administrativo administrativo;
+	
+	
+	@OneToOne(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private AulasVirtuales aulasvirtuales ;
+	
+	
+
+	public Docente() {
+	}
+
+	public Docente(Integer doce_id, String documento,String nombre,	String codigo, String password, String fecha_nacimiento, String sexo, String direccion, String celular,
+			String fecha_ingreso, String correo, String sede,Administrativo administrativo, AulasVirtuales aulasvirtuales) {
+		super();
+		this.doce_id = doce_id;
+		this.documento = documento;
+		this.nombre = nombre;
+		this.codigo = codigo;
+		this.password = password;
+		this.fecha_nacimiento = fecha_nacimiento;
+		this.sexo = sexo;
+		this.direccion = direccion;
+		this.celular = celular;
+		this.fecha_ingreso = fecha_ingreso;
+		this.correo = correo;
+		this.sede = sede;
+		this.administrativo = administrativo;
+		this.aulasvirtuales = aulasvirtuales;
+	}
+	
+	public Administrativo getAdministrativo() {
+		return administrativo;
+	}
+
+	public void setAdministrativo(Administrativo administrativo) {
+		this.administrativo = administrativo;
+	}
+
+
+	public AulasVirtuales getAulasvirtuales() {
+		return aulasvirtuales;
+	}
+
+	public void setAulasvirtuales(AulasVirtuales aulasvirtuales) {
+		this.aulasvirtuales = aulasvirtuales;
+	}
 
 	public Integer getId() {
 		return doce_id;

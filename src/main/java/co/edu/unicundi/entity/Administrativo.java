@@ -1,10 +1,14 @@
 package co.edu.unicundi.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -54,6 +58,9 @@ public class Administrativo {
 	
 	@Column(name = "admi_sede", length = 60, nullable = false)
 	private String sede;
+	
+	@OneToOne(mappedBy ="administrativo", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private Docente docente ;
 
 	public Integer getId() {
 		return admi_id;

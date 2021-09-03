@@ -24,8 +24,17 @@ public class ImagenService {
         return imagenRepository.findById(id);
     }
 
+    public void update (Imagen imagen) {
+    	Imagen img = getOne(imagen.getId()).get();
+    	img.setNombre(imagen.getNombre());
+    	img.setCodigo(imagen.getCodigo());
+    	img.setProceso(imagen.getProceso());
+    	img.setVersion(imagen.getVersion());
+    	img.setFechaAprobacion(imagen.getFechaAprobacion());
+        imagenRepository.save(img);
+    }
     public void save(Imagen imagen){
-        imagenRepository.save(imagen);
+    	imagenRepository.save(imagen);
     }
 
     public void delete(int id){
