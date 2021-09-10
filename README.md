@@ -1,2 +1,0 @@
-# ProyectoFinalModuloDocente
-Proyecto de grado
