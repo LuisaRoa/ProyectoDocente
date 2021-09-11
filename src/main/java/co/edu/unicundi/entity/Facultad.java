@@ -1,10 +1,15 @@
 package co.edu.unicundi.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,6 +32,31 @@ public class Facultad {
 
 	@Column(name = "facu_fechacambio", length = 60, nullable = false)
 	private String fechacambio;
+	
+	@OneToMany(mappedBy ="facultad", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private List<ProgramaAcademico> programaacademico ;
+
+	
+	
+	public Facultad() {
+	}
+
+	public Facultad(Integer facu_id, String nombre,	String registradopor, String fechacambio, List<ProgramaAcademico> programaacademico) {
+		super();
+		this.facu_id = facu_id;
+		this.nombre = nombre;
+		this.registradopor = registradopor;
+		this.fechacambio = fechacambio;
+		this.programaacademico = programaacademico;
+	}
+
+	public List<ProgramaAcademico> getProgramaacademico() {
+		return programaacademico;
+	}
+
+	public void setProgramaacademico(List<ProgramaAcademico> programaacademico) {
+		this.programaacademico = programaacademico;
+	}
 
 	public Integer getFacu_id() {
 		return facu_id;

@@ -37,8 +37,8 @@ public class DocenteServiceImp implements IDocenteService {
 	@Override
 	public void guardar(Docente docente) throws Exception {
 		for(Docente p: docentes) {
-			if(p.getId()==docente.getId()) {
-				throw new Exception("Ya existe el ID");
+			if(p.getDocumento()==docente.getDocumento()) {
+				throw new Exception("Ya existe el docente");
 			}
 				
 		}

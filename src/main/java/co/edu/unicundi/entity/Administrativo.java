@@ -1,17 +1,24 @@
 package co.edu.unicundi.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "administrativo")
@@ -38,7 +45,7 @@ public class Administrativo {
 	private String password;
 	
 	@Column(name = "admi_fecha_nacimiento", length = 30, nullable = false)
-	private String fecha_nacimiento;
+	private String fechaNacimiento;
 	
 	@Column(name = "admi_sexo", length = 60, nullable = false)
 	private String sexo;
@@ -59,11 +66,83 @@ public class Administrativo {
 	@Column(name = "admi_sede", length = 60, nullable = false)
 	private String sede;
 	
-	@OneToOne(mappedBy ="administrativo", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	private Docente docente ;
+	@OneToMany(mappedBy ="administrativo", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private List<Docente> docente ;
+	
+	@ManyToOne
+	@JoinColumn(name = "programa_prac_id", nullable = false, foreignKey = @ForeignKey(name = "prac_id"))
+	private ProgramaAcademico programaacademico;
 
+
+	
+	public Administrativo() {
+	}
+
+	public Administrativo(Integer admi_id, String documento,String nombre,String codigo, String password, String fechaNacimiento, String sexo, String direccion, String celular,
+			String fecha_ingreso, String correo, String sede, List<Docente> docente,
+			ProgramaAcademico programaacademico) {
+		super();
+		this.admi_id = admi_id;
+		this.documento = documento;
+		this.nombre = nombre;
+		this.codigo = codigo;
+		this.password = password;
+		this.fechaNacimiento = fechaNacimiento;
+		this.sexo = sexo;
+		this.direccion = direccion;
+		this.celular = celular;
+		this.fecha_ingreso = fecha_ingreso;
+		this.correo = correo;
+		this.sede = sede;
+		this.docente = docente;
+		this.programaacademico = programaacademico;
+	}
+
+	public Integer getAdmi_id() {
+		return admi_id;
+	}
+
+	public void setAdmi_id(Integer admi_id) {
+		this.admi_id = admi_id;
+	}
+
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getFecha_ingreso() {
+		return fecha_ingreso;
+	}
+
+	public void setFecha_ingreso(String fecha_ingreso) {
+		this.fecha_ingreso = fecha_ingreso;
+	}
+
+	public List<Docente> getDocente() {
+		return docente;
+	}
+
+	public void setDocente(List<Docente> docente) {
+		this.docente = docente;
+	}
+	
+	
+	
 	public Integer getId() {
 		return admi_id;
+	}
+	
+	@JsonBackReference 
+	public ProgramaAcademico getProgramaacademico() {
+		return programaacademico;
+	}
+
+	public void setProgrmaacademico(ProgramaAcademico progrmaacademico) {
+		this.programaacademico = progrmaacademico;
 	}
 
 	public void setId(Integer id) {
@@ -104,11 +183,11 @@ public class Administrativo {
 	}
 
 	public String getFechanacimiento() {
-		return fecha_nacimiento;
+		return fechaNacimiento;
 	}
 
 	public void setFechanacimiento(String fecha_nacimiento) {
-		this.fecha_nacimiento = fecha_nacimiento;
+		this.fechaNacimiento = fecha_nacimiento;
 	}
 
 	public String getSexo() {

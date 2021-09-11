@@ -1,6 +1,6 @@
 package co.edu.unicundi.entity;
 
-import java.util.List;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,13 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -46,7 +46,7 @@ public class Docente {
 	private String password;
 	
 	@Column(name = "doce_fecha_nacimiento", length = 30, nullable = false)
-	private String fecha_nacimiento;
+	private String fechaNacimiento;
 	
 	@Column(name = "doce_sexo", length = 60, nullable = false)
 	private String sexo;
@@ -67,8 +67,8 @@ public class Docente {
 	@Column(name = "doce_sede", length = 60, nullable = false)
 	private String sede;
 	
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne
+	
+	@ManyToOne
 	@JoinColumn(name = "administrativo_admi_id", nullable = false, foreignKey = @ForeignKey(name = "admi_id"))
 	private Administrativo administrativo;
 	
@@ -89,7 +89,7 @@ public class Docente {
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.password = password;
-		this.fecha_nacimiento = fecha_nacimiento;
+		this.fechaNacimiento = fecha_nacimiento;
 		this.sexo = sexo;
 		this.direccion = direccion;
 		this.celular = celular;
@@ -100,6 +100,7 @@ public class Docente {
 		this.aulasvirtuales = aulasvirtuales;
 	}
 	
+	@JsonBackReference 
 	public Administrativo getAdministrativo() {
 		return administrativo;
 	}
@@ -160,11 +161,11 @@ public class Docente {
 	}
 
 	public String getFechanacimiento() {
-		return fecha_nacimiento;
+		return fechaNacimiento;
 	}
 
 	public void setFechanacimiento(String fecha_nacimiento) {
-		this.fecha_nacimiento = fecha_nacimiento;
+		this.fechaNacimiento = fecha_nacimiento;
 	}
 
 	public String getSexo() {
