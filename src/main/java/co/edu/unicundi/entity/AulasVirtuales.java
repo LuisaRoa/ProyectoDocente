@@ -41,10 +41,10 @@ public class AulasVirtuales {
 	private String sede;
 
 	@Column(name = "auvi_registradopor", length = 30, nullable = false)
-	private String registradopor;
+	private String registradoPor;
 
 	@Column(name = "auvi_fechacambio", length = 60, nullable = false)
-	private String fechacambio;
+	private String fechaCambio;
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@OneToOne
@@ -68,8 +68,8 @@ public class AulasVirtuales {
 		this.grupo = grupo;
 		this.semestre = semestre;
 		this.sede = sede;
-		this.registradopor = registradopor;
-		this.fechacambio = fechacambio;
+		this.registradoPor = registradopor;
+		this.fechaCambio = fechacambio;
 		this.docente = docente;
 		this.materia = materia;
 
@@ -116,19 +116,19 @@ public class AulasVirtuales {
 	}
 
 	public String getRegistradopor() {
-		return registradopor;
+		return registradoPor;
 	}
 
 	public void setRegistradopor(String registradopor) {
-		this.registradopor = registradopor;
+		this.registradoPor = registradopor;
 	}
 
 	public String getFechacambio() {
-		return fechacambio;
+		return fechaCambio;
 	}
 
 	public void setFechacambio(String fechacambio) {
-		this.fechacambio = fechacambio;
+		this.fechaCambio = fechacambio;
 	}
 
 	

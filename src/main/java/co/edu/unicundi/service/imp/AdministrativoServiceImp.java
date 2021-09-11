@@ -47,7 +47,7 @@ public class AdministrativoServiceImp implements IAdministrativoService {
         pro.setSexo(admi.getSexo());
         pro.setDireccion(admi.getDireccion());
         pro.setCelular(admi.getCelular());
-        pro.setFechaingreso(admi.getFechaingreso());
+        pro.setFechaIngreso(admi.getFechaIngreso());
         pro.setCorreo(admi.getCorreo());
         pro.setSede(admi.getSede());
         

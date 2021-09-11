@@ -28,10 +28,10 @@ public class SolicitudAulas {
 	private String estado;
 
 	@Column(name = "soau_registradopor", length = 30, nullable = false)
-	private String registradopor;
+	private String registradoPor;
 
 	@Column(name = "soau_fechacambio", length = 60, nullable = false)
-	private String fechacambio;
+	private String fechaCambio;
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@OneToOne
@@ -54,8 +54,8 @@ public class SolicitudAulas {
 		this.soau_id = soau_id;
 		this.fecha = fecha;
 		this.estado = estado;
-		this.registradopor = registradopor;
-		this.fechacambio = fechacambio;
+		this.registradoPor = registradopor;
+		this.fechaCambio = fechacambio;
 		this.docente = docente;
 		this.materia = materia;
 	}
@@ -85,19 +85,19 @@ public class SolicitudAulas {
 	}
 
 	public String getRegistradopor() {
-		return registradopor;
+		return registradoPor;
 	}
 
 	public void setRegistradopor(String registradopor) {
-		this.registradopor = registradopor;
+		this.registradoPor = registradopor;
 	}
 
 	public String getFechacambio() {
-		return fechacambio;
+		return fechaCambio;
 	}
 
 	public void setFechacambio(String fechacambio) {
-		this.fechacambio = fechacambio;
+		this.fechaCambio = fechacambio;
 	}
 
 	public Docente getDocente() {

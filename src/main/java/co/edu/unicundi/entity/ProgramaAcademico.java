@@ -29,7 +29,7 @@ public class ProgramaAcademico {
 	
 	@NotNull(message = "Nombre  requerido")
 	@Size(min = 3, max = 30, message = "Nombre entre 3 y 30 caracteres")
-	@Column(name = "prac_nombre", length = 30, nullable = false)
+	@Column(name = "prac_nombre", length = 90, nullable = false)
 	private String nombre;
 	
 	@Column(name = "prac_registradopor", length = 30, nullable = false)

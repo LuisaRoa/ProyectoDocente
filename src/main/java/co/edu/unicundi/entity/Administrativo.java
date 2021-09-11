@@ -41,7 +41,7 @@ public class Administrativo {
 	@Column(name = "admi_codigo", length = 60, nullable = false)
 	private String codigo;
 	
-	@Column(name = "admi_password", length = 60, nullable = false)
+	@Column(name = "admi_password", length = 60, nullable = true)
 	private String password;
 	
 	@Column(name = "admi_fecha_nacimiento", length = 30, nullable = false)
@@ -58,7 +58,7 @@ public class Administrativo {
 	private String celular;	
 	
 	@Column(name = "admi_fecha_ingreso", length = 60, nullable = false)
-	private String fecha_ingreso;	
+	private String fechaIngreso;	
 	
 	@Column(name = "admi_correo", length = 60, nullable = false)
 	private String correo;	
@@ -91,7 +91,7 @@ public class Administrativo {
 		this.sexo = sexo;
 		this.direccion = direccion;
 		this.celular = celular;
-		this.fecha_ingreso = fecha_ingreso;
+		this.fechaIngreso = fecha_ingreso;
 		this.correo = correo;
 		this.sede = sede;
 		this.docente = docente;
@@ -114,12 +114,12 @@ public class Administrativo {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public String getFecha_ingreso() {
-		return fecha_ingreso;
+	public String getFechaIngreso() {
+		return fechaIngreso;
 	}
 
-	public void setFecha_ingreso(String fecha_ingreso) {
-		this.fecha_ingreso = fecha_ingreso;
+	public void setFechaIngreso(String fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
 	}
 
 	public List<Docente> getDocente() {
@@ -214,13 +214,7 @@ public class Administrativo {
 		this.celular = celular;
 	}
 
-	public String getFechaingreso() {
-		return fecha_ingreso;
-	}
 
-	public void setFechaingreso(String fecha_ingreso) {
-		this.fecha_ingreso = fecha_ingreso;
-	}
 
 	public String getCorreo() {
 		return correo;

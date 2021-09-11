@@ -24,14 +24,14 @@ public class Facultad {
 
 	@NotNull(message = "Nombre  requerido")
 	@Size(min = 3, max = 30, message = "Nombre entre 3 y 30 caracteres")
-	@Column(name = "facu_nombre", length = 30, nullable = false)
+	@Column(name = "facu_nombre", length = 90, nullable = false)
 	private String nombre;
 
 	@Column(name = "facu_registradopor", length = 30, nullable = false)
-	private String registradopor;
+	private String registradoPor;
 
 	@Column(name = "facu_fechacambio", length = 60, nullable = false)
-	private String fechacambio;
+	private String fechaCambio;
 	
 	@OneToMany(mappedBy ="facultad", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<ProgramaAcademico> programaacademico ;
@@ -45,8 +45,8 @@ public class Facultad {
 		super();
 		this.facu_id = facu_id;
 		this.nombre = nombre;
-		this.registradopor = registradopor;
-		this.fechacambio = fechacambio;
+		this.registradoPor = registradopor;
+		this.fechaCambio = fechacambio;
 		this.programaacademico = programaacademico;
 	}
 
@@ -74,20 +74,20 @@ public class Facultad {
 		this.nombre = nombre;
 	}
 
-	public String getRegistradopor() {
-		return registradopor;
+	public String getRegistradoPor() {
+		return registradoPor;
 	}
 
-	public void setRegistradopor(String registradopor) {
-		this.registradopor = registradopor;
+	public void setRegistradoPor(String registradoPor) {
+		this.registradoPor = registradoPor;
 	}
 
-	public String getFechacambio() {
-		return fechacambio;
+	public String getFechaCambio() {
+		return fechaCambio;
 	}
 
-	public void setFechacambio(String fechacambio) {
-		this.fechacambio = fechacambio;
+	public void setFechaCambio(String fechaCambio) {
+		this.fechaCambio = fechaCambio;
 	}
 
 }
