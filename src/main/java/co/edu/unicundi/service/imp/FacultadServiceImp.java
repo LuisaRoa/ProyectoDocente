@@ -19,7 +19,7 @@ public class FacultadServiceImp implements IFacultadService {
 
 	public Facultad buscarId(int id) throws ModelNotFoundException {
 		Facultad facu = repo.findById(id).orElseThrow(
-                () -> new ModelNotFoundException("materia no exontrada"));
+                () -> new ModelNotFoundException("facultad no exontrada"));
         return facu;
 	}
 

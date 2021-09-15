@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import co.edu.unicundi.entity.Administrativo;
+import co.edu.unicundi.entity.Facultad;
 import co.edu.unicundi.entity.ProgramaAcademico;
 import co.edu.unicundi.exception.ModelNotFoundException;
+import co.edu.unicundi.repo.IFacultadRepo;
 import co.edu.unicundi.repo.IProgramaAcademicoRepo;
 import co.edu.unicundi.service.IProgramaAcademicoService;
 
@@ -17,6 +19,9 @@ public class ProgramaAcademicoServiceImp implements IProgramaAcademicoService {
 	
 	@Autowired
 	private IProgramaAcademicoRepo repo;
+	
+	@Autowired
+	private IFacultadRepo repoFacu;
 	
 	List<ProgramaAcademico> admi = new ArrayList<ProgramaAcademico>();
 	
@@ -39,10 +44,12 @@ public class ProgramaAcademicoServiceImp implements IProgramaAcademicoService {
 
 	public void editar(ProgramaAcademico prac) throws Exception, ModelNotFoundException {
 		ProgramaAcademico pro = this.buscarId(prac.getPrac_id());
+		Facultad facu = repoFacu.findById(prac.getFacultad().getFacu_id()).orElseThrow(
+                () -> new ModelNotFoundException("facultad no  exontrada"));
         pro.setNombre(prac.getNombre());
         pro.setFechacambio(prac.getFechacambio());
         pro.setRegistradopor(prac.getRegistradopor());
-        pro.setFacultad(prac.getFacultad());
+        pro.setFacultad(facu);
         
         this.repo.save(pro);
 	}

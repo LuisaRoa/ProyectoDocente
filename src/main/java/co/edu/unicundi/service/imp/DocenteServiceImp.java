@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import co.edu.unicundi.entity.Administrativo;
 import co.edu.unicundi.entity.Docente;
+import co.edu.unicundi.entity.Facultad;
 import co.edu.unicundi.exception.ModelNotFoundException;
+import co.edu.unicundi.repo.IAdministrativoRepo;
 import co.edu.unicundi.repo.IDocenteRepo;
 import co.edu.unicundi.service.IDocenteService;
 
@@ -17,6 +20,8 @@ public class DocenteServiceImp implements IDocenteService {
 
 	@Autowired
 	private IDocenteRepo repo;
+	@Autowired
+	private IAdministrativoRepo repoAdmi;
 	
 	List<Docente> docentes = new ArrayList<Docente>();
 	@Override
@@ -49,6 +54,9 @@ public class DocenteServiceImp implements IDocenteService {
 	@Override
 	public void editar(Docente docente) throws Exception, ModelNotFoundException {
 		Docente pro = this.buscarId(docente.getId());
+		
+		Administrativo admi = repoAdmi.findById(docente.getAdministrativo().getAdmi_id()).orElseThrow(
+                () -> new ModelNotFoundException("administrativo no  exontrado"));
 		pro.setDocumento(docente.getDocumento());
         pro.setNombre(docente.getNombre());
         pro.setCodigo(docente.getCodigo());
@@ -60,7 +68,7 @@ public class DocenteServiceImp implements IDocenteService {
         pro.setFechaingreso(docente.getFechaingreso());
         pro.setCorreo(docente.getCorreo());
         pro.setSede(docente.getSede());
-        
+        pro.setAdministrativo(admi);
         this.repo.save(pro);
 	}
 
