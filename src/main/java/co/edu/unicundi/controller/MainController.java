@@ -2,11 +2,16 @@ package co.edu.unicundi.controller;
 
 import co.edu.unicundi.dto.Mensaje;
 import co.edu.unicundi.entity.Imagen;
+import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.CloudinaryService;
 import co.edu.unicundi.service.ImagenService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,19 +26,19 @@ import java.util.Map;
 @CrossOrigin
 public class MainController {
 
-    @Autowired
-    CloudinaryService cloudinaryService;
+	@Autowired
+	CloudinaryService cloudinaryService;
 
-    @Autowired
-    ImagenService imagenService;
+	@Autowired
+	ImagenService imagenService;
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Imagen>> list(){
-        List<Imagen> list = imagenService.list();
-        return new ResponseEntity(list, HttpStatus.OK);
-    }
+	@GetMapping("/list")
+	public ResponseEntity<List<Imagen>> list() {
+		List<Imagen> list = imagenService.list();
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
 
-    @PostMapping("/upload")
+	@PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
         /*if(bi == null){
@@ -46,16 +51,39 @@ public class MainController {
                         (String)result.get("public_id"), null, null, null, null, null);
                        /* (String)result.get("size")*/
         imagenService.save(imagen);
-        return new ResponseEntity<Object>(new Mensaje("imagen subida"), HttpStatus.OK);
+        return new ResponseEntity<Imagen>(imagen, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id)throws IOException {
-        if(!imagenService.exists(id))
-            return new ResponseEntity<Object>(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Imagen imagen = imagenService.getOne(id).get();
-        Map result = cloudinaryService.delete(imagen.getImagenId());
-        imagenService.delete(id);
-        return new ResponseEntity(new Mensaje("imagen eliminada"), HttpStatus.OK);
-    }
+	@PutMapping("/editar")
+    @ApiOperation(
+            value = "Editar al formato correspondiente al id",
+            notes = "Editar al formato correspondiente al id"
+            )
+            @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = Imagen.class ),
+            @ApiResponse(code = 503, message = "Servicio no Disponible", response = String.class),
+            @ApiResponse(code = 500, message = "Error inesperado del sistema") })
+	public ResponseEntity<Imagen> editar(@Validated @RequestBody Imagen imagen) throws Exception, ModelNotFoundException{
+		imagenService.update(imagen);
+		return new ResponseEntity<Imagen>(imagen, HttpStatus.CREATED);
+
+	}
+
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<?> delete(@PathVariable("id") int id) throws IOException {
+		if (!imagenService.exists(id))
+			return new ResponseEntity<Object>(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+		Imagen imagen = imagenService.getOne(id).get();
+		Map result = cloudinaryService.delete(imagen.getImagenId());
+		imagenService.delete(id);
+		return new ResponseEntity(new Mensaje("imagen eliminada"), HttpStatus.OK);
+	}
+
+	@GetMapping("/retornarId/{id}")
+	@ApiOperation(value = "Metodo que retorna a un formato por su id")
+	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception {
+		Imagen imagen = imagenService.getOne(id).get();
+		return new ResponseEntity<Imagen>(imagen, HttpStatus.OK);
+
+	}
 }

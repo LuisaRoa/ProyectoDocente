@@ -36,6 +36,7 @@ public class CloudinaryService {
         Map result = cloudinary.uploader().destroy(id, ObjectUtils.emptyMap());
         return result;
     }
+    
 
     private File convert(MultipartFile multipartFile) throws IOException {
         File file = new File(multipartFile.getOriginalFilename());

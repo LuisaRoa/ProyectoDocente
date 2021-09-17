@@ -16,16 +16,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "solicitudaulas")
 public class SolicitudAulas {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer soau_id;
-	
+
 	@Column(name = "soau_fecha", length = 30, nullable = false)
 	private String fecha;
 
 	@Column(name = "soau_estado", length = 30, nullable = false)
 	private String estado;
+
+	@Column(name = "soau_grupo", length = 30, nullable = false)
+	private Integer grupo;
+
+	@Column(name = "soau_semestre", length = 30, nullable = false)
+	private String semestre;
+
+	@Column(name = "soau_sede", length = 30, nullable = false)
+	private String sede;
 
 	@Column(name = "soau_registradopor", length = 30, nullable = false)
 	private String registradoPor;
@@ -43,21 +52,62 @@ public class SolicitudAulas {
 	@JoinColumn(name = "materia_mate_id", nullable = false, foreignKey = @ForeignKey(name = "mate_id"))
 	private Materia materia;
 
-	
-	
 	public SolicitudAulas() {
 	}
 
-	public SolicitudAulas(Integer soau_id, String fecha, String estado, String registradopor, String fechacambio,
-			Docente docente, Materia materia) {
+	public SolicitudAulas(Integer soau_id, String fecha, String estado, Integer grupo, String semestre, String sede,
+			String registradoPor, String fechaCambio, Docente docente, Materia materia) {
 		super();
 		this.soau_id = soau_id;
 		this.fecha = fecha;
 		this.estado = estado;
-		this.registradoPor = registradopor;
-		this.fechaCambio = fechacambio;
+		this.grupo = grupo;
+		this.semestre = semestre;
+		this.sede = sede;
+		this.registradoPor = registradoPor;
+		this.fechaCambio = fechaCambio;
 		this.docente = docente;
 		this.materia = materia;
+	}
+
+	public Integer getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Integer grupo) {
+		this.grupo = grupo;
+	}
+
+	public String getSemestre() {
+		return semestre;
+	}
+
+	public void setSemestre(String semestre) {
+		this.semestre = semestre;
+	}
+
+	public String getSede() {
+		return sede;
+	}
+
+	public void setSede(String sede) {
+		this.sede = sede;
+	}
+
+	public String getRegistradoPor() {
+		return registradoPor;
+	}
+
+	public void setRegistradoPor(String registradoPor) {
+		this.registradoPor = registradoPor;
+	}
+
+	public String getFechaCambio() {
+		return fechaCambio;
+	}
+
+	public void setFechaCambio(String fechaCambio) {
+		this.fechaCambio = fechaCambio;
 	}
 
 	public Integer getSoau_id() {
@@ -107,7 +157,7 @@ public class SolicitudAulas {
 	public void setDocente(Docente docente) {
 		this.docente = docente;
 	}
-	
+
 	@JsonIgnore
 	public Materia getMateria() {
 		return materia;
@@ -116,7 +166,5 @@ public class SolicitudAulas {
 	public void setMateria(Materia materia) {
 		this.materia = materia;
 	}
-	
-	
 
 }

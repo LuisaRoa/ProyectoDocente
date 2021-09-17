@@ -2,6 +2,8 @@ package co.edu.unicundi.entity;
 
 
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +14,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -59,7 +62,7 @@ public class Docente {
 	private String celular;	
 	
 	@Column(name = "doce_fecha_ingreso", length = 60, nullable = false)
-	private String fecha_ingreso;	
+	private String fechaIngreso;	
 	
 	@Column(name = "doce_correo", length = 60, nullable = false)
 	private String correo;	
@@ -73,8 +76,9 @@ public class Docente {
 	private Administrativo administrativo;
 	
 	
-	@OneToOne(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	private AulasVirtuales aulasvirtuales ;
+	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<AulasVirtuales> aulasvirtuales ;
 	
 	
 
@@ -82,7 +86,7 @@ public class Docente {
 	}
 
 	public Docente(Integer doce_id, String documento,String nombre,	String codigo, String password, String fecha_nacimiento, String sexo, String direccion, String celular,
-			String fecha_ingreso, String correo, String sede,Administrativo administrativo, AulasVirtuales aulasvirtuales) {
+			String fecha_ingreso, String correo, String sede,Administrativo administrativo, List<AulasVirtuales> aulasvirtuales) {
 		super();
 		this.doce_id = doce_id;
 		this.documento = documento;
@@ -93,11 +97,11 @@ public class Docente {
 		this.sexo = sexo;
 		this.direccion = direccion;
 		this.celular = celular;
-		this.fecha_ingreso = fecha_ingreso;
+		this.fechaIngreso = fecha_ingreso;
 		this.correo = correo;
 		this.sede = sede;
 		this.administrativo = administrativo;
-		this.aulasvirtuales = aulasvirtuales;
+		this.aulasvirtuales = (List<AulasVirtuales>) aulasvirtuales;
 	}
 	
 	@JsonBackReference 
@@ -110,12 +114,12 @@ public class Docente {
 	}
 
 
-	public AulasVirtuales getAulasvirtuales() {
-		return aulasvirtuales;
+	public List<AulasVirtuales> getAulasvirtuales() {
+		return (List<AulasVirtuales>) aulasvirtuales;
 	}
 
-	public void setAulasvirtuales(AulasVirtuales aulasvirtuales) {
-		this.aulasvirtuales = aulasvirtuales;
+	public void setAulasvirtuales(List<AulasVirtuales> aulasvirtuales) {
+		this.aulasvirtuales = (List<AulasVirtuales>) aulasvirtuales;
 	}
 
 	public Integer getId() {
@@ -192,12 +196,12 @@ public class Docente {
 		this.celular = celular;
 	}
 
-	public String getFechaingreso() {
-		return fecha_ingreso;
+	public String getFechaIngreso() {
+		return fechaIngreso;
 	}
 
-	public void setFechaingreso(String fechaingreso) {
-		this.fecha_ingreso = fechaingreso;
+	public void setFechaIngreso(String fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
 	}
 
 	public String getCorreo() {

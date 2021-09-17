@@ -47,12 +47,12 @@ public class AulasVirtuales {
 	private String fechaCambio;
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "docente_doce_id", nullable = false, foreignKey = @ForeignKey(name = "doce_id"))
 	private Docente docente;
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "materia_mate_id", nullable = false, foreignKey = @ForeignKey(name = "mate_id"))
 	private Materia materia;
 

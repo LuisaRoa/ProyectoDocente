@@ -37,6 +37,9 @@ public class MateriaServiceImp implements IMateriaService {
 		Materia mat = this.buscarId(mate.getMate_id());
 		mat.setNombre(mate.getNombre());
         mat.setSemestre(mate.getSemestre());
+        mat.setCodigo(mate.getCodigo());
+        mat.setRegistradopor(mate.getRegistradopor());
+        mat.setFechacambio(mate.getFechacambio());
 	}
 
 	@Override

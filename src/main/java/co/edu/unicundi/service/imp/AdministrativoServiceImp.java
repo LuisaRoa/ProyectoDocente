@@ -40,7 +40,7 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 	}
 
 	public void guardar(Administrativo admi) throws Exception {
-
+		
 		List<Administrativo> ad = mostrarAdministrativos();
 		if (admi.getDocumento() == null) {
 
@@ -51,8 +51,7 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 
 			}
 			
-			throw new ObjectItsCreatedExceptionHandler("Debe proporcionar un Director para crear esta Pelicula");
-			//throw new Exception("el programa academico ya tiene administrativo");
+			
 		} else {
 			this.repo.save(admi);
 		}

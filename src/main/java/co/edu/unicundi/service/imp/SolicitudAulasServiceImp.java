@@ -58,6 +58,9 @@ public class SolicitudAulasServiceImp implements ISolicitudAulasService{
                 () -> new ModelNotFoundException("administrativo no  exontrado"));
 		so.setFecha(soli.getFecha());
 		so.setEstado(soli.getEstado());
+		so.setSede(soli.getSede());
+		so.setGrupo(soli.getGrupo());
+		so.setSemestre(soli.getSemestre());
 		so.setDocente(doce);
 		so.setMateria(mate);
 		
