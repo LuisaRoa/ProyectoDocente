@@ -43,7 +43,7 @@ public class AdministrativoController {
 		
 			
 	}
-	@PutMapping("editar")
+	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar al Administrativo correspondiente al id",
             notes = "Editar al Administrativo correspondiente al id"

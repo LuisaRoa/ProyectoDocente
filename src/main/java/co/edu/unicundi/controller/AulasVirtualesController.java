@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.unicundi.entity.Administrativo;
 import co.edu.unicundi.entity.AulasVirtuales;
 import co.edu.unicundi.entity.Facultad;
 import co.edu.unicundi.exception.ModelNotFoundException;
@@ -78,6 +79,15 @@ public class AulasVirtualesController {
 	public ResponseEntity<List<AulasVirtuales>> retornarTodos() throws ModelNotFoundException{
 		
 		return new ResponseEntity<List<AulasVirtuales>>(service.mostrarAulasVirtuales(), HttpStatus.OK);
+
+	}
+
+	@GetMapping("/retornarId/{id}") 
+	@ApiOperation(value="Metodo que retorna a un Aula virtual por su id")
+	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception  {
+		AulasVirtuales aula = service.buscarId(id);
+		return new ResponseEntity<AulasVirtuales>(aula, HttpStatus.OK);	
+				
 
 	}
 

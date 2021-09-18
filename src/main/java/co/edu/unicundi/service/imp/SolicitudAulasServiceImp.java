@@ -44,8 +44,13 @@ public class SolicitudAulasServiceImp implements ISolicitudAulasService{
 
 	@Override
 	public void guardar(SolicitudAulas soli) throws Exception {
-		this.repo.save(soli);
-		
+		Materia mate = repoMate.findById(soli.getMateria().getMate_id()).orElseThrow(
+                () -> new ModelNotFoundException("materia no  exontrada"));
+		if(mate.getSemestre().equals(soli.getMateria().getSemestre())) {
+			this.repo.save(soli);
+		}else {
+			throw new ModelNotFoundException("Semestre no coincide");
+		}
 	}
 
 	@Override
@@ -53,9 +58,9 @@ public class SolicitudAulasServiceImp implements ISolicitudAulasService{
 		
 		SolicitudAulas so = this.buscarId(soli.getSoau_id());
 		Docente doce = repoDoce.findById(soli.getDocente().getId()).orElseThrow(
-                () -> new ModelNotFoundException("administrativo no  exontrado"));
+                () -> new ModelNotFoundException("docente no  exontrado"));
 		Materia mate = repoMate.findById(soli.getMateria().getMate_id()).orElseThrow(
-                () -> new ModelNotFoundException("administrativo no  exontrado"));
+                () -> new ModelNotFoundException("materia no  exontrada"));
 		so.setFecha(soli.getFecha());
 		so.setEstado(soli.getEstado());
 		so.setSede(soli.getSede());

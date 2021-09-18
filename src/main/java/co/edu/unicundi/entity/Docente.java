@@ -104,7 +104,6 @@ public class Docente {
 		this.aulasvirtuales = (List<AulasVirtuales>) aulasvirtuales;
 	}
 	
-	@JsonBackReference 
 	public Administrativo getAdministrativo() {
 		return administrativo;
 	}
@@ -164,11 +163,11 @@ public class Docente {
 		this.password = password;
 	}
 
-	public String getFechanacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechanacimiento(String fecha_nacimiento) {
+	public void setFechaNacimiento(String fecha_nacimiento) {
 		this.fechaNacimiento = fecha_nacimiento;
 	}
 

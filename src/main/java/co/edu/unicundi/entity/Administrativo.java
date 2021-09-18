@@ -138,7 +138,7 @@ public class Administrativo {
 		return admi_id;
 	}
 	
-	@JsonBackReference 
+	
 	public ProgramaAcademico getProgramaacademico() {
 		return programaacademico;
 	}
