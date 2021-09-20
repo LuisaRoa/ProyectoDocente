@@ -29,9 +29,13 @@ public class AdjuntarEvidenciaService {
 
     public void update (AdjuntarEvidencia evid) {
     	AdjuntarEvidencia e = getOne(evid.getId()).get();
-    	e.setName(evid.getName());
+    	e.setNombre(evid.getNombre());
+    	e.setFechaModificacion(evid.getFechaModificacion());
+    	e.setCorte(evid.getCorte());
+    	e.setTipoArchivo(evid.getTipoArchivo());
+    	e.setTamaño(evid.getTamaño());
     	e.setAulasvirtuales(evid.getAulasvirtuales());
-        repo.save(evid);
+        repo.save(e);
     }
     public void save(AdjuntarEvidencia evi){
     	repo.save(evi);

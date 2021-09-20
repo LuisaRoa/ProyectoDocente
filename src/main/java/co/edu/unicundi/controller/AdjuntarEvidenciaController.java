@@ -61,7 +61,7 @@ public class AdjuntarEvidenciaController {
         AdjuntarEvidencia evidencia =
                 new AdjuntarEvidencia(0,(String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null);
+                        (String)result.get("public_id"), null, null, null, null, null, null);
                        /* (String)result.get("size")*/
         adjuntar.save(evidencia);
         return new ResponseEntity<AdjuntarEvidencia>(evidencia, HttpStatus.OK);
