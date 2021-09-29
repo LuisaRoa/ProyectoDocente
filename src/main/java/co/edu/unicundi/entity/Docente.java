@@ -80,13 +80,17 @@ public class Docente {
 	@JsonIgnore
 	private List<AulasVirtuales> aulasvirtuales ;
 	
+	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Miembros> miembros ;
+	
 	
 
 	public Docente() {
 	}
 
 	public Docente(Integer doce_id, String documento,String nombre,	String codigo, String password, String fecha_nacimiento, String sexo, String direccion, String celular,
-			String fecha_ingreso, String correo, String sede,Administrativo administrativo, List<AulasVirtuales> aulasvirtuales) {
+			String fecha_ingreso, String correo, String sede,Administrativo administrativo, List<AulasVirtuales> aulasvirtuales, List<Miembros> miembros) {
 		super();
 		this.doce_id = doce_id;
 		this.documento = documento;
@@ -102,6 +106,7 @@ public class Docente {
 		this.sede = sede;
 		this.administrativo = administrativo;
 		this.aulasvirtuales = (List<AulasVirtuales>) aulasvirtuales;
+		this.miembros = (List<Miembros>) miembros;
 	}
 	
 	public Administrativo getAdministrativo() {
@@ -217,6 +222,14 @@ public class Docente {
 
 	public void setSede(String sede) {
 		this.sede = sede;
+	}
+
+	public List<Miembros> getMiembros() {
+		return miembros;
+	}
+
+	public void setMiembros(List<Miembros> miembros) {
+		this.miembros = miembros;
 	}	
 	
 	
