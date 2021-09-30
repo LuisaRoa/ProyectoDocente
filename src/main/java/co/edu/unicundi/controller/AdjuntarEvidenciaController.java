@@ -99,4 +99,10 @@ public class AdjuntarEvidenciaController {
 		return new ResponseEntity<AdjuntarEvidencia>(evidencia, HttpStatus.OK);
 
 	}
+	
+	@GetMapping("/listarPorAula/{id}")
+	public ResponseEntity<List<AdjuntarEvidencia>> listarPorAula(@PathVariable int id) {
+		List<AdjuntarEvidencia> lista = adjuntar.evidenciaPorIdAula(id);
+		return new ResponseEntity(lista, HttpStatus.OK);
+	}
 }

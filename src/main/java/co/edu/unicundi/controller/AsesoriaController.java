@@ -84,7 +84,7 @@ public class AsesoriaController {
 		if (!adjuntar.exists(id))
 			return new ResponseEntity<Object>(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
 		Asesoria asesoria = adjuntar.getOne(id).get();
-		Map result = cloudinaryService.delete(asesoria.getEvidenciaId());
+		Map result = cloudinaryService.delete(asesoria.getAsesoriaId());
 		adjuntar.delete(id);
 		return new ResponseEntity(new Mensaje("asesoria eliminada"), HttpStatus.OK);
 	}

@@ -17,8 +17,8 @@ public class Asesoria {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-	private String eviendeciaUrl;
-	private String evidenciaId;
+	private String asesoriaUrl;
+	private String asesoriaId;
 	private String nombre;
 	private String fecha;
 	private String tipoArchivo;
@@ -35,8 +35,8 @@ public class Asesoria {
 		super();
 		this.id = id;
 		this.name = name;
-		this.eviendeciaUrl = eviendeciaUrl;
-		this.evidenciaId = evidenciaId;
+		this.asesoriaUrl = eviendeciaUrl;
+		this.asesoriaId = evidenciaId;
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.tipoArchivo = tipoArchivo;
@@ -56,17 +56,17 @@ public class Asesoria {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getEviendeciaUrl() {
-		return eviendeciaUrl;
+	public String getAsesoriaUrl() {
+		return asesoriaUrl;
 	}
-	public void setEviendeciaUrl(String eviendeciaUrl) {
-		this.eviendeciaUrl = eviendeciaUrl;
+	public void setAsesoriaUrl(String eviendeciaUrl) {
+		this.asesoriaUrl = eviendeciaUrl;
 	}
-	public String getEvidenciaId() {
-		return evidenciaId;
+	public String getAsesoriaId() {
+		return asesoriaId;
 	}
-	public void setEvidenciaId(String evidenciaId) {
-		this.evidenciaId = evidenciaId;
+	public void setAsesoriaId(String evidenciaId) {
+		this.asesoriaId = evidenciaId;
 	}
 	public String getNombre() {
 		return nombre;

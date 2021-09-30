@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,8 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicundi.entity.AdjuntarEvidencia;
+import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Imagen;
+import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IAdjuntarEvidenciasRepo;
+import co.edu.unicundi.repo.IAulasVirtualesRepo;
 
 
 @Service
@@ -47,5 +51,16 @@ public class AdjuntarEvidenciaService {
 
     public boolean exists(int id){
         return repo.existsById(id);
+    }
+    
+    public List<AdjuntarEvidencia> evidenciaPorIdAula(int id){
+    	List<AdjuntarEvidencia> lista = new ArrayList<AdjuntarEvidencia>();
+    	for(AdjuntarEvidencia p: repo.findByOrderById()) {
+			if(p.getAulasvirtuales().getAuvi_id()==id) {
+				lista.add(p);
+			}
+				
+		}
+    	return lista;
     }
 }
