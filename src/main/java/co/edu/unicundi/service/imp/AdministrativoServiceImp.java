@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 
 import co.edu.unicundi.entity.Administrativo;
 import co.edu.unicundi.entity.ProgramaAcademico;
+import co.edu.unicundi.entity.Rol;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.exception.ObjectItsCreatedExceptionHandler;
 import co.edu.unicundi.repo.IAdministrativoRepo;
 import co.edu.unicundi.repo.IProgramaAcademicoRepo;
+import co.edu.unicundi.repo.IRolRepo;
 import co.edu.unicundi.service.IAdministrativoService;
 
 @Service
@@ -24,6 +26,9 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 
 	@Autowired
 	private IProgramaAcademicoRepo repoPrac;
+	
+	@Autowired
+	private IRolRepo repoRol;
 
 	List<Administrativo> admid = new ArrayList<Administrativo>();
 
@@ -53,6 +58,9 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 			
 			
 		} else {
+			Rol rol = repoRol.findById(2).orElseThrow(
+	                () -> new ModelNotFoundException("rol no  exontrado"));
+			admi.setRol(rol);
 			this.repo.save(admi);
 		}
 	}

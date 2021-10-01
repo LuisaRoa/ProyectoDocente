@@ -70,6 +70,10 @@ public class Docente {
 	@Column(name = "doce_sede", length = 60, nullable = false)
 	private String sede;
 	
+	@ManyToOne
+	@JoinColumn(name = "rol_id", nullable = true, foreignKey = @ForeignKey(name = "rol_id"))
+	private Rol rol;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "administrativo_admi_id", nullable = false, foreignKey = @ForeignKey(name = "admi_id"))
@@ -230,6 +234,14 @@ public class Docente {
 
 	public void setMiembros(List<Miembros> miembros) {
 		this.miembros = miembros;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}	
 	
 	

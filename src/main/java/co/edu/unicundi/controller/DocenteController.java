@@ -97,8 +97,8 @@ public class DocenteController {
 	@GetMapping("/buscarCorreo/{correo}") 
 	@ApiOperation(value="Metodo que retorna el documento por su correo")
 	public ResponseEntity<?> buscarCorreo(@PathVariable String correo) throws ModelNotFoundException, Exception  {
-		String docente = service.buscarCorreo(correo);
-		return new ResponseEntity<String>(docente, HttpStatus.OK);	
+		Docente docente = service.buscarCorreo(correo);
+		return new ResponseEntity<Docente>(docente, HttpStatus.OK);	
 				
 
 	}

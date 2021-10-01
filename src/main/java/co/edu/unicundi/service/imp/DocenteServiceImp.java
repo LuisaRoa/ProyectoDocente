@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import co.edu.unicundi.entity.Administrativo;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Facultad;
+import co.edu.unicundi.entity.Rol;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IAdministrativoRepo;
 import co.edu.unicundi.repo.IDocenteRepo;
+import co.edu.unicundi.repo.IRolRepo;
 import co.edu.unicundi.service.IDocenteService;
 
 @Service
@@ -22,6 +24,9 @@ public class DocenteServiceImp implements IDocenteService {
 	private IDocenteRepo repo;
 	@Autowired
 	private IAdministrativoRepo repoAdmi;
+	
+	@Autowired
+	private IRolRepo repoRol;
 	
 	List<Docente> docentes = new ArrayList<Docente>();
 	@Override
@@ -48,6 +53,9 @@ public class DocenteServiceImp implements IDocenteService {
 				
 		}
 		//docentes.add(docente);
+		Rol rol = repoRol.findById(1).orElseThrow(
+                () -> new ModelNotFoundException("rol no  exontrado"));
+		docente.setRol(rol);
 		this.repo.save(docente);
 	}
 
@@ -79,11 +87,11 @@ public class DocenteServiceImp implements IDocenteService {
 	
 	
 	@Override
-	public String buscarCorreo(String correo) throws ModelNotFoundException {
+	public Docente buscarCorreo(String correo) throws ModelNotFoundException {
 		
 		Docente docente = repo.findByCorreo(correo).orElseThrow(
                 () -> new ModelNotFoundException("Docente no exontrado"));
-        return docente.getDocumento();
+        return docente;
 
 	}
 

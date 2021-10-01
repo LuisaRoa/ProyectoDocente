@@ -67,6 +67,10 @@ public class Administrativo {
 	@Column(name = "admi_sede", length = 60, nullable = false)
 	private String sede;
 	
+	@ManyToOne
+	@JoinColumn(name = "rol_id", nullable = true, foreignKey = @ForeignKey(name = "rol_id"))
+	private Rol rol;
+	
 	@OneToMany(mappedBy ="administrativo", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Docente> docente ;
@@ -232,7 +236,17 @@ public class Administrativo {
 
 	public void setSede(String sede) {
 		this.sede = sede;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}	
+	
+	
 	
 }
 

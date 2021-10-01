@@ -19,7 +19,7 @@ public interface IDocenteService  {
 	
 	public void eliminar(int id) throws ModelNotFoundException;
 
-	public String buscarCorreo(String correo) throws ModelNotFoundException;
+	public Docente buscarCorreo(String correo) throws ModelNotFoundException;
 
 	
 	
