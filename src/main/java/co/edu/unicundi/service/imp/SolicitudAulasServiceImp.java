@@ -46,7 +46,7 @@ public class SolicitudAulasServiceImp implements ISolicitudAulasService{
 	public void guardar(SolicitudAulas soli) throws Exception {
 		Materia mate = repoMate.findById(soli.getMateria().getMate_id()).orElseThrow(
                 () -> new ModelNotFoundException("materia no  exontrada"));
-		if(mate.getSemestre().equals(soli.getMateria().getSemestre())) {
+		if(mate.getSemestre().equals(soli.getSemestre())) {
 			this.repo.save(soli);
 		}else {
 			throw new ModelNotFoundException("Semestre no coincide");

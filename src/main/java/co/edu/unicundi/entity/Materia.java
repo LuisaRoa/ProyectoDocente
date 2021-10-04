@@ -2,16 +2,7 @@ package co.edu.unicundi.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -45,6 +36,19 @@ public class Materia {
 	@OneToMany(mappedBy = "materia", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<AulasVirtuales> aulasvirtuales;
+	
+	@OneToMany(mappedBy = "materia", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Syllabus> syllabus;
+	
+	@OneToMany(mappedBy = "materia", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<InformeSemestral> informeSemestral;
+	
+	@OneToMany(mappedBy = "materia", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<MateriaSalida> materia_solicitudsalidas;
+	
 
 	public Materia() {
 
@@ -52,7 +56,8 @@ public class Materia {
 
 	public Materia(Integer mate_id,
 			@NotNull(message = "Nombre  requerido") @Size(min = 3, max = 30, message = "Nombre entre 3 y 30 caracteres") String nombre,
-			String semestre, String codigo, String registradopor, String fechacambio, List<AulasVirtuales> aulasvirtuales) {
+			String semestre, String codigo, String registradopor, String fechacambio, List<AulasVirtuales> aulasvirtuales, List<Syllabus> syllabus, 
+			List<InformeSemestral> informeSemestral,List<MateriaSalida> materiaSalida) {
 		super();
 		this.mate_id = mate_id;
 		this.nombre = nombre;
@@ -61,6 +66,9 @@ public class Materia {
 		this.registradopor = registradopor;
 		this.fechacambio = fechacambio;
 		this.aulasvirtuales = aulasvirtuales;
+		this.syllabus = syllabus;
+		this.informeSemestral = informeSemestral;
+		this.materia_solicitudsalidas = materiaSalida;
 	}
 
 	public String getCodigo() {
@@ -119,4 +127,57 @@ public class Materia {
 		this.fechacambio = fechacambio;
 	}
 
+	public List<Syllabus> getSyllabus() {
+		return syllabus;
+	}
+
+	public void setSyllabus(List<Syllabus> syllabus) {
+		this.syllabus = syllabus;
+	}
+
+	public List<InformeSemestral> getInformeSemestral() {
+		return informeSemestral;
+	}
+
+	public void setInformeSemestral(List<InformeSemestral> informeSemestral) {
+		this.informeSemestral = informeSemestral;
+	}
+
+	public List<MateriaSalida> getMateriaSalida() {
+		return materia_solicitudsalidas;
+	}
+
+	public void setMateriaSalida(List<MateriaSalida> materiaSalida) {
+		this.materia_solicitudsalidas = materiaSalida;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((mate_id == null) ? 0 : mate_id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Materia other = (Materia) obj;
+		if (mate_id == null) {
+			if (other.mate_id != null)
+				return false;
+		} else if (!mate_id.equals(other.mate_id))
+			return false;
+		return true;
+	}
+
+
+
+	
+	
 }

@@ -88,13 +88,24 @@ public class Docente {
 	@JsonIgnore
 	private List<Miembros> miembros ;
 	
+	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<InformeSemestral> informeSemes ;
 	
+	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Asesoria> asesoria ;
+	
+	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Syllabus> syllabus ;
 
 	public Docente() {
 	}
 
 	public Docente(Integer doce_id, String documento,String nombre,	String codigo, String password, String fecha_nacimiento, String sexo, String direccion, String celular,
-			String fecha_ingreso, String correo, String sede,Administrativo administrativo, List<AulasVirtuales> aulasvirtuales, List<Miembros> miembros) {
+			String fecha_ingreso, String correo, String sede,Administrativo administrativo, List<AulasVirtuales> aulasvirtuales, List<Miembros> miembros, List<InformeSemestral> informeSemes,
+			List<Asesoria> asesoria, List<Syllabus> syllabus) {
 		super();
 		this.doce_id = doce_id;
 		this.documento = documento;
@@ -111,6 +122,10 @@ public class Docente {
 		this.administrativo = administrativo;
 		this.aulasvirtuales = (List<AulasVirtuales>) aulasvirtuales;
 		this.miembros = (List<Miembros>) miembros;
+		this.informeSemes = informeSemes;
+		this.asesoria = asesoria;
+		this.syllabus = syllabus;
+		
 	}
 	
 	public Administrativo getAdministrativo() {
@@ -242,6 +257,30 @@ public class Docente {
 
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+
+	public List<InformeSemestral> getInformeSemes() {
+		return informeSemes;
+	}
+
+	public void setInformeSemes(List<InformeSemestral> informeSemes) {
+		this.informeSemes = informeSemes;
+	}
+
+	public List<Asesoria> getAsesoria() {
+		return asesoria;
+	}
+
+	public void setAsesoria(List<Asesoria> asesoria) {
+		this.asesoria = asesoria;
+	}
+
+	public List<Syllabus> getSyllabus() {
+		return syllabus;
+	}
+
+	public void setSyllabus(List<Syllabus> syllabus) {
+		this.syllabus = syllabus;
 	}	
 	
 	

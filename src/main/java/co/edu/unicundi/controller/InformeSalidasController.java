@@ -24,27 +24,29 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.edu.unicundi.dto.Mensaje;
-import co.edu.unicundi.entity.Asesoria;
+import co.edu.unicundi.entity.InformeSalidas;
+import co.edu.unicundi.entity.InformeSemestral;
 import co.edu.unicundi.exception.ModelNotFoundException;
-import co.edu.unicundi.service.AsesoriaService;
 import co.edu.unicundi.service.CloudinaryService;
+import co.edu.unicundi.service.InformeSalidasService;
+import co.edu.unicundi.service.InformeSemestralService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/asesoria")
+@RequestMapping("/informeSalidas")
 @CrossOrigin
-public class AsesoriaController {
+public class InformeSalidasController {
 	@Autowired
 	CloudinaryService cloudinaryService;
 
 	@Autowired
-	AsesoriaService adjuntar;
+	InformeSalidasService adjuntar;
 
 	@GetMapping("/list")
-	public ResponseEntity<List<Asesoria>> list() {
-		List<Asesoria> list = adjuntar.list();
+	public ResponseEntity<List<InformeSalidas>> list() {
+		List<InformeSalidas> list = adjuntar.list();
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 
@@ -55,13 +57,13 @@ public class AsesoriaController {
             return new ResponseEntity(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
         }*/
         Map result = cloudinaryService.upload(multipartFile);
-        Asesoria asesoria =
-                new Asesoria(0,(String)result.get("original_filename"),
+        InformeSalidas informeSalidas =
+                new InformeSalidas(0 , (String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null, null, null, null, null, null, null);
+                        (String)result.get("public_id"), null, null, null, null, null, null);
                        /* (String)result.get("size")*/
-        adjuntar.save(asesoria);
-        return new ResponseEntity<Asesoria>(asesoria, HttpStatus.OK);
+        adjuntar.save(informeSalidas);
+        return new ResponseEntity<InformeSalidas>(informeSalidas, HttpStatus.OK);
     }
 
 	@PutMapping("/editar")
@@ -70,12 +72,12 @@ public class AsesoriaController {
             notes = "Editar al formato correspondiente al id"
             )
             @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = Asesoria.class ),
+            @ApiResponse(code = 200, message = "OK", response = InformeSalidas.class ),
             @ApiResponse(code = 503, message = "Servicio no Disponible", response = String.class),
             @ApiResponse(code = 500, message = "Error inesperado del sistema") })
-	public ResponseEntity<Asesoria> editar(@Validated @RequestBody Asesoria asesoria) throws Exception, ModelNotFoundException{
-		adjuntar.update(asesoria);
-		return new ResponseEntity<Asesoria>(asesoria, HttpStatus.CREATED);
+	public ResponseEntity<InformeSalidas> editar(@Validated @RequestBody InformeSalidas informeSalidas) throws Exception, ModelNotFoundException{
+		adjuntar.update(informeSalidas);
+		return new ResponseEntity<InformeSalidas>(informeSalidas, HttpStatus.CREATED);
 
 	}
 
@@ -83,17 +85,17 @@ public class AsesoriaController {
 	public ResponseEntity<?> delete(@PathVariable("id") int id) throws IOException {
 		if (!adjuntar.exists(id))
 			return new ResponseEntity<Object>(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-		Asesoria asesoria = adjuntar.getOne(id).get();
-		Map result = cloudinaryService.delete(asesoria.getAsesoriaId());
+		InformeSalidas informeSalidas = adjuntar.getOne(id).get();
+		Map result = cloudinaryService.delete(informeSalidas.getInformeId());
 		adjuntar.delete(id);
-		return new ResponseEntity(new Mensaje("asesoria eliminada"), HttpStatus.OK);
+		return new ResponseEntity(new Mensaje("informe Salida eliminado"), HttpStatus.OK);
 	}
 
 	@GetMapping("/retornarId/{id}")
 	@ApiOperation(value = "Metodo que retorna a un formato por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception {
-		Asesoria asesoria = adjuntar.getOne(id).get();
-		return new ResponseEntity<Asesoria>(asesoria, HttpStatus.OK);
+		InformeSalidas informeSalidas = adjuntar.getOne(id).get();
+		return new ResponseEntity<InformeSalidas>(informeSalidas, HttpStatus.OK);
 
 	}
 }

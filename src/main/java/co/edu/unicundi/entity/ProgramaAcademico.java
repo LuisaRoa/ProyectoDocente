@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "programaacademico")
@@ -43,14 +44,24 @@ public class ProgramaAcademico {
 	private Facultad facultad;
 	
 	@OneToMany(mappedBy ="programaacademico", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Administrativo> administrativo ;
+	
+	@OneToMany(mappedBy ="programaacademico", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<InformeSemestral> informesemestral ;
+	
+	@OneToMany(mappedBy ="programaacademico", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Syllabus> syllabus ;
 	
 
 	public ProgramaAcademico() {
 	}
 
 
-	public ProgramaAcademico(Integer prac_id,String nombre,String registradopor, String fechacambio, Facultad facultad, List<Administrativo> administrativo) {
+	public ProgramaAcademico(Integer prac_id,String nombre,String registradopor, String fechacambio, Facultad facultad, List<Administrativo> administrativo,  List<InformeSemestral> informeSemestral,
+			List<Syllabus> syllabus) {
 		super();
 		this.prac_id = prac_id;
 		this.nombre = nombre;
@@ -58,6 +69,8 @@ public class ProgramaAcademico {
 		this.fechacambio = fechacambio;
 		this.facultad = facultad;
 		this.administrativo = administrativo;
+		this.informesemestral = informeSemestral;
+		this.syllabus = syllabus;
 	}
 
 
@@ -101,6 +114,36 @@ public class ProgramaAcademico {
 
 	public void setFacultad(Facultad facultad) {
 		this.facultad = facultad;
+	}
+
+
+	public List<Administrativo> getAdministrativo() {
+		return administrativo;
+	}
+
+
+	public void setAdministrativo(List<Administrativo> administrativo) {
+		this.administrativo = administrativo;
+	}
+
+
+	public List<InformeSemestral> getInformesemestral() {
+		return informesemestral;
+	}
+
+
+	public void setInformesemestral(List<InformeSemestral> informesemestral) {
+		this.informesemestral = informesemestral;
+	}
+
+
+	public List<Syllabus> getSyllabus() {
+		return syllabus;
+	}
+
+
+	public void setSyllabus(List<Syllabus> syllabus) {
+		this.syllabus = syllabus;
 	}
 	
 	

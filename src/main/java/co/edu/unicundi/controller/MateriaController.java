@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.unicundi.entity.AulasVirtuales;
 import co.edu.unicundi.entity.Materia;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.IMateriaService;
@@ -76,6 +77,15 @@ public class MateriaController {
 	public ResponseEntity<List<Materia>> retornarTodos() throws ModelNotFoundException{
 		
 		return new ResponseEntity<List<Materia>>(service.mostrarMateria(), HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/retornarId/{id}") 
+	@ApiOperation(value="Metodo que retorna una Materia por su id")
+	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception  {
+		Materia materia = service.buscarId(id);
+		return new ResponseEntity<Materia>(materia, HttpStatus.OK);	
+				
 
 	}
 
