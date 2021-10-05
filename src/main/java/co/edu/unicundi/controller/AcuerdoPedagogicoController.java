@@ -97,4 +97,10 @@ public class AcuerdoPedagogicoController {
 		return new ResponseEntity<AcuerdoPedagogico>(acuerdoPedagogico, HttpStatus.OK);
 
 	}
+	
+	@GetMapping("/listarDocente/{id}")
+	public ResponseEntity<List<AcuerdoPedagogico>> listarDocente(@PathVariable int id) {
+		List<AcuerdoPedagogico> list = adjuntar.listarDocente(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
 }

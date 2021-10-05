@@ -117,7 +117,7 @@ public class Syllabus {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public Materia getMateria() {
+	public Materia getNucleoTemático() {
 		return materia;
 	}
 	public void setMateria(Materia materia) {

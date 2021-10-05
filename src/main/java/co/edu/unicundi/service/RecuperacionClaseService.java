@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicundi.entity.AcuerdoPedagogico;
+import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.InformeRecuperacionClase;
 import co.edu.unicundi.entity.Materia;
@@ -44,7 +46,7 @@ public class RecuperacionClaseService {
 
     public void update (InformeRecuperacionClase recuperacionClase) throws ModelNotFoundException {
     	InformeRecuperacionClase e = getOne(recuperacionClase.getId()).get();
-    	Materia materia = repoMateria.findById(recuperacionClase.getMateria().getMate_id()).orElseThrow(
+    	Materia materia = repoMateria.findById(recuperacionClase.getNucleoTemático().getMate_id()).orElseThrow(
                 () -> new ModelNotFoundException("materia no  exontrado"));
     	ProgramaAcademico programa = repoPrograma.findById(recuperacionClase.getProgramaacademico().getPrac_id()).orElseThrow(
                 () -> new ModelNotFoundException("programa academico no  exontrado"));
@@ -76,5 +78,16 @@ public class RecuperacionClaseService {
 
     public boolean exists(int id){
         return repo.existsById(id);
+    }
+    
+    public List<InformeRecuperacionClase> listarDocente(int id){
+    	List<InformeRecuperacionClase> lista = new ArrayList<InformeRecuperacionClase>();
+    	for(InformeRecuperacionClase p: repo.findByOrderById()) {
+			if(p.getDocente().getId()==id) {
+				lista.add(p);
+			}
+				
+		}
+         return lista;
     }
 }

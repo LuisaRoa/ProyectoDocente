@@ -26,7 +26,7 @@ public class InformeSalidas {
 	
 	@ManyToOne
 	@JoinColumn(name = "solicitudsalidas_sosa_id", nullable = true, foreignKey = @ForeignKey(name = "sosa_id"))
-	private SolicitudSalida solicitudSalida;
+	private SolicitudSalidas solicitudSalida;
 	
 	@ManyToOne
 	@JoinColumn(name = "docente_doce_id", nullable = true, foreignKey = @ForeignKey(name = "doce_id"))
@@ -37,7 +37,7 @@ public class InformeSalidas {
 	}
 	
 	public InformeSalidas(int id, String name, String informeUrl, String informeId, String nombre, String fecha,
-			String tipoArchivo, String tamaño, SolicitudSalida solicitudSalida, Docente docente) {
+			String tipoArchivo, String tamaño, SolicitudSalidas solicitudSalida, Docente docente) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -115,11 +115,11 @@ public class InformeSalidas {
 		this.tamaño = tamaño;
 	}
 
-	public SolicitudSalida getSolicitudSalida() {
+	public SolicitudSalidas getSolicitudSalida() {
 		return solicitudSalida;
 	}
 
-	public void setSolicitudSalida(SolicitudSalida solicitudSalida) {
+	public void setSolicitudSalida(SolicitudSalidas solicitudSalida) {
 		this.solicitudSalida = solicitudSalida;
 	}
 

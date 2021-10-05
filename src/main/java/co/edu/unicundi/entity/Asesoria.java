@@ -106,7 +106,7 @@ public class Asesoria {
 		this.semestre = semestre;
 	}
 
-	public String getNucleo() {
+	public String getNucleoTemático() {
 		return nucleo;
 	}
 

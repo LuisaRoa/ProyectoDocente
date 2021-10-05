@@ -7,12 +7,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Materia;
 import co.edu.unicundi.entity.MateriaSalida;
 import co.edu.unicundi.entity.ProgramaAcademico;
 import co.edu.unicundi.entity.SolicitudAulas;
-import co.edu.unicundi.entity.SolicitudSalida;
+import co.edu.unicundi.entity.SolicitudSalidas;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IDocenteRepo;
 import co.edu.unicundi.repo.IMateriaRepo;
@@ -41,25 +42,25 @@ public class SolicitudSalidaServiceImp implements ISolicitudSalidaService{
 	private IMateriaSalidaRepo repoMateSalida;
 
 	@Override
-	public SolicitudSalida buscarId(int id) throws ModelNotFoundException {
-		SolicitudSalida salida = repo.findById(id).orElseThrow(
+	public SolicitudSalidas buscarId(int id) throws ModelNotFoundException {
+		SolicitudSalidas salida = repo.findById(id).orElseThrow(
                 () -> new ModelNotFoundException("solicitud no exontrada"));
         return salida;
 	}
 
 	@Override
-	public List<SolicitudSalida> mostrarSolicitudSalida() throws ModelNotFoundException {
+	public List<SolicitudSalidas> mostrarSolicitudSalida() throws ModelNotFoundException {
 		return this.repo.findAll();
 	}
 
 	@Override
-	public void guardar(SolicitudSalida soli) throws Exception {
-		if(soli.getMateria_solicitudsalidas()!=null) {
-			for(MateriaSalida p: soli.getMateria_solicitudsalidas()) {
+	public void guardar(SolicitudSalidas soli) throws Exception {
+		if(soli.getMateriaSalida()!=null) {
+			for(MateriaSalida p: soli.getMateriaSalida()) {
 				Materia mater = repoMateria.findById(p.getMateria().getMate_id()).orElseThrow(
 		                () -> new ModelNotFoundException("materia no  exontrada"));
 				p.setMateria(mater);
-				p.setSolicitudsalida(soli);
+				p.setSolicitudSalida(soli);
 			}
 		}
 		
@@ -68,9 +69,9 @@ public class SolicitudSalidaServiceImp implements ISolicitudSalidaService{
 		
 
 	@Override
-	public void editar(SolicitudSalida soli) throws Exception, ModelNotFoundException {
+	public void editar(SolicitudSalidas soli) throws Exception, ModelNotFoundException {
 		
-		SolicitudSalida so = this.buscarId(soli.getSosa_id());
+		SolicitudSalidas so = this.buscarId(soli.getSosa_id());
 		Docente doce = repoDoce.findById(soli.getDocente().getId()).orElseThrow(
                 () -> new ModelNotFoundException("docente no  exontrado"));
 		ProgramaAcademico programa = repoPrograma.findById(soli.getProgramaacademico().getPrac_id()).orElseThrow(
@@ -94,13 +95,24 @@ public class SolicitudSalidaServiceImp implements ISolicitudSalidaService{
 	}
 
 	@Override
-	public List<SolicitudSalida> retornarEstado() throws ModelNotFoundException {
-		List<SolicitudSalida> lista = new ArrayList();
-		for(SolicitudSalida s: this.repo.findAll()) {
-			if(s.getEstado().equals("Aprobado")) {
+	public List<SolicitudSalidas> retornarEstado(int id) throws ModelNotFoundException {
+		List<SolicitudSalidas> lista = new ArrayList();
+		for(SolicitudSalidas s: this.repo.findAll()) {
+			if((s.getEstado().equals("Aprobado"))&&(s.getDocente().getId()==id)) {
 				lista.add(s);
 			}
 		}
 		return lista;
 	}
+	
+	public List<SolicitudSalidas> listarDocente(int id){
+    	List<SolicitudSalidas> lista = new ArrayList<SolicitudSalidas>();
+    	for(SolicitudSalidas p: repo.findAll()) {
+			if(p.getDocente().getId()==id) {
+				lista.add(p);
+			}
+				
+		}
+         return lista;
+    }
 }

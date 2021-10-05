@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "solicitudsalidas")
-public class SolicitudSalida {
+public class SolicitudSalidas {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -75,17 +75,17 @@ public class SolicitudSalida {
 	
 	
 	@OneToMany(mappedBy ="solicitudsalidas", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<MateriaSalida> materia_solicitudsalidas ;
+	//@JsonIgnore
+	private List<MateriaSalida> materiaSalida ;
 	
-	public SolicitudSalida() {
+	public SolicitudSalidas() {
 		
 	}
 
-	public SolicitudSalida(Integer sosa_id, String fechaSolicitud, String estado, String semestre,
+	public SolicitudSalidas(Integer sosa_id, String fechaSolicitud, String estado, String semestre,
 			String registradoPor, String fechaCambio, String fechaInicio, String fechaTerminacion, String nombre,
 			String tipo, int noEstudiantes, String tematica, Docente docente,
-			ProgramaAcademico programaacademico, List<MateriaSalida> materia_solicitudsalidas) {
+			ProgramaAcademico programaacademico, List<MateriaSalida> materiaSalida) {
 		super();
 		this.sosa_id = sosa_id;
 		this.fechaSolicitud = fechaSolicitud;
@@ -101,7 +101,7 @@ public class SolicitudSalida {
 		this.tematica = tematica;
 		this.docente = docente;
 		this.programaacademico = programaacademico;
-		this.materia_solicitudsalidas = materia_solicitudsalidas;
+		this.materiaSalida = materiaSalida;
 	}
 
 	public Integer getSosa_id() {
@@ -217,13 +217,12 @@ public class SolicitudSalida {
 	}
 
 	
-
-	public List<MateriaSalida> getMateria_solicitudsalidas() {
-		return materia_solicitudsalidas;
+	public List<MateriaSalida> getMateriaSalida() {
+		return materiaSalida;
 	}
 
-	public void setMateria_solicitudsalidas(List<MateriaSalida> materia_solicitudsalidas) {
-		this.materia_solicitudsalidas = materia_solicitudsalidas;
+	public void setMateriaSalida(List<MateriaSalida> materiaSalida) {
+		this.materiaSalida = materiaSalida;
 	}
 
 	@Override
@@ -242,7 +241,7 @@ public class SolicitudSalida {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SolicitudSalida other = (SolicitudSalida) obj;
+		SolicitudSalidas other = (SolicitudSalidas) obj;
 		if (sosa_id == null) {
 			if (other.sosa_id != null)
 				return false;
@@ -250,6 +249,9 @@ public class SolicitudSalida {
 			return false;
 		return true;
 	}
+
+	
+
 
 	
 	

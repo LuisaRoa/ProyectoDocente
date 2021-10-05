@@ -58,7 +58,7 @@ public class InformeSemestralController {
         }*/
         Map result = cloudinaryService.upload(multipartFile);
         InformeSemestral informeSemestral =
-                new InformeSemestral(0 , 0, 0,(String)result.get("original_filename"),
+                new InformeSemestral(0 , 0, 0, 0, (String)result.get("original_filename"),
                         (String)result.get("url"),
                         (String)result.get("public_id"), null, null, null, null, null, null, null, null, null, null, null);
                        /* (String)result.get("size")*/
@@ -97,5 +97,11 @@ public class InformeSemestralController {
 		InformeSemestral informeSemestral = adjuntar.getOne(id).get();
 		return new ResponseEntity<InformeSemestral>(informeSemestral, HttpStatus.OK);
 
+	}
+	
+	@GetMapping("/listarDocente/{id}")
+	public ResponseEntity<List<InformeSemestral>> listarDocente(@PathVariable int id) {
+		List<InformeSemestral> list = adjuntar.listarDocente(id);
+		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }

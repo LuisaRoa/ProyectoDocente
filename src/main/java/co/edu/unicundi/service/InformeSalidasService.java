@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.InformeSalidas;
 import co.edu.unicundi.entity.InformeSemestral;
 import co.edu.unicundi.entity.Materia;
 import co.edu.unicundi.entity.ProgramaAcademico;
-import co.edu.unicundi.entity.SolicitudSalida;
+import co.edu.unicundi.entity.SolicitudSalidas;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IDocenteRepo;
 import co.edu.unicundi.repo.IInformeSalidas;
@@ -44,7 +46,7 @@ public class InformeSalidasService {
     	Docente docente = repoDocente.findById(informeSalida.getDocente().getId()).orElseThrow(
                 () -> new ModelNotFoundException("Docente no  exontrado"));
     	
-    	SolicitudSalida salida = repoSolicitud.findById(informeSalida.getSolicitudSalida().getSosa_id()).orElseThrow(
+    	SolicitudSalidas salida = repoSolicitud.findById(informeSalida.getSolicitudSalida().getSosa_id()).orElseThrow(
                 () -> new ModelNotFoundException("Solicitud no  exontrado"));
     	
     	e.setNombre(informeSalida.getNombre());
@@ -65,5 +67,16 @@ public class InformeSalidasService {
 
     public boolean exists(int id){
         return repo.existsById(id);
+    }
+    
+    public List<InformeSalidas> listarDocente(int id){
+    	List<InformeSalidas> lista = new ArrayList<InformeSalidas>();
+    	for(InformeSalidas p: repo.findByOrderById()) {
+			if(p.getDocente().getId()==id) {
+				lista.add(p);
+			}
+				
+		}
+         return lista;
     }
 }

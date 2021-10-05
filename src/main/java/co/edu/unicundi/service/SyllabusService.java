@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Materia;
 import co.edu.unicundi.entity.ProgramaAcademico;
@@ -43,7 +45,7 @@ public class SyllabusService {
 
     public void update (Syllabus syllabus) throws ModelNotFoundException {
     	Syllabus e = getOne(syllabus.getId()).get();
-    	Materia materia = repoMateria.findById(syllabus.getMateria().getMate_id()).orElseThrow(
+    	Materia materia = repoMateria.findById(syllabus.getNucleoTemático().getMate_id()).orElseThrow(
                 () -> new ModelNotFoundException("materia no  exontrado"));
     	ProgramaAcademico programa = repoPrograma.findById(syllabus.getProgramaacademico().getPrac_id()).orElseThrow(
                 () -> new ModelNotFoundException("programa academico no  exontrado"));
@@ -74,5 +76,16 @@ public class SyllabusService {
 
     public boolean exists(int id){
         return repo.existsById(id);
+    }
+    
+    public List<Syllabus> listarDocente(int id){
+    	List<Syllabus> syllabus = new ArrayList<Syllabus>();
+    	for(Syllabus p: repo.findByOrderById()) {
+			if(p.getDocente().getId()==id) {
+				syllabus.add(p);
+			}
+				
+		}
+         return syllabus;
     }
 }

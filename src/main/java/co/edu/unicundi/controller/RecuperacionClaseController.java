@@ -96,4 +96,10 @@ public class RecuperacionClaseController {
 		return new ResponseEntity<InformeRecuperacionClase>(recuperacionClase, HttpStatus.OK);
 
 	}
+	
+	@GetMapping("/listarDocente/{id}")
+	public ResponseEntity<List<InformeRecuperacionClase>> listarDocente(@PathVariable int id) {
+		List<InformeRecuperacionClase> list = adjuntar.listarDocente(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
 }

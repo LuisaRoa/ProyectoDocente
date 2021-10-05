@@ -4,40 +4,28 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Embeddable
 public class MateriaSalidaPK implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name= "mate_id")
-    private Integer idMateria;
+	@ManyToOne
+	@JoinColumn(name= "mate_id", nullable= false)
+    private Materia materia;
     
-    @Column(name= "sosa_id")
-    private Integer idSolicitudSalida;
-
-	public Integer getIdMateria() {
-		return idMateria;
-	}
-
-	public void setIdMateria(Integer idMateria) {
-		this.idMateria = idMateria;
-	}
-
-	public Integer getIdSolicitudSalida() {
-		return idSolicitudSalida;
-	}
-
-	public void setIdSolicitudSalida(Integer idSolicitudSalida) {
-		this.idSolicitudSalida = idSolicitudSalida;
-	}
+	@ManyToOne
+	@JoinColumn(name= "sosa_id", nullable= false)
+    private SolicitudSalidas solicitudsalidas;
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idMateria == null) ? 0 : idMateria.hashCode());
-		result = prime * result + ((idSolicitudSalida == null) ? 0 : idSolicitudSalida.hashCode());
+		result = prime * result + ((materia == null) ? 0 : materia.hashCode());
+		result = prime * result + ((solicitudsalidas == null) ? 0 : solicitudsalidas.hashCode());
 		return result;
 	}
 
@@ -50,18 +38,25 @@ public class MateriaSalidaPK implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		MateriaSalidaPK other = (MateriaSalidaPK) obj;
-		if (idMateria == null) {
-			if (other.idMateria != null)
+		if (materia == null) {
+			if (other.materia != null)
 				return false;
-		} else if (!idMateria.equals(other.idMateria))
+		} else if (!materia.equals(other.materia))
 			return false;
-		if (idSolicitudSalida == null) {
-			if (other.idSolicitudSalida != null)
+		if (solicitudsalidas == null) {
+			if (other.solicitudsalidas != null)
 				return false;
-		} else if (!idSolicitudSalida.equals(other.idSolicitudSalida))
+		} else if (!solicitudsalidas.equals(other.solicitudsalidas))
 			return false;
 		return true;
 	}
+
+	
+
+	
+
+	
+	
     
     
 }

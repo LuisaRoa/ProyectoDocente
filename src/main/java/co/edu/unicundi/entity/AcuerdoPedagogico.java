@@ -151,7 +151,7 @@ public class AcuerdoPedagogico {
 		this.tamaño = tamaño;
 	}
 
-	public Materia getMateria() {
+	public Materia getNucleoTemático() {
 		return materia;
 	}
 

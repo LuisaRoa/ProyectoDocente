@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicundi.entity.AdjuntarEvidencia;
 import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.exception.ModelNotFoundException;
@@ -41,7 +43,7 @@ public class AsesoriaService {
     	e.setTamaño(asesoria.getTamaño());
     	e.setFecha(asesoria.getFecha());
     	e.setSemestre(asesoria.getSemestre());
-    	e.setNucleo(asesoria.getNucleo());
+    	e.setNucleo(asesoria.getNucleoTemático());
     	e.setDocente(docente);
         repo.save(e);
     }
@@ -55,5 +57,16 @@ public class AsesoriaService {
 
     public boolean exists(int id){
         return repo.existsById(id);
+    }
+    
+    public List<Asesoria> listarDocente(int id){
+    	List<Asesoria> asesorias = new ArrayList<Asesoria>();
+    	for(Asesoria p: repo.findByOrderById()) {
+			if(p.getDocente().getId()==id) {
+				asesorias.add(p);
+			}
+				
+		}
+         return asesorias;
     }
 }

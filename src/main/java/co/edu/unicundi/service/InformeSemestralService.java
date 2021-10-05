@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicundi.entity.Administrativo;
+import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.InformeSemestral;
 import co.edu.unicundi.entity.Materia;
@@ -44,7 +46,7 @@ public class InformeSemestralService {
 
     public void update (InformeSemestral informeSemes) throws ModelNotFoundException {
     	InformeSemestral e = getOne(informeSemes.getId()).get();
-    	Materia materia = repoMateria.findById(informeSemes.getMateria().getMate_id()).orElseThrow(
+    	Materia materia = repoMateria.findById(informeSemes.getNucleoTematico().getMate_id()).orElseThrow(
                 () -> new ModelNotFoundException("materia no  exontrado"));
     	ProgramaAcademico programa = repoPrograma.findById(informeSemes.getProgramaacademico().getPrac_id()).orElseThrow(
                 () -> new ModelNotFoundException("programa academico no  exontrado"));
@@ -63,6 +65,7 @@ public class InformeSemestralService {
     	e.setMateria(materia);
     	e.setEstudianteApro(informeSemes.getEstudianteApro());
     	e.setEstudianteNoApro(informeSemes.getEstudianteNoApro());
+    	e.setEstudianteRetirado(informeSemes.getEstudianteRetirado());
     	e.setDocente(docente);
     	e.setProgramaacademico(programa);
         repo.save(e);
@@ -77,6 +80,17 @@ public class InformeSemestralService {
 
     public boolean exists(int id){
         return repo.existsById(id);
+    }
+    
+    public List<InformeSemestral> listarDocente(int id){
+    	List<InformeSemestral> lista = new ArrayList<InformeSemestral>();
+    	for(InformeSemestral p: repo.findByOrderById()) {
+			if(p.getDocente().getId()==id) {
+				lista.add(p);
+			}
+				
+		}
+         return lista;
     }
 	
 }

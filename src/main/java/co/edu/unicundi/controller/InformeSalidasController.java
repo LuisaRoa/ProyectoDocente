@@ -98,4 +98,10 @@ public class InformeSalidasController {
 		return new ResponseEntity<InformeSalidas>(informeSalidas, HttpStatus.OK);
 
 	}
+	
+	@GetMapping("/listarDocente/{id}")
+	public ResponseEntity<List<InformeSalidas>> listarDocente(@PathVariable int id) {
+		List<InformeSalidas> list = adjuntar.listarDocente(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
 }

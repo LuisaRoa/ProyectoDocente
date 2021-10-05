@@ -96,4 +96,10 @@ public class AsesoriaController {
 		return new ResponseEntity<Asesoria>(asesoria, HttpStatus.OK);
 
 	}
+	
+	@GetMapping("/listarDocente/{id}")
+	public ResponseEntity<List<Asesoria>> listarDocente(@PathVariable int id) {
+		List<Asesoria> list = adjuntar.listarDocente(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
 }

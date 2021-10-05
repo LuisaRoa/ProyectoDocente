@@ -45,10 +45,6 @@ public class Materia {
 	@JsonIgnore
 	private List<InformeSemestral> informeSemestral;
 	
-	@OneToMany(mappedBy = "materia", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<MateriaSalida> materia_solicitudsalidas;
-	
 
 	public Materia() {
 
@@ -57,7 +53,7 @@ public class Materia {
 	public Materia(Integer mate_id,
 			@NotNull(message = "Nombre  requerido") @Size(min = 3, max = 30, message = "Nombre entre 3 y 30 caracteres") String nombre,
 			String semestre, String codigo, String registradopor, String fechacambio, List<AulasVirtuales> aulasvirtuales, List<Syllabus> syllabus, 
-			List<InformeSemestral> informeSemestral,List<MateriaSalida> materiaSalida) {
+			List<InformeSemestral> informeSemestral) {
 		super();
 		this.mate_id = mate_id;
 		this.nombre = nombre;
@@ -68,7 +64,6 @@ public class Materia {
 		this.aulasvirtuales = aulasvirtuales;
 		this.syllabus = syllabus;
 		this.informeSemestral = informeSemestral;
-		this.materia_solicitudsalidas = materiaSalida;
 	}
 
 	public String getCodigo() {
@@ -142,14 +137,7 @@ public class Materia {
 	public void setInformeSemestral(List<InformeSemestral> informeSemestral) {
 		this.informeSemestral = informeSemestral;
 	}
-
-	public List<MateriaSalida> getMateriaSalida() {
-		return materia_solicitudsalidas;
-	}
-
-	public void setMateriaSalida(List<MateriaSalida> materiaSalida) {
-		this.materia_solicitudsalidas = materiaSalida;
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -175,6 +163,7 @@ public class Materia {
 			return false;
 		return true;
 	}
+
 
 
 

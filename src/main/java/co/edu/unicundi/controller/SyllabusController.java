@@ -99,4 +99,10 @@ public class SyllabusController {
 		return new ResponseEntity<Syllabus>(syllabus, HttpStatus.OK);
 
 	}
+	
+	@GetMapping("/listarDocente/{id}")
+	public ResponseEntity<List<Syllabus>> listarDocente(@PathVariable int id) {
+		List<Syllabus> list = adjuntar.listarDocente(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
 }

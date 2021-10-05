@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicundi.entity.AcuerdoPedagogico;
+import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Materia;
 import co.edu.unicundi.entity.ProgramaAcademico;
@@ -43,7 +45,7 @@ public class AcuerdoPedagogicoService {
 
     public void update (AcuerdoPedagogico acuerdoPedagogico) throws ModelNotFoundException {
     	AcuerdoPedagogico e = getOne(acuerdoPedagogico.getId()).get();
-    	Materia materia = repoMateria.findById(acuerdoPedagogico.getMateria().getMate_id()).orElseThrow(
+    	Materia materia = repoMateria.findById(acuerdoPedagogico.getNucleoTemático().getMate_id()).orElseThrow(
                 () -> new ModelNotFoundException("materia no  exontrado"));
     	ProgramaAcademico programa = repoPrograma.findById(acuerdoPedagogico.getProgramaacademico().getPrac_id()).orElseThrow(
                 () -> new ModelNotFoundException("programa academico no  exontrado"));
@@ -73,5 +75,16 @@ public class AcuerdoPedagogicoService {
 
     public boolean exists(int id){
         return repo.existsById(id);
+    }
+    
+    public List<AcuerdoPedagogico> listarDocente(int id){
+    	List<AcuerdoPedagogico> acuerdoPedagogico = new ArrayList<AcuerdoPedagogico>();
+    	for(AcuerdoPedagogico p: repo.findByOrderById()) {
+			if(p.getDocente().getId()==id) {
+				acuerdoPedagogico.add(p);
+			}
+				
+		}
+         return acuerdoPedagogico;
     }
 }

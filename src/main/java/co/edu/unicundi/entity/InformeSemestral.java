@@ -18,6 +18,7 @@ public class InformeSemestral {
 	private int id;
 	private int estudianteApro;
 	private int estudianteNoApro;
+	private int estudianteRetirado;
 	private String name;
 	private String informeUrl;
 	private String informeId;
@@ -46,7 +47,7 @@ public class InformeSemestral {
 		
 	}
 
-	public InformeSemestral(int id, int estudianteApro, int estudianteNoApro, String name, String informeUrl,
+	public InformeSemestral(int id, int estudianteApro, int estudianteNoApro, int estudianteRetirado, String name, String informeUrl,
 			String informeId, String nombre, String fecha, String tipoArchivo, String tamaño, String semestre,
 		    String grupo, String periodoAca, String año, ProgramaAcademico programaAcademico,
 			Docente docente, Materia materia) {
@@ -54,6 +55,7 @@ public class InformeSemestral {
 		this.id = id;
 		this.estudianteApro = estudianteApro;
 		this.estudianteNoApro = estudianteNoApro;
+		this.estudianteRetirado = estudianteRetirado;
 		this.name = name;
 		this.informeUrl = informeUrl;
 		this.informeId = informeId;
@@ -198,12 +200,20 @@ public class InformeSemestral {
 		this.programaacademico = programaacademico;
 	}
 
-	public Materia getMateria() {
+	public Materia getNucleoTematico() {
 		return materia;
 	}
 
 	public void setMateria(Materia materia) {
 		this.materia = materia;
+	}
+
+	public int getEstudianteRetirado() {
+		return estudianteRetirado;
+	}
+
+	public void setEstudianteRetirado(int estudianteRetirado) {
+		this.estudianteRetirado = estudianteRetirado;
 	}
 
 	

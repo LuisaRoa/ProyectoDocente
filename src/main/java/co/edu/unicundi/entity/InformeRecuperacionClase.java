@@ -172,7 +172,7 @@ public class InformeRecuperacionClase {
 		this.motivo = motivo;
 	}
 
-	public Materia getMateria() {
+	public Materia getNucleoTemático() {
 		return materia;
 	}
 
