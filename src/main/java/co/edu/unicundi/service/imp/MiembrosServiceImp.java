@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicundi.entity.Comite;
 import co.edu.unicundi.entity.Docente;
@@ -30,38 +31,18 @@ public class MiembrosServiceImp implements IMiembrosService  {
 	
 	List<Miembros> mien = new ArrayList<Miembros>();
 
-	public Miembros buscarId(int id) throws ModelNotFoundException {
-
-		Miembros mien = repo.findById(id)
-				.orElseThrow(() -> new ModelNotFoundException("Miembro no exontrado"));
-		return mien;
-
-	}
-
-	public List<Miembros> mostrarMiembros() throws ModelNotFoundException {
-		return this.repo.findAll();
-	}
-
-	public void guardar(Miembros mien) throws Exception {
+	@Override
+	public void guardarNativo(Miembros miembros) {
+		// TODO Auto-generated method stub
 		
-			this.repo.save(mien);
 	}
 
-	public void editar(Miembros mien) throws Exception, ModelNotFoundException {
-		
-		Docente doce = repoDoce.findById(mien.getDocente().getId()).orElseThrow(
-                () -> new ModelNotFoundException("docente no  exontrado"));
-		
-		Comite c = repoC.findById(mien.getComite().getId()).orElseThrow(
-                () -> new ModelNotFoundException("comite no  exontrado"));
-		
-		Miembros m = this.buscarId(mien.getMien_id());
-		m.setDocente(mien.getDocente());
-		m.setComite(mien.getComite());
-		this.repo.save(m);
-	}
+	/*@Override
+	public List<Miembros> listarPorIdDocente(Integer doce_id) {
+		return repo.listarPorIdDocente(doce_id);
+	}*/
+	
+	
+	
 
-	public void eliminar(int id) throws ModelNotFoundException {
-		this.repo.delete(this.buscarId(id));
-	}
 }
