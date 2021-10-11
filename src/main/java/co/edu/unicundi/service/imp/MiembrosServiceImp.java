@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicundi.entity.Comite;
 import co.edu.unicundi.entity.Docente;
+import co.edu.unicundi.entity.InformeSalidas;
 import co.edu.unicundi.entity.Miembros;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IComiteRepo;
@@ -16,33 +17,38 @@ import co.edu.unicundi.repo.IDocenteRepo;
 import co.edu.unicundi.repo.IMiembrosRepo;
 import co.edu.unicundi.service.IMiembrosService;
 
-
 @Service
-public class MiembrosServiceImp implements IMiembrosService  {
+public class MiembrosServiceImp implements IMiembrosService {
 
 	@Autowired
 	private IMiembrosRepo repo;
-	
+
 	@Autowired
 	private IDocenteRepo repoDoce;
-	
+
 	@Autowired
 	private IComiteRepo repoC;
-	
+
 	List<Miembros> mien = new ArrayList<Miembros>();
 
 	@Override
 	public void guardarNativo(Miembros miembros) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	/*@Override
-	public List<Miembros> listarPorIdDocente(Integer doce_id) {
-		return repo.listarPorIdDocente(doce_id);
-	}*/
-	
-	
-	
+	public List<Miembros> listarPoIdDocente(int id) {
+
+		List<Miembros> m = new ArrayList<Miembros>();
+		for (Miembros p : repo.findByOrderById()) {
+			if (p.getDocente().getId() == id) {
+				m.add(p);
+			}
+
+		}
+
+		return m;
+
+	}
 
 }
