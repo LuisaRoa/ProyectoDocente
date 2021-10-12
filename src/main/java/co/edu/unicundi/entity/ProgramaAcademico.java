@@ -57,11 +57,9 @@ public class ProgramaAcademico {
 	
 	@OneToMany(mappedBy ="programaacademico", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JsonIgnore
-<<<<<<< HEAD
 	private List<InformeHorasNoLectivas> informe ;
-=======
-	private List<SolicitudSalidas> solicitudSalidas ;
->>>>>>> 7f146afe5541e08348ad110865106561f8bb2993
+	
+
 	
 
 	public ProgramaAcademico() {
