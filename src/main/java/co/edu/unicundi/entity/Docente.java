@@ -289,6 +289,31 @@ public class Docente {
 
 	public void setSyllabus(List<Syllabus> syllabus) {
 		this.syllabus = syllabus;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((doce_id == null) ? 0 : doce_id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Docente other = (Docente) obj;
+		if (doce_id == null) {
+			if (other.doce_id != null)
+				return false;
+		} else if (!doce_id.equals(other.doce_id))
+			return false;
+		return true;
 	}	
 	
 	

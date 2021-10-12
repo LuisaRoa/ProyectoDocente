@@ -4,6 +4,7 @@ package co.edu.unicundi.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unicundi.entity.Docente;
+import co.edu.unicundi.entity.Miembros;
 import co.edu.unicundi.exception.InvalidFormatExcepcion;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.IDocenteService;
+import co.edu.unicundi.service.IMiembrosService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -34,6 +37,10 @@ public class DocenteController {
 	
 	@Autowired
 	private IDocenteService service;
+	
+	@Autowired
+	private IMiembrosService serviceM;
+	
 		
 	
 	@PostMapping("/guardar")
@@ -102,6 +109,7 @@ public class DocenteController {
 				
 
 	}
+
 	 
 	@GetMapping("/retornarAdministrativo/{id}")
 	@ApiOperation(value="Metodo que retorna todos los docentes por Administrativo")
@@ -110,6 +118,12 @@ public class DocenteController {
 		return new ResponseEntity<List<Docente>>(service.listarAdministrativo(id), HttpStatus.OK);
 
 	}
+
+	@PostMapping("/guardarMiembrosNativo")
+	public ResponseEntity<?> guardarMiembrosNativo(@Valid @RequestBody 	Miembros miembros) {	
+			serviceM.guardarNativo(miembros);
+			return new ResponseEntity<Object>("", HttpStatus.CREATED);				
+	}	
 	
 
 }

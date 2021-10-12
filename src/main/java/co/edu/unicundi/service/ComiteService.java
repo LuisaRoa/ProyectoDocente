@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,14 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import co.edu.unicundi.entity.Comite;
 import co.edu.unicundi.repo.IComiteRepo;
-
+import co.edu.unicundi.repo.IDocenteRepo;
 
 
 @Service
 @Transactional
 public class ComiteService {
+	
+	@Autowired
+	IDocenteRepo repoDocente; 
+	
 	@Autowired
     IComiteRepo repo;
 
@@ -46,5 +52,15 @@ public class ComiteService {
     public boolean exists(int id){
         return repo.existsById(id);
     }
+   /* public List<Comite> listarPoIdDocente(int ids){
+    	List<Comite> comite = new ArrayList<Comite>();
+    	for(Comite p: repo.findByOrderById()) {
+			//if(p.getMiembros().g{
+				comite.add(p);
+		//	}
+				
+		}
+         return comite;
+    }*/
 
 }
