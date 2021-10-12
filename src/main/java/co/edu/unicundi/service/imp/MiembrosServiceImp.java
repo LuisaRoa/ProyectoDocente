@@ -37,6 +37,7 @@ public class MiembrosServiceImp implements IMiembrosService {
 
 	}
 
+	/*
 	public List<Miembros> listarPoIdDocente(int id) {
 
 		List<Miembros> m = new ArrayList<Miembros>();
@@ -49,6 +50,6 @@ public class MiembrosServiceImp implements IMiembrosService {
 
 		return m;
 
-	}
+	}*/
 
 }
