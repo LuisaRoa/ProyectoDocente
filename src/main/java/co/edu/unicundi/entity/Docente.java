@@ -70,6 +70,9 @@ public class Docente {
 	@Column(name = "doce_sede", length = 60, nullable = false)
 	private String sede;
 	
+	@Column(name = "doce_tipo_contrato", length = 60, nullable = false)
+	private String contrato;
+	
 	@ManyToOne
 	@JoinColumn(name = "rol_id", nullable = true, foreignKey = @ForeignKey(name = "rol_id"))
 	private Rol rol;
@@ -99,35 +102,67 @@ public class Docente {
 	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Syllabus> syllabus ;
+	
+	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<InformeHorasNoLectivas> informe ;
+	
 
 	public Docente() {
 	}
 
-	public Docente(Integer doce_id, String documento,String nombre,	String codigo, String password, String fecha_nacimiento, String sexo, String direccion, String celular,
-			String fecha_ingreso, String correo, String sede,Administrativo administrativo, List<AulasVirtuales> aulasvirtuales, List<Miembros> miembros, List<InformeSemestral> informeSemes,
-			List<Asesoria> asesoria, List<Syllabus> syllabus) {
+	
+	public Docente(Integer doce_id, String documento,
+			String nombre,
+			String codigo, String password, String fechaNacimiento, String sexo, String direccion, String celular,
+			String fechaIngreso, String correo, String sede, String contrato, Rol rol, Administrativo administrativo,
+			List<AulasVirtuales> aulasvirtuales, List<Miembros> miembros, List<InformeSemestral> informeSemes,
+			List<Asesoria> asesoria, List<Syllabus> syllabus, List<InformeHorasNoLectivas> informe) {
 		super();
 		this.doce_id = doce_id;
 		this.documento = documento;
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.password = password;
-		this.fechaNacimiento = fecha_nacimiento;
+		this.fechaNacimiento = fechaNacimiento;
 		this.sexo = sexo;
 		this.direccion = direccion;
 		this.celular = celular;
-		this.fechaIngreso = fecha_ingreso;
+		this.fechaIngreso = fechaIngreso;
 		this.correo = correo;
 		this.sede = sede;
+		this.contrato = contrato;
+		this.rol = rol;
 		this.administrativo = administrativo;
-		this.aulasvirtuales = (List<AulasVirtuales>) aulasvirtuales;
-		this.miembros = (List<Miembros>) miembros;
+		this.aulasvirtuales = aulasvirtuales;
+		this.miembros = miembros;
 		this.informeSemes = informeSemes;
 		this.asesoria = asesoria;
 		this.syllabus = syllabus;
-		
+		this.informe = informe;
 	}
+
 	
+	public String getContrato() {
+		return contrato;
+	}
+
+
+	public void setContrato(String contrato) {
+		this.contrato = contrato;
+	}
+
+
+	public List<InformeHorasNoLectivas> getInforme() {
+		return informe;
+	}
+
+
+	public void setInforme(List<InformeHorasNoLectivas> informe) {
+		this.informe = informe;
+	}
+
+
 	public Administrativo getAdministrativo() {
 		return administrativo;
 	}

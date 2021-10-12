@@ -20,13 +20,125 @@ public class Comite {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String name;
-	private String cronogramaUrl;
-	private String cronogramaId;
-	private String fechaModificacion;
-	private String tipoArchivo;
-	private String tamaño;
+	private String nombre;
+	private String claseDeActividad;
+	private String nombreActividadAcademica;
+	private String lugarDeEjecucion;
+	private String certificacion;
+	private String fechaInicio;
+	private String fechaFinalizacion;
+	private int intensidadHoraria;
 	
+	public String getNombre() {
+		return nombre;
+	}
+
+
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+
+
+	public String getClaseDeActividad() {
+		return claseDeActividad;
+	}
+
+
+
+
+	public void setClaseDeActividad(String claseDeActividad) {
+		this.claseDeActividad = claseDeActividad;
+	}
+
+
+
+
+	public String getNombreActividadAcademica() {
+		return nombreActividadAcademica;
+	}
+
+
+
+
+	public void setNombreActividadAcademica(String nombreActividadAcademica) {
+		this.nombreActividadAcademica = nombreActividadAcademica;
+	}
+
+
+
+
+	public String getLugarDeEjecucion() {
+		return lugarDeEjecucion;
+	}
+
+
+
+
+	public void setLugarDeEjecucion(String lugarDeEjecucion) {
+		this.lugarDeEjecucion = lugarDeEjecucion;
+	}
+
+
+
+
+	public String getCertificacion() {
+		return certificacion;
+	}
+
+
+
+
+	public void setCertificacion(String certificacion) {
+		this.certificacion = certificacion;
+	}
+
+
+
+
+	public String getFechaInicio() {
+		return fechaInicio;
+	}
+
+
+
+
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+
+
+
+	public String getFechaFinalizacion() {
+		return fechaFinalizacion;
+	}
+
+
+
+
+	public void setFechaFinalizacion(String fechaFinalizacion) {
+		this.fechaFinalizacion = fechaFinalizacion;
+	}
+
+
+
+
+	public int getIntensidadHoraria() {
+		return intensidadHoraria;
+	}
+
+
+
+
+	public void setIntensidadHoraria(int intensidadHoraria) {
+		this.intensidadHoraria = intensidadHoraria;
+	}
+
+
 	@OneToMany(mappedBy ="comite", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Miembros> miembros ;
@@ -35,18 +147,7 @@ public class Comite {
 	}
 
 
-	public Comite(int id, String name, String cronogramaUrl, String cronogramaId, String fechaModificacion,
-			String tipoArchivo, String tamaño, List<Miembros> miembros) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.cronogramaUrl = cronogramaUrl;
-		this.cronogramaId = cronogramaId;
-		this.fechaModificacion = fechaModificacion;
-		this.tipoArchivo = tipoArchivo;
-		this.tamaño = tamaño;
-		this.miembros = miembros;
-	}
+	
 
 	public int getId() {
 		return id;
@@ -56,53 +157,6 @@ public class Comite {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCronogramaUrl() {
-		return cronogramaUrl;
-	}
-
-	public void setCronogramaUrl(String cronogramaUrl) {
-		this.cronogramaUrl = cronogramaUrl;
-	}
-
-	public String getCronogramaId() {
-		return cronogramaId;
-	}
-
-	public void setCronogramaId(String cronogramaId) {
-		this.cronogramaId = cronogramaId;
-	}
-
-	public String getFechaModificacion() {
-		return fechaModificacion;
-	}
-
-	public void setFechaModificacion(String fechaModificacion) {
-		this.fechaModificacion = fechaModificacion;
-	}
-
-	public String getTipoArchivo() {
-		return tipoArchivo;
-	}
-
-	public void setTipoArchivo(String tipoArchivo) {
-		this.tipoArchivo = tipoArchivo;
-	}
-
-	public String getTamaño() {
-		return tamaño;
-	}
-
-	public void setTamaño(String tamaño) {
-		this.tamaño = tamaño;
-	}
 
 
 	public List<Miembros> getMiembros() {

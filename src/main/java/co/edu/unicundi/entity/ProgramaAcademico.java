@@ -55,13 +55,17 @@ public class ProgramaAcademico {
 	@JsonIgnore
 	private List<Syllabus> syllabus ;
 	
+	@OneToMany(mappedBy ="programaacademico", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<InformeHorasNoLectivas> informe ;
+	
 
 	public ProgramaAcademico() {
 	}
 
 
 	public ProgramaAcademico(Integer prac_id,String nombre,String registradopor, String fechacambio, Facultad facultad, List<Administrativo> administrativo,  List<InformeSemestral> informeSemestral,
-			List<Syllabus> syllabus) {
+			List<Syllabus> syllabus, List<InformeHorasNoLectivas> informe) {
 		super();
 		this.prac_id = prac_id;
 		this.nombre = nombre;
@@ -71,8 +75,19 @@ public class ProgramaAcademico {
 		this.administrativo = administrativo;
 		this.informesemestral = informeSemestral;
 		this.syllabus = syllabus;
+		this.informe = informe;
 	}
 
+
+
+	public List<InformeHorasNoLectivas> getInforme() {
+		return informe;
+	}
+
+
+	public void setInforme(List<InformeHorasNoLectivas> informe) {
+		this.informe = informe;
+	}
 
 
 	public Integer getPrac_id() {

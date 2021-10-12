@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "facultad")
 public class Facultad {
@@ -35,19 +37,33 @@ public class Facultad {
 	
 	@OneToMany(mappedBy ="facultad", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<ProgramaAcademico> programaacademico ;
+	
+	@OneToMany(mappedBy ="facultad", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<InformeHorasNoLectivas> informe ;
+	
 
 	
 	
 	public Facultad() {
 	}
 
-	public Facultad(Integer facu_id, String nombre,	String registradopor, String fechacambio, List<ProgramaAcademico> programaacademico) {
+	public Facultad(Integer facu_id, String nombre,	String registradopor, String fechacambio, List<ProgramaAcademico> programaacademico, List<InformeHorasNoLectivas> informe) {
 		super();
 		this.facu_id = facu_id;
 		this.nombre = nombre;
 		this.registradoPor = registradopor;
 		this.fechaCambio = fechacambio;
 		this.programaacademico = programaacademico;
+		this.informe = informe;
+	}
+
+	public List<InformeHorasNoLectivas> getInforme() {
+		return informe;
+	}
+
+	public void setInforme(List<InformeHorasNoLectivas> informe) {
+		this.informe = informe;
 	}
 
 	public List<ProgramaAcademico> getProgramaacademico() {
