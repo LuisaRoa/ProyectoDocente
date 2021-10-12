@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 
 import co.edu.unicundi.entity.Administrativo;
+import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.ProgramaAcademico;
 import co.edu.unicundi.entity.Rol;
 import co.edu.unicundi.exception.ModelNotFoundException;
@@ -87,5 +88,14 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 
 	public void eliminar(int id) throws ModelNotFoundException {
 		this.repo.delete(this.buscarId(id));
+	}
+	
+	@Override
+	public Administrativo buscarCorreo(String correo) throws ModelNotFoundException {
+		
+		Administrativo admin = repo.findByCorreo(correo).orElseThrow(
+                () -> new ModelNotFoundException("Administrativo no exontrado"));
+        return admin;
+
 	}
 }

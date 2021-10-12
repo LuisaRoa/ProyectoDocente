@@ -90,6 +90,14 @@ public class AulasVirtualesController {
 				
 
 	}
+	
+	@GetMapping("/listarDocente/{id}") 
+	@ApiOperation(value="Metodo que retorna a un Aula virtual por su id")
+	public ResponseEntity<?> listarDocente(@PathVariable int id) throws ModelNotFoundException, Exception  {
+		return new ResponseEntity<List<AulasVirtuales>>(service.listarDocente(id), HttpStatus.OK);	
+				
+
+	}
 
 
 }

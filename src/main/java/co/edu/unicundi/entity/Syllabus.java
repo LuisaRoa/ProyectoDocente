@@ -75,7 +75,7 @@ public class Syllabus {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSyllabusUrl() {
+	public String getArchivoUrl() {
 		return syllabusUrl;
 	}
 	public void setSyllabusUrl(String syllabusUrl) {

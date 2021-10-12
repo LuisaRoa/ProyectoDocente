@@ -86,6 +86,14 @@ public class Docente {
 	
 	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JsonIgnore
+	private List<SolicitudAulas> solicitudAulas ;
+	
+	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<SolicitudSalidas> solicitudSalidas ;
+	
+	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Miembros> miembros ;
 	
 	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

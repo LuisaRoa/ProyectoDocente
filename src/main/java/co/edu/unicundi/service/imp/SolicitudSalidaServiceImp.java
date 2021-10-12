@@ -80,13 +80,13 @@ public class SolicitudSalidaServiceImp implements ISolicitudSalidaService{
 		so.setEstado(soli.getEstado());
 		so.setSemestre(soli.getSemestre());
 		so.setFechaInicio(soli.getFechaInicio());
-		so.setFechaTerminacion(soli.getFechaTerminacion());
+		so.setFechaTerminación(soli.getFechaTerminación());
 		so.setNombre(soli.getNombre());
-		so.setTipo(soli.getTipo());
+		so.setTipoSalida(soli.getTipoSalida());
 		so.setNoEstudiantes(soli.getNoEstudiantes());
 		so.setDocente(doce);
 		so.setProgramaacademico(programa);
-		
+		this.repo.save(so);
 	}
 
 	@Override
@@ -115,4 +115,15 @@ public class SolicitudSalidaServiceImp implements ISolicitudSalidaService{
 		}
          return lista;
     }
+	
+	@Override
+	public List<SolicitudSalidas> listarAdministrativo(int id) throws ModelNotFoundException {
+		List<SolicitudSalidas> lista = new ArrayList<SolicitudSalidas>();
+		for(SolicitudSalidas p: repo.findAll()) {
+			if((p.getDocente().getAdministrativo().getAdmi_id()==id)&&p.getEstado().equals("No aprobado")) {
+				lista.add(p);
+			}
+		}
+		return lista;
+	}
 }

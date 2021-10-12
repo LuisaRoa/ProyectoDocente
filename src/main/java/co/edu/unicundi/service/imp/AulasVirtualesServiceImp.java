@@ -1,10 +1,12 @@
 package co.edu.unicundi.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import co.edu.unicundi.entity.AcuerdoPedagogico;
 import co.edu.unicundi.entity.AulasVirtuales;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Materia;
@@ -60,5 +62,16 @@ public class AulasVirtualesServiceImp implements IAulaVirtualService{
 		this.repo.delete(this.buscarId(id));
 		
 	}
+	
+	public List<AulasVirtuales> listarDocente(int id){
+    	List<AulasVirtuales> aulasVirtuales = new ArrayList<AulasVirtuales>();
+    	for(AulasVirtuales p: repo.findAll()) {
+			if(p.getDocente().getId()==id) {
+				aulasVirtuales.add(p);
+			}
+				
+		}
+         return aulasVirtuales;
+    }
 
 }

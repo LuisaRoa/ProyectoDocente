@@ -67,7 +67,7 @@ public class AdjuntarEvidencia {
 			this.name = name;
 		}
 
-		public String getEviendeciaUrl() {
+		public String getArchivoUrl() {
 			return eviendeciaUrl;
 		}
 
@@ -83,7 +83,7 @@ public class AdjuntarEvidencia {
 			this.evidenciaId = evidenciaId;
 		}
 
-		public AulasVirtuales getAulasvirtuales() {
+		public AulasVirtuales getAulaVirtual() {
 			return aulasvirtuales;
 		}
 

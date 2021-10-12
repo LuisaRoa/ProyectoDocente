@@ -1,6 +1,5 @@
 package co.edu.unicundi.controller;
 
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
@@ -25,29 +24,30 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.edu.unicundi.dto.Mensaje;
-import co.edu.unicundi.entity.AdjuntarEvidencia;
-import co.edu.unicundi.entity.Imagen;
+import co.edu.unicundi.entity.CierreAcademico;
+import co.edu.unicundi.entity.InformeSalidas;
 import co.edu.unicundi.exception.ModelNotFoundException;
-import co.edu.unicundi.service.AdjuntarEvidenciaService;
+import co.edu.unicundi.service.CierreAcademicoService;
 import co.edu.unicundi.service.CloudinaryService;
-import co.edu.unicundi.service.ImagenService;
+import co.edu.unicundi.service.InformeSalidasService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/evidencia")
+@RequestMapping("/cierreAcademico")
 @CrossOrigin
-public class AdjuntarEvidenciaController {
+public class CierreAcademicoController {
+
 	@Autowired
 	CloudinaryService cloudinaryService;
 
 	@Autowired
-	AdjuntarEvidenciaService adjuntar;
+	CierreAcademicoService adjuntar;
 
 	@GetMapping("/list")
-	public ResponseEntity<List<AdjuntarEvidencia>> list() {
-		List<AdjuntarEvidencia> list = adjuntar.list();
+	public ResponseEntity<List<CierreAcademico>> list() {
+		List<CierreAcademico> list = adjuntar.list();
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 
@@ -58,13 +58,13 @@ public class AdjuntarEvidenciaController {
             return new ResponseEntity(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
         }*/
         Map result = cloudinaryService.upload(multipartFile);
-        AdjuntarEvidencia evidencia =
-                new AdjuntarEvidencia(0,(String)result.get("original_filename"),
+        CierreAcademico cierreAcademico =
+                new CierreAcademico(0 , (String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null, null, null, null, null, null);
+                        (String)result.get("public_id"), null, null, null, null, null, null, null);
                        /* (String)result.get("size")*/
-        adjuntar.save(evidencia);
-        return new ResponseEntity<AdjuntarEvidencia>(evidencia, HttpStatus.OK);
+        adjuntar.save(cierreAcademico);
+        return new ResponseEntity<CierreAcademico>(cierreAcademico, HttpStatus.OK);
     }
 
 	@PutMapping("/editar")
@@ -73,12 +73,12 @@ public class AdjuntarEvidenciaController {
             notes = "Editar al formato correspondiente al id"
             )
             @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = AdjuntarEvidencia.class ),
+            @ApiResponse(code = 200, message = "OK", response = CierreAcademico.class ),
             @ApiResponse(code = 503, message = "Servicio no Disponible", response = String.class),
             @ApiResponse(code = 500, message = "Error inesperado del sistema") })
-	public ResponseEntity<AdjuntarEvidencia> editar(@Validated @RequestBody AdjuntarEvidencia evidencia) throws Exception, ModelNotFoundException{
-		adjuntar.update(evidencia);
-		return new ResponseEntity<AdjuntarEvidencia>(evidencia, HttpStatus.CREATED);
+	public ResponseEntity<CierreAcademico> editar(@Validated @RequestBody CierreAcademico cierreAcademico) throws Exception, ModelNotFoundException{
+		adjuntar.update(cierreAcademico);
+		return new ResponseEntity<CierreAcademico>(cierreAcademico, HttpStatus.CREATED);
 
 	}
 
@@ -86,31 +86,23 @@ public class AdjuntarEvidenciaController {
 	public ResponseEntity<?> delete(@PathVariable("id") int id) throws IOException {
 		if (!adjuntar.exists(id))
 			return new ResponseEntity<Object>(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-		AdjuntarEvidencia evidencia = adjuntar.getOne(id).get();
-		Map result = cloudinaryService.delete(evidencia.getEvidenciaId());
+		CierreAcademico cierreAcademico = adjuntar.getOne(id).get();
+		Map result = cloudinaryService.delete(cierreAcademico.getInformeId());
 		adjuntar.delete(id);
-		return new ResponseEntity(new Mensaje("evidencia eliminada"), HttpStatus.OK);
+		return new ResponseEntity(new Mensaje("Informe Cierre Academico eliminado"), HttpStatus.OK);
 	}
 
 	@GetMapping("/retornarId/{id}")
 	@ApiOperation(value = "Metodo que retorna a un formato por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception {
-		AdjuntarEvidencia evidencia = adjuntar.getOne(id).get();
-		return new ResponseEntity<AdjuntarEvidencia>(evidencia, HttpStatus.OK);
+		CierreAcademico cierreAcademico = adjuntar.getOne(id).get();
+		return new ResponseEntity<CierreAcademico>(cierreAcademico, HttpStatus.OK);
 
 	}
 	
-	@GetMapping("/listarPorAula/{id}")
-	public ResponseEntity<List<AdjuntarEvidencia>> listarPorAula(@PathVariable int id) {
-		List<AdjuntarEvidencia> lista = adjuntar.evidenciaPorIdAula(id);
-		return new ResponseEntity(lista, HttpStatus.OK);
+	@GetMapping("/listarAdministrativo/{id}")
+	public ResponseEntity<List<CierreAcademico>> listarAdministrativo(@PathVariable int id) {
+		List<CierreAcademico> list = adjuntar.listarAdministrativo(id);
+		return new ResponseEntity(list, HttpStatus.OK);
 	}
-	
-	@GetMapping("/listarDocente/{id}")
-	public ResponseEntity<List<AdjuntarEvidencia>> listarDocente(@PathVariable int id) {
-		List<AdjuntarEvidencia> lista = adjuntar.listarDocente(id);
-		return new ResponseEntity(lista, HttpStatus.OK);
-	}
-	
-	
 }

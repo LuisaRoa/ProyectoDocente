@@ -1,6 +1,7 @@
 
 package co.edu.unicundi.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class SolicitudAulasServiceImp implements ISolicitudAulasService{
 
 	@Override
 	public void guardar(SolicitudAulas soli) throws Exception {
-		Materia mate = repoMate.findById(soli.getMateria().getMate_id()).orElseThrow(
+		Materia mate = repoMate.findById(soli.getNucleoTemático().getMate_id()).orElseThrow(
                 () -> new ModelNotFoundException("materia no  exontrada"));
 		if(mate.getSemestre().equals(soli.getSemestre())) {
 			this.repo.save(soli);
@@ -55,11 +56,11 @@ public class SolicitudAulasServiceImp implements ISolicitudAulasService{
 
 	@Override
 	public void editar(SolicitudAulas soli) throws Exception, ModelNotFoundException {
-		
+		System.out.println("id mate"+soli.getNucleoTemático().getMate_id());
 		SolicitudAulas so = this.buscarId(soli.getSoau_id());
 		Docente doce = repoDoce.findById(soli.getDocente().getId()).orElseThrow(
                 () -> new ModelNotFoundException("docente no  exontrado"));
-		Materia mate = repoMate.findById(soli.getMateria().getMate_id()).orElseThrow(
+		Materia mate = repoMate.findById(soli.getNucleoTemático().getMate_id()).orElseThrow(
                 () -> new ModelNotFoundException("materia no  exontrada"));
 		so.setFecha(soli.getFecha());
 		so.setEstado(soli.getEstado());
@@ -67,8 +68,8 @@ public class SolicitudAulasServiceImp implements ISolicitudAulasService{
 		so.setGrupo(soli.getGrupo());
 		so.setSemestre(soli.getSemestre());
 		so.setDocente(doce);
-		so.setMateria(mate);
-		
+		so.setNucleoTemático(mate);
+		this.repo.save(so);
 		
 	}
 
@@ -76,5 +77,17 @@ public class SolicitudAulasServiceImp implements ISolicitudAulasService{
 	public void eliminar(int id) throws ModelNotFoundException {
 		this.repo.delete(this.buscarId(id));
 	}
+
+	@Override
+	public List<SolicitudAulas> listarAdministrativo(int id) throws ModelNotFoundException {
+		List<SolicitudAulas> lista = new ArrayList<SolicitudAulas>();
+		for(SolicitudAulas p: repo.findAll()) {
+			if((p.getDocente().getAdministrativo().getAdmi_id()==id)&&p.getEstado().equals("inactivo")) {
+				lista.add(p);
+			}
+		}
+		return lista;
+	}
+	
 
 }

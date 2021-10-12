@@ -103,6 +103,13 @@ public class DocenteController {
 
 	}
 	 
+	@GetMapping("/retornarAdministrativo/{id}")
+	@ApiOperation(value="Metodo que retorna todos los docentes por Administrativo")
+	public ResponseEntity<List<Docente>> retornarAdministrativo(@PathVariable int id) throws ModelNotFoundException{
+		
+		return new ResponseEntity<List<Docente>>(service.listarAdministrativo(id), HttpStatus.OK);
+
+	}
 	
 
 }

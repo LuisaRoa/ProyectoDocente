@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicundi.entity.AdjuntarEvidencia;
+import co.edu.unicundi.entity.AulasVirtuales;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Imagen;
 import co.edu.unicundi.exception.ModelNotFoundException;
@@ -38,7 +39,7 @@ public class AdjuntarEvidenciaService {
     	e.setCorte(evid.getCorte());
     	e.setTipoArchivo(evid.getTipoArchivo());
     	e.setTamaño(evid.getTamaño());
-    	e.setAulasvirtuales(evid.getAulasvirtuales());
+    	e.setAulasvirtuales(evid.getAulaVirtual());
         repo.save(e);
     }
     public void save(AdjuntarEvidencia evi){
@@ -56,11 +57,22 @@ public class AdjuntarEvidenciaService {
     public List<AdjuntarEvidencia> evidenciaPorIdAula(int id){
     	List<AdjuntarEvidencia> lista = new ArrayList<AdjuntarEvidencia>();
     	for(AdjuntarEvidencia p: repo.findByOrderById()) {
-			if(p.getAulasvirtuales().getAuvi_id()==id) {
+			if(p.getAulaVirtual().getAuvi_id()==id) {
 				lista.add(p);
 			}
 				
 		}
     	return lista;
+    }
+    
+    public List<AdjuntarEvidencia> listarDocente(int id){
+    	List<AdjuntarEvidencia> evidencia = new ArrayList<AdjuntarEvidencia>();
+    	for(AdjuntarEvidencia p: repo.findByOrderById()) {
+			if(p.getAulaVirtual().getDocente().getId()==id) {
+				evidencia.add(p);
+			}
+				
+		}
+         return evidencia;
     }
 }

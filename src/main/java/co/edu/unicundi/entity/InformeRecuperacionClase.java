@@ -84,7 +84,7 @@ public class InformeRecuperacionClase {
 		this.name = name;
 	}
 
-	public String getInformeUrl() {
+	public String getArchivoUrl() {
 		return informeUrl;
 	}
 

@@ -91,5 +91,13 @@ public class AdministrativoController {
 
 	}
 
+	@GetMapping("/buscarCorreo/{correo}") 
+	@ApiOperation(value="Metodo que retorna el documento por su correo")
+	public ResponseEntity<?> buscarCorreo(@PathVariable String correo) throws ModelNotFoundException, Exception  {
+		Administrativo admin = service.buscarCorreo(correo);
+		return new ResponseEntity<Administrativo>(admin, HttpStatus.OK);	
+				
+
+	}
 
 }

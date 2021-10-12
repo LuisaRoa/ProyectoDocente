@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import co.edu.unicundi.entity.Administrativo;
+import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.exception.ModelNotFoundException;
 
 
@@ -21,5 +22,5 @@ public interface IAdministrativoService {
 	
 	public void eliminar(int id) throws ModelNotFoundException;
 
-
+	public Administrativo buscarCorreo(String correo) throws ModelNotFoundException;
 }

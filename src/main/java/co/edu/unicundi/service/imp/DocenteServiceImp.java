@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import co.edu.unicundi.entity.AcuerdoPedagogico;
 import co.edu.unicundi.entity.Administrativo;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Facultad;
@@ -95,5 +96,14 @@ public class DocenteServiceImp implements IDocenteService {
 
 	}
 
-
+	public List<Docente> listarAdministrativo(int id){
+    	List<Docente> docente = new ArrayList<Docente>();
+    	for(Docente p: repo.findAll()) {
+			if(p.getAdministrativo().getId()==id) {
+				docente.add(p);
+			}
+				
+		}
+         return docente;
+    }
 }

@@ -45,6 +45,10 @@ public class Materia {
 	@JsonIgnore
 	private List<InformeSemestral> informeSemestral;
 	
+	@OneToMany(mappedBy = "materia", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<SolicitudAulas> solicitudAulas;
+	
 
 	public Materia() {
 

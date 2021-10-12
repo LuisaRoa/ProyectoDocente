@@ -55,6 +55,10 @@ public class ProgramaAcademico {
 	@JsonIgnore
 	private List<Syllabus> syllabus ;
 	
+	@OneToMany(mappedBy ="programaacademico", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<SolicitudSalidas> solicitudSalidas ;
+	
 
 	public ProgramaAcademico() {
 	}

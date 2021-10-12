@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -42,13 +44,11 @@ public class SolicitudAulas {
 	@Column(name = "soau_fechacambio", length = 60, nullable = false)
 	private String fechaCambio;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "docente_doce_id", nullable = false, foreignKey = @ForeignKey(name = "doce_id"))
 	private Docente docente;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "materia_mate_id", nullable = false, foreignKey = @ForeignKey(name = "mate_id"))
 	private Materia materia;
 
@@ -158,12 +158,11 @@ public class SolicitudAulas {
 		this.docente = docente;
 	}
 
-	@JsonIgnore
-	public Materia getMateria() {
+	public Materia getNucleoTemático() {
 		return materia;
 	}
 
-	public void setMateria(Materia materia) {
+	public void setNucleoTemático(Materia materia) {
 		this.materia = materia;
 	}
 

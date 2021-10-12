@@ -79,7 +79,7 @@ public class AcuerdoPedagogico {
 		this.name = name;
 	}
 
-	public String getAcuerdoUrl() {
+	public String getArchivoUrl() {
 		return acuerdoUrl;
 	}
 
