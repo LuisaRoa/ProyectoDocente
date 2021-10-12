@@ -46,7 +46,7 @@ public class InformeSemestralService {
 
     public void update (InformeSemestral informeSemes) throws ModelNotFoundException {
     	InformeSemestral e = getOne(informeSemes.getId()).get();
-    	Materia materia = repoMateria.findById(informeSemes.getNucleoTematico().getMate_id()).orElseThrow(
+    	Materia materia = repoMateria.findById(informeSemes.getNucleoTemático().getMate_id()).orElseThrow(
                 () -> new ModelNotFoundException("materia no  exontrado"));
     	ProgramaAcademico programa = repoPrograma.findById(informeSemes.getProgramaacademico().getPrac_id()).orElseThrow(
                 () -> new ModelNotFoundException("programa academico no  exontrado"));

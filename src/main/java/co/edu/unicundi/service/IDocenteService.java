@@ -21,7 +21,7 @@ public interface IDocenteService  {
 
 	public Docente buscarCorreo(String correo) throws ModelNotFoundException;
 
-	
+	public List<Docente> listarAdministrativo(int id) throws ModelNotFoundException;
 	
 	
 }

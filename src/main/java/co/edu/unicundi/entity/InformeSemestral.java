@@ -104,7 +104,7 @@ public class InformeSemestral {
 		this.name = name;
 	}
 
-	public String getInformeUrl() {
+	public String getArchivoUrl() {
 		return informeUrl;
 	}
 
@@ -200,7 +200,7 @@ public class InformeSemestral {
 		this.programaacademico = programaacademico;
 	}
 
-	public Materia getNucleoTematico() {
+	public Materia getNucleoTemático() {
 		return materia;
 	}
 

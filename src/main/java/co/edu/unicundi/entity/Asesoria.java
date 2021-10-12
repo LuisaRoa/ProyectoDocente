@@ -61,7 +61,7 @@ public class Asesoria {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAsesoriaUrl() {
+	public String getArchivoUrl() {
 		return asesoriaUrl;
 	}
 	public void setAsesoriaUrl(String eviendeciaUrl) {

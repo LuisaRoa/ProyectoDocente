@@ -39,7 +39,7 @@ public class SolicitudAulasController {
 		
 			
 	}
-	@PutMapping("editar")
+	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar solicitud de aula  correspondiente al id",
             notes = "Editar solicitud de aula  correspondiente al id"
@@ -77,6 +77,22 @@ public class SolicitudAulasController {
 	public ResponseEntity<List<SolicitudAulas>> retornarTodos() throws ModelNotFoundException{
 		
 		return new ResponseEntity<List<SolicitudAulas>>(service.mostrarSolicitudAulas(), HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/retornarId/{id}")
+	@ApiOperation(value="Metodo que retorna todas las solicitudes creadas")
+	public ResponseEntity<SolicitudAulas> retornarId(@PathVariable int id) throws ModelNotFoundException{
+		
+		return new ResponseEntity<SolicitudAulas>(service.buscarId(id), HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/retornarAdministrativo/{id}")
+	@ApiOperation(value="Metodo que retorna todas las solicitudes creadas por administrativo")
+	public ResponseEntity<List<SolicitudAulas>> retornarAdministrativo(@PathVariable int id) throws ModelNotFoundException{
+		System.out.println("id"+id);
+		return new ResponseEntity<List<SolicitudAulas>>(service.listarAdministrativo(id), HttpStatus.OK);
 
 	}
 }

@@ -62,14 +62,11 @@ public class SolicitudSalidas {
 	@Column(name = "sosa_tematica", length = 30, nullable = false)
 	private String tematica;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "docente_doce_id", nullable = false, foreignKey = @ForeignKey(name = "doce_id"))
 	private Docente docente;
 
-	
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "programaacademico_prac_id", nullable = false, foreignKey = @ForeignKey(name = "prac_id"))
 	private ProgramaAcademico programaacademico;
 	
@@ -160,11 +157,11 @@ public class SolicitudSalidas {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public String getFechaTerminacion() {
+	public String getFechaTerminación() {
 		return fechaTerminacion;
 	}
 
-	public void setFechaTerminacion(String fechaTerminacion) {
+	public void setFechaTerminación(String fechaTerminacion) {
 		this.fechaTerminacion = fechaTerminacion;
 	}
 
@@ -176,11 +173,11 @@ public class SolicitudSalidas {
 		this.nombre = nombre;
 	}
 
-	public String getTipo() {
+	public String getTipoSalida() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipoSalida(String tipo) {
 		this.tipo = tipo;
 	}
 

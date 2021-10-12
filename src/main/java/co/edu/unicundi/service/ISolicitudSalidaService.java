@@ -21,4 +21,6 @@ public interface ISolicitudSalidaService {
 	
 	public List<SolicitudSalidas> listarDocente(int id) throws ModelNotFoundException;
 	
+	public List<SolicitudSalidas> listarAdministrativo(int id) throws ModelNotFoundException;
+	
 }

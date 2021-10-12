@@ -16,5 +16,7 @@ public interface IAulaVirtualService {
 	public void editar(AulasVirtuales mate) throws Exception, ModelNotFoundException;
 	
 	public void eliminar(int id) throws ModelNotFoundException;
+	
+	public List<AulasVirtuales>listarDocente(int id) ;
 
 }

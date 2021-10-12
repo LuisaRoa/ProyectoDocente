@@ -2,6 +2,7 @@ package co.edu.unicundi.service;
 
 import java.util.List;
 
+import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.SolicitudAulas;
 import co.edu.unicundi.exception.ModelNotFoundException;
 
@@ -17,4 +18,5 @@ public interface ISolicitudAulasService {
 	
 	public void eliminar(int id) throws ModelNotFoundException;
 
+	public List<SolicitudAulas> listarAdministrativo(int id) throws ModelNotFoundException;
 }

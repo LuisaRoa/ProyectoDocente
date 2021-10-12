@@ -38,7 +38,7 @@ public class SolicitudSalidaController {
 		
 			
 	}
-	@PutMapping("editar")
+	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar solicitud de salida  correspondiente al id",
             notes = "Editar solicitud de salida  correspondiente al id"
@@ -92,6 +92,14 @@ public class SolicitudSalidaController {
 	public ResponseEntity<List<SolicitudSalidas>> retornarDocente(@PathVariable int id) throws ModelNotFoundException{
 		
 		return new ResponseEntity<List<SolicitudSalidas>>(service.listarDocente(id), HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/retornarAdministrativo/{id}")
+	@ApiOperation(value="Metodo que retorna todas las solicitudes por administrativo")
+	public ResponseEntity<List<SolicitudSalidas>> retornarAdministrativo(@PathVariable int id) throws ModelNotFoundException{
+		
+		return new ResponseEntity<List<SolicitudSalidas>>(service.listarAdministrativo(id), HttpStatus.OK);
 
 	}
 }
