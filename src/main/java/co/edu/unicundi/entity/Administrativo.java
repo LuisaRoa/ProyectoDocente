@@ -29,6 +29,14 @@ public class Administrativo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer admi_id;
 	
+	@Column(name = "name", length = 30, nullable = true)
+	private String name;
+	
+	@Column(name = "fotoUrl", length = 90, nullable = true)
+	private String fotoUrl;
+	
+	@Column(name = "fotoId", length = 30, nullable = true)
+	private String fotoId;
 	
 	@Column(name = "admi_documento", length = 30, nullable = false)
 	private String documento;
@@ -244,6 +252,30 @@ public class Administrativo {
 
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getFotoUrl() {
+		return fotoUrl;
+	}
+
+	public void setFotoUrl(String fotoUrl) {
+		this.fotoUrl = fotoUrl;
+	}
+
+	public String getFotoId() {
+		return fotoId;
+	}
+
+	public void setFotoId(String fotoId) {
+		this.fotoId = fotoId;
 	}	
 	
 	

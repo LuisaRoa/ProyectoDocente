@@ -18,7 +18,5 @@ import co.edu.unicundi.entity.Miembros;
 @Repository
 public interface IMiembrosRepo extends JpaRepository<Miembros, Integer> {
 
-	//List<Miembros> findByOrderById();
-
 
 }

@@ -8,18 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import co.edu.unicundi.entity.Administrativo;
+import co.edu.unicundi.entity.AulasVirtuales;
 import co.edu.unicundi.entity.Comite;
+import co.edu.unicundi.entity.Rol;
+import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IComiteRepo;
-import co.edu.unicundi.repo.IDocenteRepo;
+
 
 
 @Service
 @Transactional
 public class ComiteService {
 	
-	@Autowired
-	IDocenteRepo repoDocente; 
 	
 	@Autowired
     IComiteRepo repo;
@@ -32,35 +33,45 @@ public class ComiteService {
         return repo.findById(id);
     }
 
-    public void update (Comite com) {
-    	Comite e = getOne(com.getId()).get();
-    	e.setName(com.getName());
-    	e.setFechaModificacion(com.getFechaModificacion());
-    	e.setTipoArchivo(com.getTipoArchivo());
-    	e.setTamaño(com.getTamaño());
+    List<Comite> Comite = new ArrayList<Comite>();
+    
+	public Comite buscarId(int id) throws ModelNotFoundException {
+		
+		Comite C = repo.findById(id).orElseThrow(
+                () -> new ModelNotFoundException("docente no exontrado"));
+        return C;
 
-        repo.save(e);
-    }
-    public void save(Comite com){
-    	repo.save(com);
-    }
+	}
 
-    public void delete(int id){
-        repo.deleteById(id);
-    }
 
-    public boolean exists(int id){
-        return repo.existsById(id);
-    }
-   /* public List<Comite> listarPoIdDocente(int ids){
-    	List<Comite> comite = new ArrayList<Comite>();
-    	for(Comite p: repo.findByOrderById()) {
-			//if(p.getMiembros().g{
-				comite.add(p);
-		//	}
-				
-		}
-         return comite;
-    }*/
+	public List<Comite> mostrarComite() throws ModelNotFoundException {
+		return this.repo.findAll();
+	}
 
+
+	public void guardar(Comite comite) throws Exception {
+		
+		this.repo.save(comite);
+	}
+
+
+	public void editar(Comite comite) throws Exception, ModelNotFoundException {
+		Comite pro = this.buscarId(comite.getId());
+		
+        pro.setNombre(comite.getNombre());
+        pro.setNombreActividadAcademica(comite.getNombreActividadAcademica());;
+        pro.setClaseDeActividad(comite.getClaseDeActividad());
+        pro.setLugarDeEjecucion(comite.getLugarDeEjecucion());
+        pro.setFechaInicio(comite.getFechaInicio());
+        pro.setFechaFinalizacion(comite.getFechaFinalizacion());
+        pro.setCertificacion(comite.getCertificacion());
+        pro.setIntensidadHoraria(comite.getIntensidadHoraria());
+        this.repo.save(pro);
+	}
+
+
+	public void eliminar(int id) throws ModelNotFoundException {
+		this.repo.delete(this.buscarId(id));
+	}
+	
 }

@@ -62,6 +62,7 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 			Rol rol = repoRol.findById(2).orElseThrow(
 	                () -> new ModelNotFoundException("rol no  exontrado"));
 			admi.setRol(rol);
+			admi.setPassword(admi.getDocumento());
 			this.repo.save(admi);
 		}
 	}
@@ -97,5 +98,24 @@ public class AdministrativoServiceImp implements IAdministrativoService {
                 () -> new ModelNotFoundException("Administrativo no exontrado"));
         return admin;
 
+	}
+
+	@Override
+	public void subirFoto(int idAdministrativo, String nombre, String url, String id)
+			throws Exception, ModelNotFoundException {
+		Administrativo pro = this.buscarId(idAdministrativo);
+		pro.setFotoId(id);
+		pro.setFotoUrl(url);
+		pro.setName(nombre);
+        this.repo.save(pro);
+		
+	}
+
+	@Override
+	public void cambiarPassword(int idAdministrativo, String password) throws ModelNotFoundException {
+		// TODO Auto-generated method stub
+		Administrativo pro = this.buscarId(idAdministrativo);
+		pro.setPassword(password);
+		this.repo.save(pro);
 	}
 }

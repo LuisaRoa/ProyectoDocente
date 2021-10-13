@@ -37,19 +37,5 @@ public class MiembrosServiceImp implements IMiembrosService {
 
 	}
 
-	/*
-	public List<Miembros> listarPoIdDocente(int id) {
-
-		List<Miembros> m = new ArrayList<Miembros>();
-		for (Miembros p : repo.findByOrderById()) {
-			if (p.getDocente().getId() == id) {
-				m.add(p);
-			}
-
-		}
-
-		return m;
-
-	}*/
 
 }

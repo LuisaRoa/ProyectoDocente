@@ -57,6 +57,7 @@ public class DocenteServiceImp implements IDocenteService {
 		Rol rol = repoRol.findById(1).orElseThrow(
                 () -> new ModelNotFoundException("rol no  exontrado"));
 		docente.setRol(rol);
+		docente.setPassword(docente.getDocumento());
 		this.repo.save(docente);
 	}
 
@@ -106,4 +107,24 @@ public class DocenteServiceImp implements IDocenteService {
 		}
          return docente;
     }
+
+
+	@Override
+	public void subirFoto(int idDocente, String nombre, String url, String id) throws Exception, ModelNotFoundException {
+		Docente pro = this.buscarId(idDocente);
+		pro.setFotoId(id);
+		pro.setFotoUrl(url);
+		pro.setName(nombre);
+        this.repo.save(pro);
+		
+	}
+
+
+	@Override
+	public void cambiarPassword(int idDocente, String password) throws ModelNotFoundException {
+		// TODO Auto-generated method stub
+		Docente pro = this.buscarId(idDocente);
+		pro.setPassword(password);
+		this.repo.save(pro);
+	}
 }
