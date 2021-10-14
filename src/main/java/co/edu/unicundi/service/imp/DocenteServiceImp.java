@@ -79,6 +79,7 @@ public class DocenteServiceImp implements IDocenteService {
         pro.setCorreo(docente.getCorreo());
         pro.setSede(docente.getSede());
         pro.setAdministrativo(admi);
+        pro.setContrato(docente.getContrato());
         this.repo.save(pro);
 	}
 

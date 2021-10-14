@@ -37,5 +37,17 @@ public class MiembrosServiceImp implements IMiembrosService {
 
 	}
 
+	@Override
+	public List<Miembros> listarPorIdDocente(Integer doce_id) {
+		List<Miembros> lista = new ArrayList<Miembros>();
+		for(Miembros p: repo.findAll()) {
+			if(p.getDocente().getId()==doce_id) {
+				lista.add(p);
+			}
+		}
+		
+		return lista;
+	}
+
 
 }
