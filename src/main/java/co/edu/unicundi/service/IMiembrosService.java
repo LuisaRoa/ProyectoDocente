@@ -10,6 +10,6 @@ public interface IMiembrosService {
 
 	public void guardarNativo(Miembros miembros);
 
-	List<Miembros> listarPorIdDocente(Integer doce_id);
+	List<Miembros> listarPorIdDocente(int id);
 
 }

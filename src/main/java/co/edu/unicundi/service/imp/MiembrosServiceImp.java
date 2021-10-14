@@ -38,10 +38,10 @@ public class MiembrosServiceImp implements IMiembrosService {
 	}
 
 	@Override
-	public List<Miembros> listarPorIdDocente(Integer doce_id) {
+	public List<Miembros> listarPorIdDocente(int id) {
 		List<Miembros> lista = new ArrayList<Miembros>();
 		for(Miembros p: repo.findAll()) {
-			if(p.getDocente().getId()==doce_id) {
+			if(p.getDocente().getId()==id) {
 				lista.add(p);
 			}
 		}

@@ -93,4 +93,24 @@ public class ComiteService {
 		this.repo.delete(this.buscarId(id));
 	}
 	
+	public List<Comite> listarPorIdDocente(int id) {
+		List<Comite> lista = new ArrayList<Comite>();
+		List<Miembros> listaM = new ArrayList<Miembros>();
+		boolean bandera= false;
+		for(Comite p: repo.findAll()) {
+			bandera = false;
+			for(Miembros m: p.getMiembros()) {
+				if(m.getDocente().getId()==id) {
+					bandera= true;
+				}
+			}
+			if(bandera==true) {
+				lista.add(p);
+			}
+			
+		}
+		
+		return lista;
+	}
+	
 }

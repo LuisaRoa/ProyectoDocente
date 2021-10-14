@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unicundi.entity.Comite;
+import co.edu.unicundi.entity.Miembros;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.ComiteService;
 import io.swagger.annotations.ApiOperation;
@@ -91,6 +92,12 @@ public class ComiteController {
 
 	}
 	
+	@GetMapping("/retornarDocente/{id}")
+	@ApiOperation(value="Metodo que retorna todos los comites del docente")
+	public ResponseEntity<List<Comite>> retornarDocente(@PathVariable int id) throws ModelNotFoundException{
+		
+		return new ResponseEntity<List<Comite>>(service.listarPorIdDocente(id), HttpStatus.OK);
 
+	}
 
 }

@@ -61,7 +61,7 @@ public class ActasController {
         Actas evidencia =
                 new Actas(0,(String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null, null, null, null);
+                        (String)result.get("public_id"), null, null, null, null, null, null);
                        /* (String)result.get("size")*/
         actas.save(evidencia);
         return new ResponseEntity<Actas>(evidencia, HttpStatus.OK);
@@ -98,5 +98,11 @@ public class ActasController {
 		Actas evidencia = actas.getOne(id).get();
 		return new ResponseEntity<Actas>(evidencia, HttpStatus.OK);
 
+	}
+	
+	@GetMapping("/listarComite/{id}")
+	public ResponseEntity<List<Actas>> listarComite(@PathVariable int id) {
+		List<Actas> list = actas.listarComite(id);
+		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }
