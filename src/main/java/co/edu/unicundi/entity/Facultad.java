@@ -38,9 +38,6 @@ public class Facultad {
 	@OneToMany(mappedBy ="facultad", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<ProgramaAcademico> programaacademico ;
 	
-	@OneToMany(mappedBy ="facultad", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<InformeHorasNoLectivas> informe ;
 	
 
 	
@@ -48,22 +45,13 @@ public class Facultad {
 	public Facultad() {
 	}
 
-	public Facultad(Integer facu_id, String nombre,	String registradopor, String fechacambio, List<ProgramaAcademico> programaacademico, List<InformeHorasNoLectivas> informe) {
+	public Facultad(Integer facu_id, String nombre,	String registradopor, String fechacambio, List<ProgramaAcademico> programaacademico) {
 		super();
 		this.facu_id = facu_id;
 		this.nombre = nombre;
 		this.registradoPor = registradopor;
 		this.fechaCambio = fechacambio;
 		this.programaacademico = programaacademico;
-		this.informe = informe;
-	}
-
-	public List<InformeHorasNoLectivas> getInforme() {
-		return informe;
-	}
-
-	public void setInforme(List<InformeHorasNoLectivas> informe) {
-		this.informe = informe;
 	}
 
 	public List<ProgramaAcademico> getProgramaacademico() {

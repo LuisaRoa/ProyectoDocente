@@ -20,11 +20,9 @@ public class InformeHorasNoLectivas {
 	private String informeUrl;
 	private String informeId;
 	private String nombre;
-	private String fecha;
+	private String fechaElaboración;
 	private String tipoArchivo;
 	private String tamaño;
-	private String semestre;
-	private String grupo;
 	private String periodoAca;
 	private String año;
 	
@@ -36,34 +34,26 @@ public class InformeHorasNoLectivas {
 	@JoinColumn(name = "docente_doce_id", nullable = true, foreignKey = @ForeignKey(name = "doce_id"))
 	private Docente docente;
 	
-	@ManyToOne
-	@JoinColumn(name = "facultad_facu_id", nullable = true, foreignKey = @ForeignKey(name = "facu_id"))
-	private Facultad facultad;
 
 	public InformeHorasNoLectivas() {
 	}
 
-	public InformeHorasNoLectivas(int id, String name, String informeUrl, String informeId, String nombre, String fecha,
-			String tipoArchivo, String tamaño, String semestre, String grupo, String periodoAca, String año,
-			ProgramaAcademico programaacademico, Docente docente, Facultad facultad) {
+	public InformeHorasNoLectivas(int id, String name, String informeUrl, String informeId, String nombre,
+			String fechaElaboración, String tipoArchivo, String tamaño, String periodoAca, String año,
+			ProgramaAcademico programaacademico, Docente docente) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.informeUrl = informeUrl;
 		this.informeId = informeId;
 		this.nombre = nombre;
-		this.fecha = fecha;
+		this.fechaElaboración = fechaElaboración;
 		this.tipoArchivo = tipoArchivo;
 		this.tamaño = tamaño;
-		this.semestre = semestre;
-		this.grupo = grupo;
 		this.periodoAca = periodoAca;
 		this.año = año;
 		this.programaacademico = programaacademico;
 		this.docente = docente;
-		this.facultad = facultad;
-		
-		
 	}
 
 	public int getId() {
@@ -82,11 +72,11 @@ public class InformeHorasNoLectivas {
 		this.name = name;
 	}
 
-	public String getInformeUrl() {
+	public String getArchivoUrl() {
 		return informeUrl;
 	}
 
-	public void setInformeUrl(String informeUrl) {
+	public void setArchivoUrl(String informeUrl) {
 		this.informeUrl = informeUrl;
 	}
 
@@ -106,12 +96,12 @@ public class InformeHorasNoLectivas {
 		this.nombre = nombre;
 	}
 
-	public String getFecha() {
-		return fecha;
+	public String getFechaElaboración() {
+		return fechaElaboración;
 	}
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
+	public void setFechaElaboración(String fechaElaboración) {
+		this.fechaElaboración = fechaElaboración;
 	}
 
 	public String getTipoArchivo() {
@@ -130,27 +120,11 @@ public class InformeHorasNoLectivas {
 		this.tamaño = tamaño;
 	}
 
-	public String getSemestre() {
-		return semestre;
-	}
-
-	public void setSemestre(String semestre) {
-		this.semestre = semestre;
-	}
-
-	public String getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(String grupo) {
-		this.grupo = grupo;
-	}
-
-	public String getPeriodoAca() {
+	public String getPeriodoAcadémico() {
 		return periodoAca;
 	}
 
-	public void setPeriodoAca(String periodoAca) {
+	public void setPeriodoAcadémico(String periodoAca) {
 		this.periodoAca = periodoAca;
 	}
 
@@ -178,13 +152,8 @@ public class InformeHorasNoLectivas {
 		this.docente = docente;
 	}
 
-	public Facultad getFacultad() {
-		return facultad;
-	}
 
-	public void setFacultad(Facultad facultad) {
-		this.facultad = facultad;
-	}
+	
 	
 	
 	

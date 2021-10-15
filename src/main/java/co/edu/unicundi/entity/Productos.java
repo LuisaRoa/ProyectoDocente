@@ -19,7 +19,9 @@ public class Productos {
 	private String name;
 	private String productoUrl;
 	private String productoId;
-	private String fechaModificacion;
+	private String producto;
+	private String nombre;
+	private String fechaElaboracion;
 	private String tipoArchivo;
 	private String tamaño;
 	
@@ -30,14 +32,16 @@ public class Productos {
 	public Productos() {
 	}
 
-	public Productos(int id, String name, String productoUrl, String productoId, String fechaModificacion,
-			String tipoArchivo, String tamaño, Comite comite) {
+	public Productos(int id, String name, String productoUrl, String productoId, String producto, String nombre,
+			String fechaElaboracion, String tipoArchivo, String tamaño, Comite comite) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.productoUrl = productoUrl;
 		this.productoId = productoId;
-		this.fechaModificacion = fechaModificacion;
+		this.producto = producto;
+		this.nombre = nombre;
+		this.fechaElaboracion = fechaElaboracion;
 		this.tipoArchivo = tipoArchivo;
 		this.tamaño = tamaño;
 		this.comite = comite;
@@ -75,12 +79,28 @@ public class Productos {
 		this.productoId = productoId;
 	}
 
-	public String getFechaModificacion() {
-		return fechaModificacion;
+	public String getProducto() {
+		return producto;
 	}
 
-	public void setFechaModificacion(String fechaModificacion) {
-		this.fechaModificacion = fechaModificacion;
+	public void setProducto(String producto) {
+		this.producto = producto;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getFechaElaboración() {
+		return fechaElaboracion;
+	}
+
+	public void setFechaElaboración(String fechaElaboracion) {
+		this.fechaElaboracion = fechaElaboracion;
 	}
 
 	public String getTipoArchivo() {
@@ -106,6 +126,8 @@ public class Productos {
 	public void setComite(Comite comite) {
 		this.comite = comite;
 	}
+
+	
 	
 	
 }
