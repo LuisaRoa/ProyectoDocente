@@ -13,6 +13,7 @@ public interface IDocenteRepo extends JpaRepository<Docente, Integer> {
 
 	Optional<Docente> findByCorreo(String correo);
 
+	Docente findOneByCorreo(String correo);
 
     
 	

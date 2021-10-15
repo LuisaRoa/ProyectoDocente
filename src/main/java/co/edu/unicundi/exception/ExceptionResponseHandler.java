@@ -70,5 +70,11 @@ public class ExceptionResponseHandler extends ResponseEntityExceptionHandler {
 	return new ResponseEntity<ExceptionResponse>(exp, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	@ExceptionHandler(LoginException.class)
+	public ResponseEntity<ExceptionResponse> filtroLoginException(LoginException ex, WebRequest request){
+		ex.printStackTrace();
+		ExceptionResponse exp = new ExceptionResponse("401", "Unauthorized", ex.getMessage(), request.getDescription(false));
+		return new ResponseEntity<ExceptionResponse>(exp, HttpStatus.UNAUTHORIZED); 
+	}	
 	
 }

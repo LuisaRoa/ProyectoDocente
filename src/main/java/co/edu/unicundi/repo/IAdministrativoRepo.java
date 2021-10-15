@@ -12,5 +12,7 @@ import co.edu.unicundi.entity.Docente;
 public interface IAdministrativoRepo extends JpaRepository<Administrativo, Integer> {
     
 	Optional<Administrativo> findByCorreo(String correo);
+	
+	Administrativo findOneByCorreo(String correo);
 }
 

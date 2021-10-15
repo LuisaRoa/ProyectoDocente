@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-
 
 import co.edu.unicundi.entity.Administrativo;
 import co.edu.unicundi.entity.Docente;
@@ -26,8 +32,11 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 	private IAdministrativoRepo repo;
 
 	@Autowired
-	private IProgramaAcademicoRepo repoPrac;
+	private BCryptPasswordEncoder bcrypt;
 	
+	@Autowired
+	private IProgramaAcademicoRepo repoPrac;
+
 	@Autowired
 	private IRolRepo repoRol;
 
@@ -46,7 +55,7 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 	}
 
 	public void guardar(Administrativo admi) throws Exception {
-		
+
 		List<Administrativo> ad = mostrarAdministrativos();
 		if (admi.getDocumento() == null) {
 
@@ -56,12 +65,12 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 				}
 
 			}
-			
-			
+
 		} else {
-			Rol rol = repoRol.findById(2).orElseThrow(
-	                () -> new ModelNotFoundException("rol no  exontrado"));
+			Rol rol = repoRol.findById(2).orElseThrow(() -> new ModelNotFoundException("rol no  exontrado"));
 			admi.setRol(rol);
+			admi.setPassword(bcrypt.encode(admi.getDocumento()));
+
 			this.repo.save(admi);
 		}
 	}
@@ -89,13 +98,37 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 	public void eliminar(int id) throws ModelNotFoundException {
 		this.repo.delete(this.buscarId(id));
 	}
-	
+
 	@Override
 	public Administrativo buscarCorreo(String correo) throws ModelNotFoundException {
-		
-		Administrativo admin = repo.findByCorreo(correo).orElseThrow(
-                () -> new ModelNotFoundException("Administrativo no exontrado"));
-        return admin;
+
+		Administrativo admin = repo.findByCorreo(correo)
+				.orElseThrow(() -> new ModelNotFoundException("Administrativo no exontrado"));
+		return admin;
 
 	}
+	
+	@Override
+	public Administrativo buscarCorreo1(String correo) throws ModelNotFoundException {
+
+		Administrativo admin = repo.findOneByCorreo(correo);
+		
+		return admin;
+
+	}
+
+	/*
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Administrativo a = repo.findOneByNick(username);
+
+		if (a == null)
+			throw new UsernameNotFoundException("----Usuario no encontrado");
+
+		List<GrantedAuthority> roles = new ArrayList<>();
+		roles.add(new SimpleGrantedAuthority(a.getRol().getNombre()));
+
+		UserDetails ud = new User(a.getCorreo(), a.getPassword(), roles);
+		return ud;
+	}*/
 }
