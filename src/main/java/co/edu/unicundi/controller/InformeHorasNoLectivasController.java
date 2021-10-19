@@ -61,7 +61,7 @@ public class InformeHorasNoLectivasController {
         InformeHorasNoLectivas informeHoras =
                 new InformeHorasNoLectivas(0 , (String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null, null, null, null, null, null, null, null, null, null, null);
+                        (String)result.get("public_id"), null, null, null, null, null, null, null, null);
                        /* (String)result.get("size")*/
         adjuntar.save(informeHoras);
         return new ResponseEntity<InformeHorasNoLectivas>(informeHoras, HttpStatus.OK);

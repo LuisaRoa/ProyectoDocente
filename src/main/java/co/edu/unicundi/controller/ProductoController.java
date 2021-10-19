@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.edu.unicundi.dto.Mensaje;
+import co.edu.unicundi.entity.Actas;
 import co.edu.unicundi.entity.Productos;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.ActasService;
@@ -62,7 +63,7 @@ public class ProductoController {
         Productos evidencia =
                 new Productos(0,(String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null, null, null, null);
+                        (String)result.get("public_id"), null, null, null, null, null, null);
                        /* (String)result.get("size")*/
         prod.save(evidencia);
         return new ResponseEntity<Productos>(evidencia, HttpStatus.OK);
@@ -99,5 +100,11 @@ public class ProductoController {
 		Productos evidencia = prod.getOne(id).get();
 		return new ResponseEntity<Productos>(evidencia, HttpStatus.OK);
 
+	}
+	
+	@GetMapping("/listarComite/{id}")
+	public ResponseEntity<List<Productos>> listarComite(@PathVariable int id) {
+		List<Productos> list = prod.listarComite(id);
+		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }

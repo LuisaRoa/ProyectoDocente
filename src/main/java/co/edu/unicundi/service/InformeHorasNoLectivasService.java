@@ -28,9 +28,6 @@ public class InformeHorasNoLectivasService {
 	IInformeHorasNoLectivasRepo repo;
 	
 	@Autowired
-	IFacultadRepo repoF;
-	
-	@Autowired
 	IProgramaAcademicoRepo repoPrograma;
 	
 	@Autowired
@@ -46,8 +43,6 @@ public class InformeHorasNoLectivasService {
 
     public void update (InformeHorasNoLectivas informe) throws ModelNotFoundException {
     	InformeHorasNoLectivas e = getOne(informe.getId()).get();
-    	Facultad facultad = repoF.findById(informe.getFacultad().getFacu_id()).orElseThrow(
-                () -> new ModelNotFoundException("programa academico no  exontrado"));
     	
     	ProgramaAcademico programa = repoPrograma.findById(informe.getProgramaacademico().getPrac_id()).orElseThrow(
                 () -> new ModelNotFoundException("programa academico no  exontrado"));
@@ -58,14 +53,11 @@ public class InformeHorasNoLectivasService {
     	e.setNombre(informe.getNombre());
     	e.setTipoArchivo(informe.getTipoArchivo());
     	e.setTamaño(informe.getTamaño());
-    	e.setFecha(informe.getFecha());
-    	e.setSemestre(informe.getSemestre());
-    	e.setGrupo(informe.getGrupo());
+    	e.setFechaElaboración(informe.getFechaElaboración());
     	e.setAño(informe.getAño());
-    	e.setPeriodoAca(informe.getPeriodoAca());
+    	e.setPeriodoAcadémico(informe.getPeriodoAcadémico());
     	e.setDocente(docente);
     	e.setProgramaacademico(programa);
-    	e.setFacultad(facultad);
         repo.save(e);
     }
     public void save(InformeHorasNoLectivas informe){
