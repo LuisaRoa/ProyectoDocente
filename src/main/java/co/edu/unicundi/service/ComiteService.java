@@ -11,9 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.unicundi.entity.Administrativo;
 import co.edu.unicundi.entity.AulasVirtuales;
 import co.edu.unicundi.entity.Comite;
+import co.edu.unicundi.entity.Docente;
+import co.edu.unicundi.entity.Materia;
+import co.edu.unicundi.entity.MateriaSalida;
+import co.edu.unicundi.entity.Miembros;
 import co.edu.unicundi.entity.Rol;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IComiteRepo;
+import co.edu.unicundi.repo.IDocenteRepo;
 
 
 
@@ -24,9 +29,12 @@ public class ComiteService {
 	
 	@Autowired
     IComiteRepo repo;
+	
+	@Autowired 
+	IDocenteRepo repoDocente;
 
     public List<Comite> list(){
-        return repo.findByOrderById();
+        return repo.findAll();
     }
 
     public Optional<Comite> getOne(int id){
@@ -50,13 +58,24 @@ public class ComiteService {
 
 
 	public void guardar(Comite comite) throws Exception {
-		
+		if(comite.getMiembros()!=null) {
+			for(Miembros p: comite.getMiembros()) {
+				Docente docente = repoDocente.findById(p.getDocente().getId()).orElseThrow(
+		                () -> new ModelNotFoundException("docente no  exontrada"));
+				System.out.println(docente.getContrato());
+				if(docente.getContrato().equals("Hora Cátedra")) {
+					throw new Exception("Error, tipo de contrato hora cátedra");
+				}
+				p.setDocente(docente);
+				p.setComite(comite);
+			}
+		}
 		this.repo.save(comite);
 	}
 
 
 	public void editar(Comite comite) throws Exception, ModelNotFoundException {
-		Comite pro = this.buscarId(comite.getId());
+		Comite pro = this.buscarId(comite.getComi_id());
 		
         pro.setNombre(comite.getNombre());
         pro.setNombreActividadAcademica(comite.getNombreActividadAcademica());;
@@ -72,6 +91,26 @@ public class ComiteService {
 
 	public void eliminar(int id) throws ModelNotFoundException {
 		this.repo.delete(this.buscarId(id));
+	}
+	
+	public List<Comite> listarPorIdDocente(int id) {
+		List<Comite> lista = new ArrayList<Comite>();
+		List<Miembros> listaM = new ArrayList<Miembros>();
+		boolean bandera= false;
+		for(Comite p: repo.findAll()) {
+			bandera = false;
+			for(Miembros m: p.getMiembros()) {
+				if(m.getDocente().getId()==id) {
+					bandera= true;
+				}
+			}
+			if(bandera==true) {
+				lista.add(p);
+			}
+			
+		}
+		
+		return lista;
 	}
 	
 }

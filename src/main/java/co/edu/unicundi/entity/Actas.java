@@ -19,7 +19,9 @@ public class Actas {
 	private String name;
 	private String actaUrl;
 	private String actaId;
-	private String fechaModificacion;
+	private String nombre;
+	private String fecha;
+	private String lugar;
 	private String tipoArchivo;
 	private String tamaño;
 	
@@ -32,14 +34,16 @@ public class Actas {
 	}
 
 
-	public Actas(int id, String name, String actaUrl, String actaId, String fechaModificacion, String tipoArchivo,
-			String tamaño, Comite comite) {
+	public Actas(int id, String name, String actaUrl, String actaId, String nombre, String fecha, String lugar,
+			String tipoArchivo, String tamaño, Comite comite) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.actaUrl = actaUrl;
 		this.actaId = actaId;
-		this.fechaModificacion = fechaModificacion;
+		this.nombre = nombre;
+		this.fecha = fecha;
+		this.lugar = lugar;
 		this.tipoArchivo = tipoArchivo;
 		this.tamaño = tamaño;
 		this.comite = comite;
@@ -86,13 +90,33 @@ public class Actas {
 	}
 
 
-	public String getFechaModificacion() {
-		return fechaModificacion;
+	public String getNombre() {
+		return nombre;
 	}
 
 
-	public void setFechaModificacion(String fechaModificacion) {
-		this.fechaModificacion = fechaModificacion;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public String getFecha() {
+		return fecha;
+	}
+
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+
+	public String getLugar() {
+		return lugar;
+	}
+
+
+	public void setLugar(String lugar) {
+		this.lugar = lugar;
 	}
 
 
@@ -124,6 +148,9 @@ public class Actas {
 	public void setComite(Comite comite) {
 		this.comite = comite;
 	}
+
+
+	
 	
 	
 

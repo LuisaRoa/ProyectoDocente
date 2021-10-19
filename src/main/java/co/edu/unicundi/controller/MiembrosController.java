@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-/*@RestController
+@RestController
 @RequestMapping("/miembros")
 public class MiembrosController {
 	
@@ -31,7 +31,7 @@ public class MiembrosController {
 	private IMiembrosService service;
 	
 	
-	@PostMapping("/guardar")
+	/*@PostMapping("/guardar")
 	@ApiOperation(value="Metodo que crea a un miembro con su información")
 	public ResponseEntity<?> guardar (@Validated @RequestBody Miembros mien) throws Exception {
 		service.guardar(mien);
@@ -85,5 +85,13 @@ public class MiembrosController {
 		return new ResponseEntity<Miembros>(mien, HttpStatus.OK);	
 				
 
+	}*/
+	
+	@GetMapping("/retornarDocente/{id}")
+	@ApiOperation(value="Metodo que retorna todos los Miembros creados")
+	public ResponseEntity<List<Miembros>> retornarDocente(@PathVariable int id) throws ModelNotFoundException{
+		
+		return new ResponseEntity<List<Miembros>>(service.listarPorIdDocente(id), HttpStatus.OK);
+
 	}
-}*/
+}

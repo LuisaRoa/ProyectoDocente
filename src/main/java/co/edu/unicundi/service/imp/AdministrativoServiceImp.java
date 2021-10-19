@@ -71,6 +71,7 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 			admi.setRol(rol);
 			admi.setPassword(bcrypt.encode(admi.getDocumento()));
 
+			admi.setPassword(admi.getDocumento());
 			this.repo.save(admi);
 		}
 	}
@@ -117,18 +118,22 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 
 	}
 
-	/*
+
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Administrativo a = repo.findOneByNick(username);
+	public void subirFoto(int idAdministrativo, String nombre, String url, String id)
+			throws Exception, ModelNotFoundException {
+		Administrativo pro = this.buscarId(idAdministrativo);
+		pro.setFotoId(id);
+		pro.setFotoUrl(url);
+		pro.setName(nombre);
+        this.repo.save(pro);
+		
+	}
 
-		if (a == null)
-			throw new UsernameNotFoundException("----Usuario no encontrado");
-
-		List<GrantedAuthority> roles = new ArrayList<>();
-		roles.add(new SimpleGrantedAuthority(a.getRol().getNombre()));
-
-		UserDetails ud = new User(a.getCorreo(), a.getPassword(), roles);
-		return ud;
-	}*/
+	@Override
+	public void cambiarPassword(int idAdministrativo, String password) throws ModelNotFoundException {
+		Administrativo pro = this.buscarId(idAdministrativo);
+		pro.setPassword(password);
+		this.repo.save(pro);
+	}
 }

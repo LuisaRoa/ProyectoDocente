@@ -25,4 +25,10 @@ public interface IAdministrativoService {
 	public Administrativo buscarCorreo(String correo) throws ModelNotFoundException;
 
 	Administrativo buscarCorreo1(String correo) throws ModelNotFoundException;
+
+	
+	public void subirFoto(int idAdministrativo, String nombre, String url, String id) throws Exception, ModelNotFoundException;
+	
+	public void cambiarPassword(int idAdministrativo, String password) throws ModelNotFoundException;
+
 }

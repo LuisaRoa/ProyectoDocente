@@ -25,5 +25,7 @@ public interface IDocenteService  {
 
 	public List<Docente> listarAdministrativo(int id) throws ModelNotFoundException;
 	
+	public void subirFoto(int idDocente, String nombre, String url, String id) throws Exception, ModelNotFoundException;
 	
+	public void cambiarPassword(int idDocente, String password) throws ModelNotFoundException;
 }

@@ -19,7 +19,7 @@ public class Comite {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int comi_id;
 	private String nombre;
 	private String claseDeActividad;
 	private String nombreActividadAcademica;
@@ -28,6 +28,10 @@ public class Comite {
 	private String fechaInicio;
 	private String fechaFinalizacion;
 	private int intensidadHoraria;
+	
+	@OneToMany(mappedBy ="comite", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	//@JsonIgnore
+	private List<Miembros> miembros;
 	
 	public String getNombre() {
 		return nombre;
@@ -137,11 +141,6 @@ public class Comite {
 	public void setIntensidadHoraria(int intensidadHoraria) {
 		this.intensidadHoraria = intensidadHoraria;
 	}
-
-
-	@OneToMany(mappedBy ="comite", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<Miembros> miembros ;
 	
 	public Comite() {
 	}
@@ -149,13 +148,19 @@ public class Comite {
 
 	
 
-	public int getId() {
-		return id;
+
+
+	public int getComi_id() {
+		return comi_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+
+
+
+	public void setComi_id(int comi_id) {
+		this.comi_id = comi_id;
 	}
+
 
 
 
@@ -173,9 +178,11 @@ public class Comite {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + comi_id;
 		return result;
 	}
+
+
 
 
 	@Override
@@ -187,10 +194,12 @@ public class Comite {
 		if (getClass() != obj.getClass())
 			return false;
 		Comite other = (Comite) obj;
-		if (id != other.id)
+		if (comi_id != other.comi_id)
 			return false;
 		return true;
 	}
+
+	
 	
 	
 	

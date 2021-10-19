@@ -4,6 +4,7 @@ package co.edu.unicundi.entity;
 
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -32,6 +34,14 @@ public class Docente {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer doce_id;
 	
+	@Column(name = "name", length = 30, nullable = true)
+	private String name;
+	
+	@Column(name = "fotoUrl", length = 90, nullable = true)
+	private String fotoUrl;
+	
+	@Column(name = "fotoId", length = 30, nullable = true)
+	private String fotoId;
 	
 	@Column(name = "doce_documento", length = 30, nullable = false)
 	private String documento;
@@ -70,7 +80,7 @@ public class Docente {
 	@Column(name = "doce_sede", length = 60, nullable = false)
 	private String sede;
 	
-	@Column(name = "doce_tipo_contrato", length = 60, nullable = false)
+	@Column(name = "doce_tipo_contrato", length = 60, nullable = true)
 	private String contrato;
 	
 	@ManyToOne
@@ -115,6 +125,10 @@ public class Docente {
 	@JsonIgnore
 	private List<InformeHorasNoLectivas> informe ;
 	
+	@OneToMany(mappedBy ="docente", cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Notificaciones> notificacion; 
+	
 
 	public Docente() {
 	}
@@ -125,7 +139,7 @@ public class Docente {
 			String codigo, String password, String fechaNacimiento, String sexo, String direccion, String celular,
 			String fechaIngreso, String correo, String sede, String contrato, Rol rol, Administrativo administrativo,
 			List<AulasVirtuales> aulasvirtuales, List<Miembros> miembros, List<InformeSemestral> informeSemes,
-			List<Asesoria> asesoria, List<Syllabus> syllabus, List<InformeHorasNoLectivas> informe) {
+			List<Asesoria> asesoria, List<Syllabus> syllabus, List<InformeHorasNoLectivas> informe,  List<Notificaciones> notificacion) {
 		super();
 		this.doce_id = doce_id;
 		this.documento = documento;
@@ -148,9 +162,40 @@ public class Docente {
 		this.asesoria = asesoria;
 		this.syllabus = syllabus;
 		this.informe = informe;
+		this.notificacion = notificacion;
 	}
 
 	
+	public List<SolicitudAulas> getSolicitudAulas() {
+		return solicitudAulas;
+	}
+
+
+	public void setSolicitudAulas(List<SolicitudAulas> solicitudAulas) {
+		this.solicitudAulas = solicitudAulas;
+	}
+
+
+	public List<SolicitudSalidas> getSolicitudSalidas() {
+		return solicitudSalidas;
+	}
+
+
+	public void setSolicitudSalidas(List<SolicitudSalidas> solicitudSalidas) {
+		this.solicitudSalidas = solicitudSalidas;
+	}
+
+
+	public List<Notificaciones> getNotificacion() {
+		return notificacion;
+	}
+
+
+	public void setNotificacion(List<Notificaciones> notificacion) {
+		this.notificacion = notificacion;
+	}
+
+
 	public String getContrato() {
 		return contrato;
 	}
@@ -325,6 +370,36 @@ public class Docente {
 	public void setSyllabus(List<Syllabus> syllabus) {
 		this.syllabus = syllabus;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getFotoUrl() {
+		return fotoUrl;
+	}
+
+
+	public void setFotoUrl(String fotoUrl) {
+		this.fotoUrl = fotoUrl;
+	}
+
+
+	public String getFotoId() {
+		return fotoId;
+	}
+
+
+	public void setFotoId(String fotoId) {
+		this.fotoId = fotoId;
+	}
+
 
 	@Override
 	public int hashCode() {

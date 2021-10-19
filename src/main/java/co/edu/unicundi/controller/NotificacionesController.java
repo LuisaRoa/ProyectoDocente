@@ -16,54 +16,51 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.unicundi.entity.AulasVirtuales;
-import co.edu.unicundi.entity.Materia;
+import co.edu.unicundi.entity.Notificaciones;
 import co.edu.unicundi.exception.ModelNotFoundException;
-import co.edu.unicundi.service.IMateriaService;
+import co.edu.unicundi.service.NotificacionesService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/materia")
+@RequestMapping("/notificacion")
 @PreAuthorize("hasAuthority('administrativo')")
-public class MateriaController {
-	
+public class NotificacionesController {
 	@Autowired
-	private IMateriaService service;
-		
+	private NotificacionesService service;
 	
 	@PostMapping("/guardar")
-	@ApiOperation(value="Metodo que crea una materia con su información")
-	public ResponseEntity<?> guardar (@Validated @RequestBody Materia materia ) throws Exception {
-		service.guardar(materia);
-		return new ResponseEntity<Materia>(materia, HttpStatus.CREATED);
+	@ApiOperation(value="Metodo que crea una Notificacion con su información")
+	public ResponseEntity<?> guardar (@Validated @RequestBody Notificaciones notificacion ) throws Exception {
+		service.guardar(notificacion);
+		return new ResponseEntity<Notificaciones>(notificacion, HttpStatus.CREATED);
 		
 			
 	}
 	@PutMapping("editar")
     @ApiOperation(
-            value = "Editar la materia correspondiente al id",
-            notes = "Editar la materia correspondiente al id"
+            value = "Editar la Notificacion correspondiente al id",
+            notes = "Editar la Notificacion correspondiente al id"
             )
             @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = Materia.class ),
+            @ApiResponse(code = 200, message = "OK", response = Notificaciones.class ),
             @ApiResponse(code = 503, message = "Servicio no Disponible", response = String.class),
             @ApiResponse(code = 500, message = "Error inesperado del sistema") })
-	public ResponseEntity<Materia> editar(@Validated @RequestBody Materia materia) throws Exception, ModelNotFoundException{
-		service.editar(materia);
-		return new ResponseEntity<Materia>(materia, HttpStatus.CREATED);
+	public ResponseEntity<Notificaciones> editar(@Validated @RequestBody Notificaciones notificacion) throws Exception, ModelNotFoundException{
+		service.editar(notificacion);
+		return new ResponseEntity<Notificaciones>(notificacion, HttpStatus.CREATED);
 
 	}
 	
 	@DeleteMapping("eliminar/{id}")
     @ApiOperation(
-            value = "Elimina la materia correspondiente al id",
-            notes = "Elimina la materia correspondiente al id"
+            value = "Elimina la Notificacion correspondiente al id",
+            notes = "Elimina la Notificacion correspondiente al id"
             )
             @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = Materia.class ),
-            @ApiResponse(code = 404, message = "NOT_FOUND", response = Materia.class ),
+            @ApiResponse(code = 200, message = "OK", response = Notificaciones.class ),
+            @ApiResponse(code = 404, message = "NOT_FOUND", response = Notificaciones.class ),
             @ApiResponse(code = 503, message = "Servicio no Disponible", response = String.class),
             @ApiResponse(code = 500, message = "Error inesperado del sistema") })
 	
@@ -75,20 +72,10 @@ public class MateriaController {
 	}
 	
 	@GetMapping("/retornarTodos")
-	@ApiOperation(value="Metodo que retorna todas las materias creadas")
-	public ResponseEntity<List<Materia>> retornarTodos() throws ModelNotFoundException{
+	@ApiOperation(value="Metodo que retorna todas las Notificaciones creadas")
+	public ResponseEntity<List<Notificaciones>> retornarTodos() throws ModelNotFoundException{
 		
-		return new ResponseEntity<List<Materia>>(service.mostrarMateria(), HttpStatus.OK);
+		return new ResponseEntity<List<Notificaciones>>(service.mostrarNotificaciones(), HttpStatus.OK);
 
 	}
-	
-	@GetMapping("/retornarId/{id}") 
-	@ApiOperation(value="Metodo que retorna una Materia por su id")
-	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception  {
-		Materia materia = service.buscarId(id);
-		return new ResponseEntity<Materia>(materia, HttpStatus.OK);	
-				
-
-	}
-
 }

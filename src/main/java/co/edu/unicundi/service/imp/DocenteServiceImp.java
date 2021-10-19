@@ -32,10 +32,10 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 
 	@Autowired
 	private IDocenteRepo repo;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bcrypt;
-	
+
 	@Autowired
 	private IAdministrativoRepo repoAdmi;
 
@@ -68,7 +68,10 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 		// docentes.add(docente);
 		Rol rol = repoRol.findById(1).orElseThrow(() -> new ModelNotFoundException("rol no  exontrado"));
 		docente.setRol(rol);
+
 		docente.setPassword(bcrypt.encode(docente.getDocumento()));
+
+		docente.setPassword(docente.getDocumento());
 		this.repo.save(docente);
 	}
 
@@ -90,6 +93,19 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 		pro.setCorreo(docente.getCorreo());
 		pro.setSede(docente.getSede());
 		pro.setAdministrativo(admi);
+		this.repo.save(pro);
+		pro.setNombre(docente.getNombre());
+		pro.setCodigo(docente.getCodigo());
+		pro.setPassword(docente.getPassword());
+		pro.setFechaNacimiento(docente.getFechaNacimiento());
+		pro.setSexo(docente.getSexo());
+		pro.setDireccion(docente.getDireccion());
+		pro.setCelular(docente.getCelular());
+		pro.setFechaIngreso(docente.getFechaIngreso());
+		pro.setCorreo(docente.getCorreo());
+		pro.setSede(docente.getSede());
+		pro.setAdministrativo(admi);
+		pro.setContrato(docente.getContrato());
 		this.repo.save(pro);
 	}
 
@@ -123,6 +139,7 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 			}
 
 		}
+
 		return docente;
 	}
 
@@ -151,5 +168,28 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 			UserDetails ud = new User(doce.getCorreo(), doce.getPassword(), roles);
 			return ud;
 		}
+	}
+
+	
+
+	
+
+	@Override
+	public void subirFoto(int idDocente, String nombre, String url, String id)
+			throws Exception, ModelNotFoundException {
+		Docente pro = this.buscarId(idDocente);
+		pro.setFotoId(id);
+		pro.setFotoUrl(url);
+		pro.setName(nombre);
+		this.repo.save(pro);
+
+	}
+
+	@Override
+	public void cambiarPassword(int idDocente, String password) throws ModelNotFoundException {
+		// TODO Auto-generated method stub
+		Docente pro = this.buscarId(idDocente);
+		pro.setPassword(password);
+		this.repo.save(pro);
 	}
 }
