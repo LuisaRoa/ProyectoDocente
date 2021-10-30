@@ -25,13 +25,12 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/solicitudsalida")
-@PreAuthorize("hasAuthority('docente')")
 public class SolicitudSalidaController {
 
 	@Autowired
 	private ISolicitudSalidaService service;
 		
-	
+	@PreAuthorize("hasAuthority('Docente')")
 	@PostMapping("/guardar")
 	@ApiOperation(value="Metodo que crea una solicitud de aula virtual")
 	public ResponseEntity<?> guardar (@Validated @RequestBody SolicitudSalidas soli ) throws Exception {
@@ -40,6 +39,8 @@ public class SolicitudSalidaController {
 		
 			
 	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar solicitud de salida  correspondiente al id",
@@ -55,6 +56,7 @@ public class SolicitudSalidaController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente')")
 	@DeleteMapping("eliminar/{id}")
     @ApiOperation(
             value = "Elimina la solicitud de salida  correspondiente al id",
@@ -73,6 +75,7 @@ public class SolicitudSalidaController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarTodos")
 	@ApiOperation(value="Metodo que retorna todas las solicitudes creadas")
 	public ResponseEntity<List<SolicitudSalidas>> retornarTodos() throws ModelNotFoundException{
@@ -81,6 +84,7 @@ public class SolicitudSalidaController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarEstado/{id}")
 	@ApiOperation(value="Metodo que retorna todas las solicitudes por estado")
 	public ResponseEntity<List<SolicitudSalidas>> retornarEstado(@PathVariable int id) throws ModelNotFoundException{
@@ -89,6 +93,7 @@ public class SolicitudSalidaController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarDocente/{id}")
 	@ApiOperation(value="Metodo que retorna todas las solicitudes por docente")
 	public ResponseEntity<List<SolicitudSalidas>> retornarDocente(@PathVariable int id) throws ModelNotFoundException{
@@ -97,6 +102,7 @@ public class SolicitudSalidaController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarAdministrativo/{id}")
 	@ApiOperation(value="Metodo que retorna todas las solicitudes por administrativo")
 	public ResponseEntity<List<SolicitudSalidas>> retornarAdministrativo(@PathVariable int id) throws ModelNotFoundException{

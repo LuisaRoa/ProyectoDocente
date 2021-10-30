@@ -8,38 +8,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.unicundi.entity.Actas;
-import co.edu.unicundi.entity.AdjuntarEvidencia;
-import co.edu.unicundi.entity.Asesoria;
-import co.edu.unicundi.repo.IActasRepo;
-import co.edu.unicundi.repo.IAdjuntarEvidenciasRepo;
+import co.edu.unicundi.entity.Cronograma;
+import co.edu.unicundi.repo.ICronogramaRepo;
 
 @Service
 @Transactional
-public class ActasService {
-	
-	@Autowired
-    IActasRepo repo;
+public class CronogramaService {
 
-    public List<Actas> list(){
+	@Autowired
+    ICronogramaRepo repo;
+
+    public List<Cronograma> list(){
         return repo.findByOrderById();
     }
 
-    public Optional<Actas> getOne(int id){
+    public Optional<Cronograma> getOne(int id){
         return repo.findById(id);
     }
 
-    public void update (Actas evid) {
-    	Actas e = getOne(evid.getId()).get();
+    public void update (Cronograma evid) {
+    	Cronograma e = getOne(evid.getId()).get();
     	e.setNombre(evid.getNombre());
-    	e.setLugar(evid.getLugar());
     	e.setFecha(evid.getFecha());
     	e.setTipoArchivo(evid.getTipoArchivo());
     	e.setTamaño(evid.getTamaño());
     	e.setComite(evid.getComite());
         repo.save(e);
     }
-    public void save(Actas evi){
+    public void save(Cronograma evi){
     	repo.save(evi);
     }
 
@@ -51,14 +47,14 @@ public class ActasService {
         return repo.existsById(id);
     }
     
-    public List<Actas> listarComite(int id){
-    	List<Actas> actas = new ArrayList<Actas>();
-    	for(Actas p: repo.findByOrderById()) {
+    public List<Cronograma> listarComite(int id){
+    	List<Cronograma> crono = new ArrayList<Cronograma>();
+    	for(Cronograma p: repo.findByOrderById()) {
 			if(p.getComite().getComi_id()==id) {
-				actas.add(p);
+				crono.add(p);
 			}
 				
 		}
-         return actas;
+         return crono;
     }
 }

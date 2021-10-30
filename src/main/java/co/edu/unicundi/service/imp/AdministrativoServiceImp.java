@@ -84,7 +84,7 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 		pro.setDocumento(admi.getDocumento());
 		pro.setNombre(admi.getNombre());
 		pro.setCodigo(admi.getCodigo());
-		pro.setPassword(admi.getPassword());
+		pro.setPassword(bcrypt.encode(admi.getPassword()));
 		pro.setFechanacimiento(admi.getFechanacimiento());
 		pro.setSexo(admi.getSexo());
 		pro.setDireccion(admi.getDireccion());
@@ -133,7 +133,7 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 	@Override
 	public void cambiarPassword(int idAdministrativo, String password) throws ModelNotFoundException {
 		Administrativo pro = this.buscarId(idAdministrativo);
-		pro.setPassword(password);
+		pro.setPassword(bcrypt.encode(password));
 		this.repo.save(pro);
 	}
 }

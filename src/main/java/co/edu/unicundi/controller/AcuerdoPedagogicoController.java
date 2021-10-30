@@ -35,7 +35,6 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/acuerdopedagogico")
-@PreAuthorize("hasAuthority('docente')")
 @CrossOrigin
 public class AcuerdoPedagogicoController {
 
@@ -45,12 +44,14 @@ public class AcuerdoPedagogicoController {
 	@Autowired
 	AcuerdoPedagogicoService adjuntar;
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/list")
 	public ResponseEntity<List<AcuerdoPedagogico>> list() {
 		List<AcuerdoPedagogico> list = adjuntar.list();
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
@@ -67,6 +68,7 @@ public class AcuerdoPedagogicoController {
         return new ResponseEntity<AcuerdoPedagogico>(acuerdoPedagogico, HttpStatus.OK);
     }
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar al formato correspondiente al id",
@@ -82,6 +84,7 @@ public class AcuerdoPedagogicoController {
 
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) throws IOException {
 		if (!adjuntar.exists(id))
@@ -92,6 +95,7 @@ public class AcuerdoPedagogicoController {
 		return new ResponseEntity(new Mensaje("AcuerdoPedagogico eliminado"), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarId/{id}")
 	@ApiOperation(value = "Metodo que retorna a un formato por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception {
@@ -100,6 +104,7 @@ public class AcuerdoPedagogicoController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/listarDocente/{id}")
 	public ResponseEntity<List<AcuerdoPedagogico>> listarDocente(@PathVariable int id) {
 		List<AcuerdoPedagogico> list = adjuntar.listarDocente(id);

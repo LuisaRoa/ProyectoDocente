@@ -28,4 +28,6 @@ public interface IDocenteService  {
 	public void subirFoto(int idDocente, String nombre, String url, String id) throws Exception, ModelNotFoundException;
 	
 	public void cambiarPassword(int idDocente, String password) throws ModelNotFoundException;
+
+	List<Docente> listarNoMiembros(Integer id);
 }

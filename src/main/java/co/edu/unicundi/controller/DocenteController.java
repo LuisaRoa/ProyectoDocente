@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +43,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/docente")
-@PreAuthorize("hasAuthority('administrativo')")
+@CrossOrigin
 public class DocenteController {
 	
 	@Autowired
@@ -54,6 +55,7 @@ public class DocenteController {
 	@Autowired
 	private IMiembrosService serviceM;
 	
+	@PreAuthorize("hasAuthority('Docente')")
 	@PutMapping("/upload/{id}")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile, @PathVariable int id)throws ModelNotFoundException, Exception {
 		Docente docente = service.buscarId(id);
@@ -66,6 +68,7 @@ public class DocenteController {
 		return new ResponseEntity<Object>((String)result.get("url"), HttpStatus.CREATED);
     }
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping("/guardar")
 	@ApiOperation(value="Metodo que crea a un docente con su información")
 	public ResponseEntity<?> guardar (@Validated @RequestBody Docente docente) throws Exception {
@@ -74,6 +77,8 @@ public class DocenteController {
 		
 			
 	}
+	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar al docente correspondiente al id",
@@ -89,6 +94,7 @@ public class DocenteController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@DeleteMapping("eliminar/{id}")
     @ApiOperation(
             value = "Elimina el docente correspondiente al id",
@@ -107,6 +113,7 @@ public class DocenteController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Administrador') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarTodos")
 	@ApiOperation(value="Metodo que retorna todos los docentes creados")
 	public ResponseEntity<List<Docente>> retornarTodos() throws ModelNotFoundException{
@@ -115,6 +122,7 @@ public class DocenteController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Administrador') OR hasAuthority('Administrativo') OR hasAuthority('Docente')")
 	@GetMapping("/retornarId/{id}") 
 	@ApiOperation(value="Metodo que retorna a un docente por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception  {
@@ -124,6 +132,7 @@ public class DocenteController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente')")
 	@GetMapping("/buscarCorreo/{correo}") 
 	@ApiOperation(value="Metodo que retorna el documento por su correo")
 	public ResponseEntity<?> buscarCorreo(@PathVariable String correo) throws ModelNotFoundException, Exception  {
@@ -133,7 +142,7 @@ public class DocenteController {
 
 	}
 
-	 
+	@PreAuthorize("hasAuthority('Administrador') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarAdministrativo/{id}")
 	@ApiOperation(value="Metodo que retorna todos los docentes por Administrativo")
 	public ResponseEntity<List<Docente>> retornarAdministrativo(@PathVariable int id) throws ModelNotFoundException{
@@ -141,17 +150,20 @@ public class DocenteController {
 		return new ResponseEntity<List<Docente>>(service.listarAdministrativo(id), HttpStatus.OK);
 
 	}
-
-	@PostMapping("/guardarMiembrosNativo")
-	public ResponseEntity<?> guardarMiembrosNativo(@Valid @RequestBody 	Miembros miembros) {	
-			serviceM.guardarNativo(miembros);
-			return new ResponseEntity<Object>("", HttpStatus.CREATED);				
-	}	
 	
+	@PreAuthorize("hasAuthority('Docente')")
 	@PutMapping("/cambiarPassword/{id}/{password}")
     public ResponseEntity<?> cambiarPassword(@PathVariable int id, @PathVariable String password)throws ModelNotFoundException, Exception {
         service.cambiarPassword(id, password);
 		return new ResponseEntity<Object>("", HttpStatus.CREATED);
     }
+	
+	@PreAuthorize("hasAuthority('Administrativo')")
+	@GetMapping("/listarNoMiembros/{id}")
+	public ResponseEntity<List<Docente>> retornarNoMiembros(@PathVariable Integer id) throws ModelNotFoundException{
+		
+		return new ResponseEntity<List<Docente>>(service.listarNoMiembros(id), HttpStatus.OK);
+
+	}
 
 }

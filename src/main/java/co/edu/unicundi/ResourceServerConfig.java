@@ -9,9 +9,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Configuration
 @EnableResourceServer
+@CrossOrigin
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	
 	//Trae todo lo que configuramos en el SecurityConfig
@@ -42,6 +44,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
                 .antMatchers("/evidencia/**" ).authenticated()
                 .antMatchers("/comite/**" ).authenticated()
                 .antMatchers("/asesoria/**" ).authenticated()
+                .antMatchers("/cronograma/**" ).authenticated()
                 .antMatchers("/desempeñoDocentes/**" ).authenticated()
                 .antMatchers("/docente/**" ).authenticated()
                 .antMatchers("/facultad/**" ).authenticated()
@@ -56,7 +59,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
                 .antMatchers("/solicitudaulas/**" ).authenticated()
                 .antMatchers("/syllabus/**" ).authenticated()
                 .antMatchers("/oauth/token/**" ).permitAll()
-                .antMatchers("/cerrarSesion/**" ).authenticated();
+                .antMatchers("/cerrarSesion/**" ).permitAll();
     }    
     
     

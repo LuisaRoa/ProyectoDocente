@@ -37,7 +37,6 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/producto")
-@PreAuthorize("hasAuthority('docente')")
 @CrossOrigin
 public class ProductoController {
 	
@@ -47,12 +46,14 @@ public class ProductoController {
 	@Autowired
 	ProductoService prod;
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/list")
 	public ResponseEntity<List<Productos>> list() {
 		List<Productos> list = prod.list();
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
@@ -68,7 +69,8 @@ public class ProductoController {
         prod.save(evidencia);
         return new ResponseEntity<Productos>(evidencia, HttpStatus.OK);
     }
-
+	
+	@PreAuthorize("hasAuthority('Docente')")
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar al Producto correspondiente al id",
@@ -84,6 +86,7 @@ public class ProductoController {
 
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) throws IOException {
 		if (!prod.exists(id))
@@ -94,6 +97,7 @@ public class ProductoController {
 		return new ResponseEntity(new Mensaje("Producto eliminado"), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarId/{id}")
 	@ApiOperation(value = "Metodo que retorna a un Producto por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception {
@@ -102,6 +106,7 @@ public class ProductoController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/listarComite/{id}")
 	public ResponseEntity<List<Productos>> listarComite(@PathVariable int id) {
 		List<Productos> list = prod.listarComite(id);

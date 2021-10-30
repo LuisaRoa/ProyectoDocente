@@ -26,13 +26,12 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/solicitudaulas")
-@PreAuthorize("hasAuthority('docente')")
 public class SolicitudAulasController {
 
 	@Autowired
 	private ISolicitudAulasService service;
 		
-	
+	@PreAuthorize("hasAuthority('Docente')")
 	@PostMapping("/guardar")
 	@ApiOperation(value="Metodo que crea una solicitud de aula virtual")
 	public ResponseEntity<?> guardar (@Validated @RequestBody SolicitudAulas soli ) throws Exception {
@@ -41,6 +40,8 @@ public class SolicitudAulasController {
 		
 			
 	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar solicitud de aula  correspondiente al id",
@@ -56,6 +57,7 @@ public class SolicitudAulasController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente')")
 	@DeleteMapping("eliminar/{id}")
     @ApiOperation(
             value = "Elimina la solicitud de aula  correspondiente al id",
@@ -74,6 +76,7 @@ public class SolicitudAulasController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarTodos")
 	@ApiOperation(value="Metodo que retorna todas las solicitudes creadas")
 	public ResponseEntity<List<SolicitudAulas>> retornarTodos() throws ModelNotFoundException{
@@ -82,6 +85,7 @@ public class SolicitudAulasController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarId/{id}")
 	@ApiOperation(value="Metodo que retorna todas las solicitudes creadas")
 	public ResponseEntity<SolicitudAulas> retornarId(@PathVariable int id) throws ModelNotFoundException{
@@ -90,6 +94,7 @@ public class SolicitudAulasController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarAdministrativo/{id}")
 	@ApiOperation(value="Metodo que retorna todas las solicitudes creadas por administrativo")
 	public ResponseEntity<List<SolicitudAulas>> retornarAdministrativo(@PathVariable int id) throws ModelNotFoundException{

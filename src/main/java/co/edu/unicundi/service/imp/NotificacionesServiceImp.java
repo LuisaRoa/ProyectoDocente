@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import co.edu.unicundi.entity.AulasVirtuales;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Notificaciones;
 import co.edu.unicundi.exception.ModelNotFoundException;
@@ -54,6 +55,8 @@ public class NotificacionesServiceImp implements NotificacionesService {
 		
 		pro.setNoti_observacion(notificacion.getNoti_observacion() );
 		pro.setNoti_actividad(notificacion.getNoti_actividad());
+		pro.setFecha(notificacion.getFecha());
+		pro.setNoti_nombreArchivo(notificacion.getNoti_nombreArchivo());
 		pro.setDocente(doce);
 	
 		this.repo.save(pro);
@@ -62,4 +65,15 @@ public class NotificacionesServiceImp implements NotificacionesService {
 	public void eliminar(int id) throws ModelNotFoundException {
 		this.repo.delete(this.buscarId(id));
 	}
+	
+	public List<Notificaciones> listarDocente(int id){
+    	List<Notificaciones> notificaciones = new ArrayList<Notificaciones>();
+    	for(Notificaciones p: repo.findAll()) {
+			if(p.getDocente().getId()==id) {
+				notificaciones.add(p);
+			}
+				
+		}
+         return notificaciones;
+    }
 }

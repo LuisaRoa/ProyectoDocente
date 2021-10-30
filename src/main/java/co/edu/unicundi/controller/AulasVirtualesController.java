@@ -28,13 +28,12 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/aulasvirtuales")
-@PreAuthorize("hasAuthority('docente')")
 public class AulasVirtualesController {
 	
 	@Autowired
 	private IAulaVirtualService service;
 		
-	
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@PostMapping("/guardar")
 	@ApiOperation(value="Metodo que crea una Aula Virtual con su información")
 	public ResponseEntity<?> guardar (@Validated @RequestBody AulasVirtuales aulas ) throws Exception {
@@ -43,6 +42,8 @@ public class AulasVirtualesController {
 		
 			
 	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@PutMapping("editar")
     @ApiOperation(
             value = "Editar la Aula Virtual correspondiente al id",
@@ -58,6 +59,7 @@ public class AulasVirtualesController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@DeleteMapping("eliminar/{id}")
     @ApiOperation(
             value = "Elimina la Aula Virtual correspondiente al id",
@@ -76,6 +78,7 @@ public class AulasVirtualesController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarTodos")
 	@ApiOperation(value="Metodo que retorna todas las Facultades creadas")
 	public ResponseEntity<List<AulasVirtuales>> retornarTodos() throws ModelNotFoundException{
@@ -84,6 +87,7 @@ public class AulasVirtualesController {
 
 	}
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarId/{id}") 
 	@ApiOperation(value="Metodo que retorna a un Aula virtual por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception  {
@@ -93,6 +97,7 @@ public class AulasVirtualesController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/listarDocente/{id}") 
 	@ApiOperation(value="Metodo que retorna a un Aula virtual por su id")
 	public ResponseEntity<?> listarDocente(@PathVariable int id) throws ModelNotFoundException, Exception  {

@@ -2,6 +2,7 @@ package co.edu.unicundi.service;
 
 import java.util.List;
 
+import co.edu.unicundi.entity.AulasVirtuales;
 import co.edu.unicundi.entity.Notificaciones;
 import co.edu.unicundi.exception.ModelNotFoundException;
 
@@ -16,4 +17,6 @@ public interface NotificacionesService {
 	public void editar(Notificaciones notificacion) throws Exception, ModelNotFoundException;
 	
 	public void eliminar(int id) throws ModelNotFoundException;
+	
+	public List<Notificaciones>listarDocente(int id) ;
 }
