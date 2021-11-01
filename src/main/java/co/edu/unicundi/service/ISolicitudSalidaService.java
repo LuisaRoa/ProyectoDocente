@@ -23,4 +23,8 @@ public interface ISolicitudSalidaService {
 	
 	public List<SolicitudSalidas> listarAdministrativo(int id) throws ModelNotFoundException;
 	
+	public List<SolicitudSalidas> mostrarSolicitudes(String año) throws ModelNotFoundException;
+	
+	public List<SolicitudSalidas> mostrarSolicitudesP(String año, String periodo) throws ModelNotFoundException;
+	
 }

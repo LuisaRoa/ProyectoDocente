@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.edu.unicundi.dto.Mensaje;
+import co.edu.unicundi.dto.ReporteDto;
+import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.InformeSemestral;
 import co.edu.unicundi.entity.Syllabus;
 import co.edu.unicundi.exception.ModelNotFoundException;
@@ -37,7 +39,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/syllabus")
-@PreAuthorize("hasAuthority('docente')")
+//@PreAuthorize("hasAuthority('docente')")
 @CrossOrigin
 public class SyllabusController {
 
@@ -105,6 +107,18 @@ public class SyllabusController {
 	@GetMapping("/listarDocente/{id}")
 	public ResponseEntity<List<Syllabus>> listarDocente(@PathVariable int id) {
 		List<Syllabus> list = adjuntar.listarDocente(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/reporte/{año}/{periodo}")
+	public ResponseEntity<List<Syllabus>> syllabusreporte(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<Syllabus> list = adjuntar.mostrarSyllabus(año, periodo);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/reporteanual/{año}")
+	public ResponseEntity<List<Syllabus>> syllabusReporte(@PathVariable String año) throws ModelNotFoundException {
+		List<Syllabus> list = adjuntar.mostrarSyllabusA(año);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }

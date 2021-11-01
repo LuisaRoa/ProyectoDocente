@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.unicundi.entity.Actas;
 import co.edu.unicundi.entity.SolicitudSalidas;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.ISolicitudSalidaService;
@@ -25,7 +26,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/solicitudsalida")
-@PreAuthorize("hasAuthority('docente')")
+//@PreAuthorize("hasAuthority('docente')")
 public class SolicitudSalidaController {
 
 	@Autowired
@@ -103,5 +104,16 @@ public class SolicitudSalidaController {
 		
 		return new ResponseEntity<List<SolicitudSalidas>>(service.listarAdministrativo(id), HttpStatus.OK);
 
+	}
+	@GetMapping("/reporteanual/{año}")
+	public ResponseEntity<List<SolicitudSalidas>> actasReporte(@PathVariable String año) throws ModelNotFoundException {
+		List<SolicitudSalidas> list = service.mostrarSolicitudes(año);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
+	public ResponseEntity<List<SolicitudSalidas>> aactasReporteP(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<SolicitudSalidas> list = service.mostrarSolicitudesP(año, periodo);
+		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }

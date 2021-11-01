@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import co.edu.unicundi.dto.Mensaje;
 import co.edu.unicundi.entity.AcuerdoPedagogico;
+import co.edu.unicundi.entity.Syllabus;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.AcuerdoPedagogicoService;
 import co.edu.unicundi.service.CloudinaryService;
@@ -35,7 +36,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/acuerdopedagogico")
-@PreAuthorize("hasAuthority('docente')")
+//@PreAuthorize("hasAuthority('docente') OR hasAuthority('Administrativo')")
 @CrossOrigin
 public class AcuerdoPedagogicoController {
 
@@ -103,6 +104,18 @@ public class AcuerdoPedagogicoController {
 	@GetMapping("/listarDocente/{id}")
 	public ResponseEntity<List<AcuerdoPedagogico>> listarDocente(@PathVariable int id) {
 		List<AcuerdoPedagogico> list = adjuntar.listarDocente(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	//@PreAuthorize("hasAuthority('docente') AND hasAuthority('Administrativo')")
+	@GetMapping("/reporte/{año}/{periodo}")
+	public ResponseEntity<List<AcuerdoPedagogico>> acuerdoreporte(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<AcuerdoPedagogico> list = adjuntar.mostrarAcuerdoPedagogico(año, periodo);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	@GetMapping("/reporteAnual/{año}")
+	public ResponseEntity<List<AcuerdoPedagogico>> acuerdoreportea(@PathVariable String año) throws ModelNotFoundException {
+		List<AcuerdoPedagogico> list = adjuntar.mostrarAcuerdoPedagogicoA(año);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }

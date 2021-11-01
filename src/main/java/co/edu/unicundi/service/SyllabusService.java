@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicundi.dto.ReporteDto;
 import co.edu.unicundi.entity.Asesoria;
+import co.edu.unicundi.entity.AulasVirtuales;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Materia;
 import co.edu.unicundi.entity.ProgramaAcademico;
@@ -73,6 +75,7 @@ public class SyllabusService {
     public void delete(int id){
         repo.deleteById(id);
     }
+    
 
     public boolean exists(int id){
         return repo.existsById(id);
@@ -88,4 +91,13 @@ public class SyllabusService {
 		}
          return syllabus;
     }
+    
+    
+    public List<Syllabus> mostrarSyllabus(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.numerodeSyllabus(año, periodo);
+	}
+    public List<Syllabus> mostrarSyllabusA(String año) throws ModelNotFoundException {
+		return this.repo.numerodeSyllabusA(año);
+	}
+    
 }

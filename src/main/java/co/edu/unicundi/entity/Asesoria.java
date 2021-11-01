@@ -24,6 +24,7 @@ public class Asesoria {
 	private String tipoArchivo;
 	private String tamaño;
 	private String semestre;
+	private String periodo;
 	private String nucleo;
 	
 	@ManyToOne
@@ -35,7 +36,7 @@ public class Asesoria {
 	}
 	
 	public Asesoria(int id, String name, String eviendeciaUrl, String evidenciaId, String nombre, String fecha,
-			String tipoArchivo, String tamaño, String semestre, String nucleo, Docente docente) {
+			String tipoArchivo, String tamaño, String semestre, String periodo, String nucleo, Docente docente) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -46,6 +47,7 @@ public class Asesoria {
 		this.tipoArchivo = tipoArchivo;
 		this.tamaño = tamaño;
 		this.semestre = semestre;
+		this.periodo = periodo;
 		this.nucleo = nucleo;
 		this.docente = docente;
 	}
@@ -105,6 +107,15 @@ public class Asesoria {
 	public void setSemestre(String semestre) {
 		this.semestre = semestre;
 	}
+	
+
+	public String getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
+	}
 
 	public String getNucleoTemático() {
 		return nucleo;
@@ -120,6 +131,10 @@ public class Asesoria {
 
 	public void setDocente(Docente docente) {
 		this.docente = docente;
+	}
+
+	public String getNucleo() {
+		return nucleo;
 	}
 	
 	

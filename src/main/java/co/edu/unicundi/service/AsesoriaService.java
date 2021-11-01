@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicundi.entity.AcuerdoPedagogico;
 import co.edu.unicundi.entity.AdjuntarEvidencia;
 import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Docente;
@@ -44,6 +45,7 @@ public class AsesoriaService {
     	e.setFecha(asesoria.getFecha());
     	e.setSemestre(asesoria.getSemestre());
     	e.setNucleo(asesoria.getNucleoTemático());
+    	e.setPeriodo(asesoria.getPeriodo());
     	e.setDocente(docente);
         repo.save(e);
     }
@@ -69,4 +71,11 @@ public class AsesoriaService {
 		}
          return asesorias;
     }
+    
+    public List<Asesoria> mostrarAsesoria(String año) throws ModelNotFoundException {
+		return this.repo.numerodeAsesoria(año);
+	}
+    public List<Asesoria> mostrarAsesoriaP(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.asesoriaperiodo(año, periodo);
+	}
 }

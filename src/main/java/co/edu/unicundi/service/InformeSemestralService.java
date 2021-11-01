@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicundi.entity.Actas;
 import co.edu.unicundi.entity.Administrativo;
 import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Docente;
@@ -93,4 +94,10 @@ public class InformeSemestralService {
          return lista;
     }
 	
+    public List<InformeSemestral> mostrarInforme(String año) throws ModelNotFoundException {
+		return this.repo.informeAño(año);
+	}
+    public List<InformeSemestral> mostrarInformeP(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.informePeriodo(año, periodo);
+	}
 }

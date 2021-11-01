@@ -126,4 +126,16 @@ public class SolicitudSalidaServiceImp implements ISolicitudSalidaService{
 		}
 		return lista;
 	}
+
+	@Override
+	public List<SolicitudSalidas> mostrarSolicitudes(String año) throws ModelNotFoundException {
+		return this.repo.numerodeSolicitudSalidas(año);
+	}
+
+	@Override
+	public List<SolicitudSalidas> mostrarSolicitudesP(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.SolicitudSalidasperiodo(año, periodo);
+	}
+	
+	
 }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.unicundi.entity.Actas;
 import co.edu.unicundi.entity.AdjuntarEvidencia;
 import co.edu.unicundi.entity.Asesoria;
+import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IActasRepo;
 import co.edu.unicundi.repo.IAdjuntarEvidenciasRepo;
 
@@ -33,6 +34,7 @@ public class ActasService {
     	Actas e = getOne(evid.getId()).get();
     	e.setName(evid.getName());
     	e.setNombre(evid.getNombre());
+    	e.setPeriodo(evid.getPeriodo());
     	e.setLugar(evid.getLugar());
     	e.setFecha(evid.getFecha());
     	e.setTipoArchivo(evid.getTipoArchivo());
@@ -62,4 +64,11 @@ public class ActasService {
 		}
          return actas;
     }
+    
+    public List<Actas> mostrarActas(String año) throws ModelNotFoundException {
+		return this.repo.numerodeActas(año);
+	}
+    public List<Actas> mostrarActasP(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.actasperiodo(año, periodo);
+	}
 }

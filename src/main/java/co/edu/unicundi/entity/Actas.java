@@ -21,6 +21,7 @@ public class Actas {
 	private String actaId;
 	private String nombre;
 	private String fecha;
+	private String periodo;
 	private String lugar;
 	private String tipoArchivo;
 	private String tamaño;
@@ -34,7 +35,7 @@ public class Actas {
 	}
 
 
-	public Actas(int id, String name, String actaUrl, String actaId, String nombre, String fecha, String lugar,
+	public Actas(int id, String name, String actaUrl, String actaId, String nombre, String fecha, String periodo, String lugar,
 			String tipoArchivo, String tamaño, Comite comite) {
 		super();
 		this.id = id;
@@ -43,6 +44,7 @@ public class Actas {
 		this.actaId = actaId;
 		this.nombre = nombre;
 		this.fecha = fecha;
+		this.periodo = periodo;
 		this.lugar = lugar;
 		this.tipoArchivo = tipoArchivo;
 		this.tamaño = tamaño;
@@ -87,6 +89,17 @@ public class Actas {
 
 	public void setActaId(String actaId) {
 		this.actaId = actaId;
+	}
+
+	
+
+	public String getPeriodo() {
+		return periodo;
+	}
+
+
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
 	}
 
 

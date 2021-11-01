@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Materia;
 import co.edu.unicundi.entity.ProgramaAcademico;
+import co.edu.unicundi.entity.Syllabus;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IAcuerdoPedagogicoRepo;
 import co.edu.unicundi.repo.IDocenteRepo;
@@ -87,4 +89,12 @@ public class AcuerdoPedagogicoService {
 		}
          return acuerdoPedagogico;
     }
+    
+    public List<AcuerdoPedagogico> mostrarAcuerdoPedagogico(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.numerodeaAcuerdos(año, periodo);
+	}
+    
+    public List<AcuerdoPedagogico> mostrarAcuerdoPedagogicoA(String año) throws ModelNotFoundException {
+		return this.repo.numerodeaAcuerdosA(año);
+	}
 }
