@@ -37,7 +37,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/cierreAcademico")
-@PreAuthorize("hasAuthority('docente')")
+@PreAuthorize("hasAuthority('Administrativo')")
 @CrossOrigin
 public class CierreAcademicoController {
 
@@ -47,6 +47,7 @@ public class CierreAcademicoController {
 	@Autowired
 	CierreAcademicoService adjuntar;
 
+	
 	@GetMapping("/list")
 	public ResponseEntity<List<CierreAcademico>> list() {
 		List<CierreAcademico> list = adjuntar.list();

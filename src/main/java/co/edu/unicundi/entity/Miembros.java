@@ -25,6 +25,17 @@ public class Miembros {
 	@Id
 	private Comite comite;
 
+	
+	public Miembros() {
+		
+	}
+	
+	public Miembros(Docente docente, Comite comite) {
+		super();
+		this.docente = docente;
+		this.comite = comite;
+	}
+
 	public Docente getDocente() {
 		return docente;
 	}

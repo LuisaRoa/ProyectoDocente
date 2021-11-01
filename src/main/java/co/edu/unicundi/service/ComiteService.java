@@ -78,13 +78,6 @@ public class ComiteService {
 		Comite pro = this.buscarId(comite.getComi_id());
 		
         pro.setNombre(comite.getNombre());
-        pro.setNombreActividadAcademica(comite.getNombreActividadAcademica());;
-        pro.setClaseDeActividad(comite.getClaseDeActividad());
-        pro.setLugarDeEjecucion(comite.getLugarDeEjecucion());
-        pro.setFechaInicio(comite.getFechaInicio());
-        pro.setFechaFinalizacion(comite.getFechaFinalizacion());
-        pro.setCertificacion(comite.getCertificacion());
-        pro.setIntensidadHoraria(comite.getIntensidadHoraria());
         this.repo.save(pro);
 	}
 
@@ -101,6 +94,26 @@ public class ComiteService {
 			bandera = false;
 			for(Miembros m: p.getMiembros()) {
 				if(m.getDocente().getId()==id) {
+					bandera= true;
+				}
+			}
+			if(bandera==true) {
+				lista.add(p);
+			}
+			
+		}
+		
+		return lista;
+	}
+	
+	public List<Comite> listarPorIdAdministrativo(int id) {
+		List<Comite> lista = new ArrayList<Comite>();
+		List<Miembros> listaM = new ArrayList<Miembros>();
+		boolean bandera= false;
+		for(Comite p: repo.findAll()) {
+			bandera = false;
+			for(Miembros m: p.getMiembros()) {
+				if(m.getDocente().getAdministrativo().getAdmi_id()==id) {
 					bandera= true;
 				}
 			}

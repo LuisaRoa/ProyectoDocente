@@ -24,7 +24,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/cloudinary")
-@PreAuthorize("hasAuthority('docente')")
 @CrossOrigin
 public class MainController {
 
@@ -34,12 +33,14 @@ public class MainController {
 	@Autowired
 	ImagenService imagenService;
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo') OR hasAuthority('Administrador') ")
 	@GetMapping("/list")
 	public ResponseEntity<List<Imagen>> list() {
 		List<Imagen> list = imagenService.list();
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
@@ -56,6 +57,7 @@ public class MainController {
         return new ResponseEntity<Imagen>(imagen, HttpStatus.OK);
     }
 
+	@PreAuthorize("hasAuthority('Administrador') ")
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar al formato correspondiente al id",
@@ -71,6 +73,7 @@ public class MainController {
 
 	}
 
+	@PreAuthorize("hasAuthority('Administrador') ")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) throws IOException {
 		if (!imagenService.exists(id))
@@ -81,6 +84,7 @@ public class MainController {
 		return new ResponseEntity(new Mensaje("imagen eliminada"), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo') OR hasAuthority('Administrador') ")
 	@GetMapping("/retornarId/{id}")
 	@ApiOperation(value = "Metodo que retorna a un formato por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception {

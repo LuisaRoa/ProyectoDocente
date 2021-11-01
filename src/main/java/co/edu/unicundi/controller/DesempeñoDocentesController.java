@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/desempeñoDocentes")
-@PreAuthorize("hasAuthority('administrativo')")
+@PreAuthorize("hasAuthority('Administrativo')")
 @CrossOrigin
 public class DesempeñoDocentesController {
 

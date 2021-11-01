@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/materia")
-@PreAuthorize("hasAuthority('administrativo')")
+@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo') OR hasAuthority('Administrador') ")
 public class MateriaController {
 	
 	@Autowired

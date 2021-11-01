@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Notificaciones;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.NotificacionesService;
@@ -25,11 +26,11 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/notificacion")
-@PreAuthorize("hasAuthority('administrativo')")
 public class NotificacionesController {
 	@Autowired
 	private NotificacionesService service;
 	
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@PostMapping("/guardar")
 	@ApiOperation(value="Metodo que crea una Notificacion con su información")
 	public ResponseEntity<?> guardar (@Validated @RequestBody Notificaciones notificacion ) throws Exception {
@@ -38,6 +39,8 @@ public class NotificacionesController {
 		
 			
 	}
+	
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@PutMapping("editar")
     @ApiOperation(
             value = "Editar la Notificacion correspondiente al id",
@@ -53,6 +56,7 @@ public class NotificacionesController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@DeleteMapping("eliminar/{id}")
     @ApiOperation(
             value = "Elimina la Notificacion correspondiente al id",
@@ -71,6 +75,7 @@ public class NotificacionesController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarTodos")
 	@ApiOperation(value="Metodo que retorna todas las Notificaciones creadas")
 	public ResponseEntity<List<Notificaciones>> retornarTodos() throws ModelNotFoundException{
@@ -78,4 +83,11 @@ public class NotificacionesController {
 		return new ResponseEntity<List<Notificaciones>>(service.mostrarNotificaciones(), HttpStatus.OK);
 
 	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
+		@GetMapping("/listarDocente/{id}")
+		public ResponseEntity<List<Asesoria>> listarDocente(@PathVariable int id) {
+			List<Notificaciones> list = service.listarDocente(id);
+			return new ResponseEntity(list, HttpStatus.OK);
+		}
 }

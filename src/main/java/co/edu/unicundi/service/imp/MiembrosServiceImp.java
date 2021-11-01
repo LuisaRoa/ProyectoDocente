@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicundi.dto.MiembrosDto;
 import co.edu.unicundi.entity.Comite;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.InformeSalidas;
@@ -32,9 +33,9 @@ public class MiembrosServiceImp implements IMiembrosService {
 	List<Miembros> mien = new ArrayList<Miembros>();
 
 	@Override
-	public void guardarNativo(Miembros miembros) {
+	public void guardarNativo(MiembrosDto miembros) {
 		// TODO Auto-generated method stub
-
+		repo.guardar(miembros.getDocente(), miembros.getComite());
 	}
 
 	@Override
@@ -48,6 +49,8 @@ public class MiembrosServiceImp implements IMiembrosService {
 		
 		return lista;
 	}
+
+	
 
 
 }

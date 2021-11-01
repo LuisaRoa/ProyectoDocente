@@ -29,13 +29,13 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/comite")
-@PreAuthorize("hasAuthority('docente')")
 @CrossOrigin
 public class ComiteController {
 	
 	@Autowired
 	private ComiteService service;
 	
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@PostMapping("/guardar")
 	@ApiOperation(value="Metodo que crea a un comite con su información")
 	public ResponseEntity<?> guardar (@Validated @RequestBody Comite comite) throws Exception {
@@ -44,6 +44,8 @@ public class ComiteController {
 		
 			
 	}
+	
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@PutMapping("editar")
     @ApiOperation(
             value = "Editar al comite correspondiente al id",
@@ -59,6 +61,7 @@ public class ComiteController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@DeleteMapping("eliminar/{id}")
     @ApiOperation(
             value = "Elimina el comite correspondiente al id",
@@ -77,6 +80,7 @@ public class ComiteController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarTodos")
 	@ApiOperation(value="Metodo que retorna todos los comites creados")
 	public ResponseEntity<List<Comite>> retornarTodos() throws ModelNotFoundException{
@@ -85,6 +89,7 @@ public class ComiteController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarId/{id}") 
 	@ApiOperation(value="Metodo que retorna a un comite por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception  {
@@ -94,11 +99,21 @@ public class ComiteController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarDocente/{id}")
 	@ApiOperation(value="Metodo que retorna todos los comites del docente")
 	public ResponseEntity<List<Comite>> retornarDocente(@PathVariable int id) throws ModelNotFoundException{
 		
 		return new ResponseEntity<List<Comite>>(service.listarPorIdDocente(id), HttpStatus.OK);
+
+	}
+	
+	@PreAuthorize("hasAuthority('Administrativo')")
+	@GetMapping("/retornarAdministrativo/{id}")
+	@ApiOperation(value="Metodo que retorna todos los comites del docente")
+	public ResponseEntity<List<Comite>> retornarAdministrativo(@PathVariable int id) throws ModelNotFoundException{
+		
+		return new ResponseEntity<List<Comite>>(service.listarPorIdAdministrativo(id), HttpStatus.OK);
 
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 //Ejecución de creación del token, las otras fueron de configuración
 @Configuration
@@ -57,7 +58,8 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter{
 	@Override
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
 		configurer.inMemory().withClient(clientId).secret(bcrypt.encode(clientSecret)).authorizedGrantTypes(grantType)
-		.scopes(scopeRead, scopeWrite).resourceIds(resourceIds).accessTokenValiditySeconds(6000)
+		.scopes(scopeRead, scopeWrite).resourceIds(resourceIds).accessTokenValiditySeconds(10800)
+
 		.refreshTokenValiditySeconds(0);
 	}	
 	

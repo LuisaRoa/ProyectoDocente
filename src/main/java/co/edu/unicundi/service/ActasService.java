@@ -32,7 +32,6 @@ public class ActasService {
 
     public void update (Actas evid) {
     	Actas e = getOne(evid.getId()).get();
-    	e.setName(evid.getName());
     	e.setNombre(evid.getNombre());
     	e.setPeriodo(evid.getPeriodo());
     	e.setLugar(evid.getLugar());

@@ -37,7 +37,6 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/informeSalidas")
-@PreAuthorize("hasAuthority('docente')")
 @CrossOrigin
 public class InformeSalidasController {
 	@Autowired
@@ -46,12 +45,14 @@ public class InformeSalidasController {
 	@Autowired
 	InformeSalidasService adjuntar;
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/list")
 	public ResponseEntity<List<InformeSalidas>> list() {
 		List<InformeSalidas> list = adjuntar.list();
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
@@ -68,6 +69,7 @@ public class InformeSalidasController {
         return new ResponseEntity<InformeSalidas>(informeSalidas, HttpStatus.OK);
     }
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar al formato correspondiente al id",
@@ -83,6 +85,7 @@ public class InformeSalidasController {
 
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) throws IOException {
 		if (!adjuntar.exists(id))
@@ -93,6 +96,7 @@ public class InformeSalidasController {
 		return new ResponseEntity(new Mensaje("informe Salida eliminado"), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarId/{id}")
 	@ApiOperation(value = "Metodo que retorna a un formato por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception {
@@ -101,6 +105,7 @@ public class InformeSalidasController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/listarDocente/{id}")
 	public ResponseEntity<List<InformeSalidas>> listarDocente(@PathVariable int id) {
 		List<InformeSalidas> list = adjuntar.listarDocente(id);

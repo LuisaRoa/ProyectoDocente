@@ -25,88 +25,85 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.edu.unicundi.dto.Mensaje;
-import co.edu.unicundi.entity.InformeRecuperacionClase;
+import co.edu.unicundi.entity.Cronograma;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.CloudinaryService;
-import co.edu.unicundi.service.RecuperacionClaseService;
+import co.edu.unicundi.service.CronogramaService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/recuperacionclase")
+@RequestMapping("/cronograma")
 @CrossOrigin
-public class RecuperacionClaseController {
+public class CronogramaController {
 	@Autowired
 	CloudinaryService cloudinaryService;
 
 	@Autowired
-	RecuperacionClaseService adjuntar;
+	CronogramaService cronograma;
 
 	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/list")
-	public ResponseEntity<List<InformeRecuperacionClase>> list() {
-		List<InformeRecuperacionClase> list = adjuntar.list();
+	public ResponseEntity<List<Cronograma>> list() {
+		List<Cronograma> list = cronograma.list();
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAuthority('Docente')")
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
-        /*if(bi == null){
-            return new ResponseEntity(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
-        }*/
         Map result = cloudinaryService.upload(multipartFile);
-        InformeRecuperacionClase recuperacionClase =
-                new InformeRecuperacionClase(0,(String)result.get("original_filename"),
+        Cronograma evidencia =
+                new Cronograma(0,(String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null, null, null, null, null, null, null, 0, null, null, null, null);
+                        (String)result.get("public_id"), null, null, null, null, null);
                        /* (String)result.get("size")*/
-        adjuntar.save(recuperacionClase);
-        return new ResponseEntity<InformeRecuperacionClase>(recuperacionClase, HttpStatus.OK);
+        cronograma.save(evidencia);
+        return new ResponseEntity<Cronograma>(evidencia, HttpStatus.OK);
     }
 
-	@PreAuthorize("hasAuthority('Docente')")
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@PutMapping("/editar")
     @ApiOperation(
-            value = "Editar al formato correspondiente al id",
-            notes = "Editar al formato correspondiente al id"
+            value = "Editar al cronograma correspondiente al id",
+            notes = "Editar al cronograma correspondiente al id"
             )
             @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = InformeRecuperacionClase.class ),
+            @ApiResponse(code = 200, message = "OK", response = Cronograma.class ),
             @ApiResponse(code = 503, message = "Servicio no Disponible", response = String.class),
             @ApiResponse(code = 500, message = "Error inesperado del sistema") })
-	public ResponseEntity<InformeRecuperacionClase> editar(@Validated @RequestBody InformeRecuperacionClase recuperacionClase) throws Exception, ModelNotFoundException{
-		adjuntar.update(recuperacionClase);
-		return new ResponseEntity<InformeRecuperacionClase>(recuperacionClase, HttpStatus.CREATED);
+	public ResponseEntity<Cronograma> editar(@Validated @RequestBody Cronograma evidencia) throws Exception, ModelNotFoundException{
+		cronograma.update(evidencia);
+		return new ResponseEntity<Cronograma>(evidencia, HttpStatus.CREATED);
 
 	}
 
-	@PreAuthorize("hasAuthority('Docente')")
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) throws IOException {
-		if (!adjuntar.exists(id))
+		if (!cronograma.exists(id))
 			return new ResponseEntity<Object>(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-		InformeRecuperacionClase recuperacionClase = adjuntar.getOne(id).get();
-		Map result = cloudinaryService.delete(recuperacionClase.getInformeId());
-		adjuntar.delete(id);
-		return new ResponseEntity(new Mensaje("AcuerdoPedagogico eliminado"), HttpStatus.OK);
+		Cronograma evidencia = cronograma.getOne(id).get();
+		Map result = cloudinaryService.delete(evidencia.getCronogramaId());
+		cronograma.delete(id);
+		return new ResponseEntity(new Mensaje("Cronograma eliminado"), HttpStatus.OK);
 	}
 
 	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarId/{id}")
-	@ApiOperation(value = "Metodo que retorna a un formato por su id")
+	@ApiOperation(value = "Metodo que retorna a un Acta por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception {
-		InformeRecuperacionClase recuperacionClase = adjuntar.getOne(id).get();
-		return new ResponseEntity<InformeRecuperacionClase>(recuperacionClase, HttpStatus.OK);
+		Cronograma evidencia = cronograma.getOne(id).get();
+		return new ResponseEntity<Cronograma>(evidencia, HttpStatus.OK);
 
 	}
 	
 	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
-	@GetMapping("/listarDocente/{id}")
-	public ResponseEntity<List<InformeRecuperacionClase>> listarDocente(@PathVariable int id) {
-		List<InformeRecuperacionClase> list = adjuntar.listarDocente(id);
+	@GetMapping("/listarComite/{id}")
+	public ResponseEntity<List<Cronograma>> listarComite(@PathVariable int id) {
+		List<Cronograma> list = cronograma.listarComite(id);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }

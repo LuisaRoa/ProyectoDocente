@@ -48,12 +48,14 @@ public class ActasController {
 	@Autowired
 	ActasService actas;
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/list")
 	public ResponseEntity<List<Actas>> list() {
 		List<Actas> list = actas.list();
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
@@ -70,6 +72,7 @@ public class ActasController {
         return new ResponseEntity<Actas>(evidencia, HttpStatus.OK);
     }
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar al Acta correspondiente al id",
@@ -85,6 +88,7 @@ public class ActasController {
 
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) throws IOException {
 		if (!actas.exists(id))
@@ -95,6 +99,7 @@ public class ActasController {
 		return new ResponseEntity(new Mensaje("Acta eliminada"), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarId/{id}")
 	@ApiOperation(value = "Metodo que retorna a un Acta por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception {
@@ -103,6 +108,7 @@ public class ActasController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/listarComite/{id}")
 	public ResponseEntity<List<Actas>> listarComite(@PathVariable int id) {
 		List<Actas> list = actas.listarComite(id);

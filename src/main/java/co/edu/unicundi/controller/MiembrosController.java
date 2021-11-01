@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.unicundi.dto.MiembrosDto;
+import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.Miembros;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IDocenteRepo;
@@ -25,20 +28,22 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/miembros")
+@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo') OR hasAuthority('Administrador') ")
 public class MiembrosController {
 	
 	@Autowired	
 	private IMiembrosService service;
 	
 	
-	/*@PostMapping("/guardar")
+	@PostMapping("/guardar")
 	@ApiOperation(value="Metodo que crea a un miembro con su información")
-	public ResponseEntity<?> guardar (@Validated @RequestBody Miembros mien) throws Exception {
-		service.guardar(mien);
-		return new ResponseEntity<Miembros>(mien, HttpStatus.CREATED);
+	public ResponseEntity<?> guardar (@Validated @RequestBody MiembrosDto mien) throws Exception {
+		service.guardarNativo(mien);
+		return new ResponseEntity<MiembrosDto>(mien, HttpStatus.CREATED);
 		
 			
 	}
+	/*
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar al Miembro correspondiente al id",
@@ -94,4 +99,5 @@ public class MiembrosController {
 		return new ResponseEntity<List<Miembros>>(service.listarPorIdDocente(id), HttpStatus.OK);
 
 	}
+	
 }

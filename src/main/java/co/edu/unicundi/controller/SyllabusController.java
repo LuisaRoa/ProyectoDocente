@@ -49,12 +49,14 @@ public class SyllabusController {
 	@Autowired
 	SyllabusService adjuntar;
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/list")
 	public ResponseEntity<List<Syllabus>> list() {
 		List<Syllabus> list = adjuntar.list();
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
@@ -71,6 +73,7 @@ public class SyllabusController {
         return new ResponseEntity<Syllabus>(syllabus, HttpStatus.OK);
     }
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar al formato correspondiente al id",
@@ -86,6 +89,7 @@ public class SyllabusController {
 
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) throws IOException {
 		if (!adjuntar.exists(id))
@@ -96,6 +100,7 @@ public class SyllabusController {
 		return new ResponseEntity(new Mensaje("Syllabus eliminado"), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarId/{id}")
 	@ApiOperation(value = "Metodo que retorna a un formato por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception {
@@ -104,6 +109,7 @@ public class SyllabusController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/listarDocente/{id}")
 	public ResponseEntity<List<Syllabus>> listarDocente(@PathVariable int id) {
 		List<Syllabus> list = adjuntar.listarDocente(id);

@@ -70,8 +70,6 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 		docente.setRol(rol);
 
 		docente.setPassword(bcrypt.encode(docente.getDocumento()));
-
-		docente.setPassword(docente.getDocumento());
 		this.repo.save(docente);
 	}
 
@@ -84,7 +82,7 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 		pro.setDocumento(docente.getDocumento());
 		pro.setNombre(docente.getNombre());
 		pro.setCodigo(docente.getCodigo());
-		pro.setPassword(docente.getPassword());
+		pro.setPassword(bcrypt.encode(docente.getPassword()));
 		pro.setFechaNacimiento(docente.getFechaNacimiento());
 		pro.setSexo(docente.getSexo());
 		pro.setDireccion(docente.getDireccion());
@@ -93,19 +91,6 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 		pro.setCorreo(docente.getCorreo());
 		pro.setSede(docente.getSede());
 		pro.setAdministrativo(admi);
-		this.repo.save(pro);
-		pro.setNombre(docente.getNombre());
-		pro.setCodigo(docente.getCodigo());
-		pro.setPassword(docente.getPassword());
-		pro.setFechaNacimiento(docente.getFechaNacimiento());
-		pro.setSexo(docente.getSexo());
-		pro.setDireccion(docente.getDireccion());
-		pro.setCelular(docente.getCelular());
-		pro.setFechaIngreso(docente.getFechaIngreso());
-		pro.setCorreo(docente.getCorreo());
-		pro.setSede(docente.getSede());
-		pro.setAdministrativo(admi);
-		pro.setContrato(docente.getContrato());
 		this.repo.save(pro);
 	}
 
@@ -189,7 +174,13 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 	public void cambiarPassword(int idDocente, String password) throws ModelNotFoundException {
 		// TODO Auto-generated method stub
 		Docente pro = this.buscarId(idDocente);
-		pro.setPassword(password);
+		pro.setPassword(bcrypt.encode(password));
 		this.repo.save(pro);
+	}
+	
+	@Override
+	public List<Docente> listarNoMiembros(Integer id) {
+		List<Docente> docentes = repo.buscarNoMiembros(id);
+		return docentes;
 	}
 }

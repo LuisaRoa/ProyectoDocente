@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +38,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/administrativo")
-@PreAuthorize("hasAuthority('administrativo')")
+@CrossOrigin
 public class AdministrativoController {
 	
 	@Autowired
@@ -46,6 +47,7 @@ public class AdministrativoController {
 	@Autowired	
 	private IAdministrativoService service;
 	
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@PutMapping("/upload/{id}")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile, @PathVariable int id)throws ModelNotFoundException, Exception {
 		Administrativo administrativo = service.buscarId(id);
@@ -58,6 +60,7 @@ public class AdministrativoController {
 		return new ResponseEntity<Object>((String)result.get("url"), HttpStatus.CREATED);
     }
 
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping("/guardar")
 	@ApiOperation(value="Metodo que crea a un administrativo con su información")
 	public ResponseEntity<?> guardar (@Validated @RequestBody Administrativo admi) throws Exception {
@@ -66,6 +69,8 @@ public class AdministrativoController {
 		
 			
 	}
+	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar al Administrativo correspondiente al id",
@@ -81,6 +86,7 @@ public class AdministrativoController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@DeleteMapping("eliminar/{id}")
     @ApiOperation(
             value = "Elimina el Administrativo correspondiente al id",
@@ -98,6 +104,7 @@ public class AdministrativoController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrador')")
 	@GetMapping("/retornarTodos")
 	@ApiOperation(value="Metodo que retorna todos los Administrativo creados")
 	public ResponseEntity<List<Administrativo>> retornarTodos() throws ModelNotFoundException{
@@ -105,6 +112,8 @@ public class AdministrativoController {
 		return new ResponseEntity<List<Administrativo>>(service.mostrarAdministrativos(), HttpStatus.OK);
 
 	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrador') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarId/{id}") 
 	@ApiOperation(value="Metodo que retorna a un Administrativo por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception  {
@@ -114,6 +123,7 @@ public class AdministrativoController {
 
 	}
 
+	@PreAuthorize("hasAuthority('Administrador') OR hasAuthority('Administrativo')")
 	@GetMapping("/buscarCorreo/{correo}") 
 	@ApiOperation(value="Metodo que retorna el documento por su correo")
 	public ResponseEntity<?> buscarCorreo(@PathVariable String correo) throws ModelNotFoundException, Exception  {
@@ -123,6 +133,7 @@ public class AdministrativoController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@PutMapping("/cambiarPassword/{id}/{password}")
     public ResponseEntity<?> cambiarPassword(@PathVariable int id, @PathVariable String password)throws ModelNotFoundException, Exception {
         service.cambiarPassword(id, password);

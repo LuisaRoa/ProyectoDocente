@@ -45,12 +45,14 @@ public class AsesoriaController {
 	@Autowired
 	AsesoriaService adjuntar;
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/list")
 	public ResponseEntity<List<Asesoria>> list() {
 		List<Asesoria> list = adjuntar.list();
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
@@ -67,6 +69,7 @@ public class AsesoriaController {
         return new ResponseEntity<Asesoria>(asesoria, HttpStatus.OK);
     }
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@PutMapping("/editar")
     @ApiOperation(
             value = "Editar al formato correspondiente al id",
@@ -82,6 +85,7 @@ public class AsesoriaController {
 
 	}
 
+	@PreAuthorize("hasAuthority('Docente')")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) throws IOException {
 		if (!adjuntar.exists(id))
@@ -92,6 +96,7 @@ public class AsesoriaController {
 		return new ResponseEntity(new Mensaje("asesoria eliminada"), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/retornarId/{id}")
 	@ApiOperation(value = "Metodo que retorna a un formato por su id")
 	public ResponseEntity<?> retornarId(@PathVariable int id) throws ModelNotFoundException, Exception {
@@ -100,6 +105,7 @@ public class AsesoriaController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
 	@GetMapping("/listarDocente/{id}")
 	public ResponseEntity<List<Asesoria>> listarDocente(@PathVariable int id) {
 		List<Asesoria> list = adjuntar.listarDocente(id);

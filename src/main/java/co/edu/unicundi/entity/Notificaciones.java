@@ -20,6 +20,9 @@ public class Notificaciones {
 
 	@Column(name = "noti_observacion", length = 500, nullable = false)
 	private String noti_observacion;
+	
+	@Column(name = "noti_nombre_archivo", length = 100, nullable = false)
+	private String noti_nombreArchivo;
 
 	@Column(name = "noti_tipo_actividad", length = 100, nullable = false)
 	private String noti_actividad;
@@ -27,16 +30,21 @@ public class Notificaciones {
 	@ManyToOne
 	@JoinColumn(name = "docente_doce_id", nullable = false, foreignKey = @ForeignKey(name = "doce_id"))
 	private Docente docente;
+	
+	@Column(name = "noti_fecha", length = 30, nullable = false)
+	private String fecha;
 
 	public Notificaciones() {
 	}
 
-	public Notificaciones(Integer noti_id, String noti_observacion, String noti_actividad, Docente docente) {
+	public Notificaciones(Integer noti_id, String noti_observacion, String noti_actividad, Docente docente, String fecha, String noti_nombreArchivo) {
 		super();
 		this.noti_id = noti_id;
 		this.noti_observacion = noti_observacion;
 		this.noti_actividad = noti_actividad;
 		this.docente = docente;
+		this.fecha = fecha;
+		this.noti_nombreArchivo = noti_nombreArchivo;
 	}
 
 	public Integer getNoti_id() {
@@ -69,6 +77,22 @@ public class Notificaciones {
 
 	public void setDocente(Docente docente) {
 		this.docente = docente;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+	public String getNoti_nombreArchivo() {
+		return noti_nombreArchivo;
+	}
+
+	public void setNoti_nombreArchivo(String noti_nombreArchivo) {
+		this.noti_nombreArchivo = noti_nombreArchivo;
 	}
 	
 	
