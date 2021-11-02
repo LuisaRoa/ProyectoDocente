@@ -88,4 +88,9 @@ public class SyllabusService {
 		}
          return syllabus;
     }
+    
+    public List<Syllabus> listarAño(String año){
+ 
+         return repo.buscarPorAño(año);
+    }
 }

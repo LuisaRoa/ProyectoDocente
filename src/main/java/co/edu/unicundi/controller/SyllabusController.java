@@ -112,4 +112,11 @@ public class SyllabusController {
 		List<Syllabus> list = adjuntar.listarDocente(id);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
+	@GetMapping("/listarAño/{año}")
+	public ResponseEntity<List<Syllabus>> listarAño(@PathVariable String año) {
+		List<Syllabus> list = adjuntar.listarAño(año);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
 }
