@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,12 @@ public class ActasService {
     	e.setTipoArchivo(evid.getTipoArchivo());
     	e.setTamaño(evid.getTamaño());
     	e.setComite(evid.getComite());
+    	LocalDate fecha = LocalDate.parse(evid.getFecha());
+    	if((fecha.getMonthValue()>=1)&&(fecha.getMonthValue()<=6)) {
+    		e.setPeriodo("1");
+    	}else {
+    		e.setPeriodo("2");
+    	}
         repo.save(e);
     }
     public void save(Actas evi){

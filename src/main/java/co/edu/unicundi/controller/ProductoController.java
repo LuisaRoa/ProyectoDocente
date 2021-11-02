@@ -64,7 +64,7 @@ public class ProductoController {
         Productos evidencia =
                 new Productos(0,(String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null, null, null, null, null, null);
+                        (String)result.get("public_id"), null, null, null, null, null, null, null);
                        /* (String)result.get("size")*/
         prod.save(evidencia);
         return new ResponseEntity<Productos>(evidencia, HttpStatus.OK);
@@ -110,6 +110,20 @@ public class ProductoController {
 	@GetMapping("/listarComite/{id}")
 	public ResponseEntity<List<Productos>> listarComite(@PathVariable int id) {
 		List<Productos> list = prod.listarComite(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
+	@GetMapping("/reporteanual/{año}")
+	public ResponseEntity<List<Productos>> productosReporte(@PathVariable String año) throws ModelNotFoundException {
+		List<Productos> list = prod.mostrarProductosA(año);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
+	public ResponseEntity<List<Productos>> productosReporteP(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<Productos> list = prod.mostrarProductos(año, periodo);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }

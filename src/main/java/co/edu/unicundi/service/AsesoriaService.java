@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +48,12 @@ public class AsesoriaService {
     	e.setNucleo(asesoria.getNucleoTemático());
     	e.setPeriodo(asesoria.getPeriodo());
     	e.setDocente(docente);
+    	LocalDate fecha = LocalDate.parse(asesoria.getFecha());
+    	if((fecha.getMonthValue()>=1)&&(fecha.getMonthValue()<=6)) {
+    		e.setPeriodo("1");
+    	}else {
+    		e.setPeriodo("2");
+    	}
         repo.save(e);
     }
     public void save(Asesoria evi){

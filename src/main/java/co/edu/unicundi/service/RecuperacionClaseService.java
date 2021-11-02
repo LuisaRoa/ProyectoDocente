@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -66,6 +67,12 @@ public class RecuperacionClaseService {
     	e.setMateria(materia);
     	e.setDocente(docente);
     	e.setProgramaacademico(programa);
+    	LocalDate fecha = LocalDate.parse(recuperacionClase.getFecha());
+    	if((fecha.getMonthValue()>=1)&&(fecha.getMonthValue()<=6)) {
+    		e.setPeriodoAca("1");
+    	}else {
+    		e.setPeriodoAca("2");
+    	}
         repo.save(e);
     }
     public void save(InformeRecuperacionClase recuperacionClase){
@@ -90,4 +97,10 @@ public class RecuperacionClaseService {
 		}
          return lista;
     }
+    public List<InformeRecuperacionClase> mostrarRecuperacion(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.recuperacionsperiodo(año, periodo);
+	}
+    public List<InformeRecuperacionClase> mostrarRecuperacionA(String año) throws ModelNotFoundException {
+		return this.repo.numerodeRecuperacion(año);
+	}
 }

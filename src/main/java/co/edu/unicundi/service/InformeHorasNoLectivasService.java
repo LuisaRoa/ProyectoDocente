@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import co.edu.unicundi.entity.Facultad;
 import co.edu.unicundi.entity.InformeHorasNoLectivas;
 import co.edu.unicundi.entity.Materia;
 import co.edu.unicundi.entity.ProgramaAcademico;
+import co.edu.unicundi.entity.Syllabus;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IDocenteRepo;
 import co.edu.unicundi.repo.IFacultadRepo;
@@ -58,6 +60,7 @@ public class InformeHorasNoLectivasService {
     	e.setPeriodoAcadémico(informe.getPeriodoAcadémico());
     	e.setDocente(docente);
     	e.setProgramaacademico(programa);
+   
         repo.save(e);
     }
     public void save(InformeHorasNoLectivas informe){
@@ -82,4 +85,11 @@ public class InformeHorasNoLectivasService {
 		}
          return lista;
     }
+    
+    public List<InformeHorasNoLectivas> mostrarInforme(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.horasperiodo(año, periodo);
+	}
+    public List<InformeHorasNoLectivas> mostrarInformeA(String año) throws ModelNotFoundException {
+		return this.repo.numerodeHoras(año);
+	}
 }

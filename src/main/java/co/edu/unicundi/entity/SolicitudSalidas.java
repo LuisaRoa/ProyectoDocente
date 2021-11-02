@@ -56,7 +56,7 @@ public class SolicitudSalidas {
 	@Column(name = "sosa_tipo", length = 40, nullable = false)
 	private String tipo;
 	
-	@Column(name = "sosa_periodo", length = 40, nullable = false)
+	@Column(name = "sosa_periodo", length = 40, nullable = true)
 	private String periodo;
 	
 	@Column(name = "sosa_numeroestudiantes", length = 30, nullable = false)

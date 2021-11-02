@@ -16,6 +16,9 @@ import co.edu.unicundi.entity.Syllabus;
 public interface ISyllabusRepo extends JpaRepository<Syllabus, Integer>{
 	List<Syllabus> findByOrderById();
 	
+//	@Query(value = "select * from syllabus where fecha like %?1%", nativeQuery  = true)
+	//List<Syllabus> buscarPorAño(@Param("año") String año);
+
 	@Query(value="SELECT * FROM  syllabus where syllabus.fecha LIKE %?1% and syllabus.periodo_aca=?2", nativeQuery = true)
 	public List<Syllabus>numerodeSyllabus(@Param("año") String año, @Param("periodo") String periodo);
 	

@@ -109,4 +109,18 @@ public class RecuperacionClaseController {
 		List<InformeRecuperacionClase> list = adjuntar.listarDocente(id);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
+	@GetMapping("/reporteanual/{año}")
+	public ResponseEntity<List<InformeRecuperacionClase>> recReporte(@PathVariable String año) throws ModelNotFoundException {
+		List<InformeRecuperacionClase> list = adjuntar.mostrarRecuperacionA(año);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
+	public ResponseEntity<List<InformeRecuperacionClase>> recReporteP(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<InformeRecuperacionClase> list =adjuntar.mostrarRecuperacion(año, periodo);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
 }

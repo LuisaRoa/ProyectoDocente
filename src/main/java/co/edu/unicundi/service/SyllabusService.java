@@ -92,6 +92,12 @@ public class SyllabusService {
          return syllabus;
     }
     
+/*
+    public List<Syllabus> listarAño(String año){
+ 
+         return repo.buscarPorAño(año);
+    }
+*/
     
     public List<Syllabus> mostrarSyllabus(String año, String periodo) throws ModelNotFoundException {
 		return this.repo.numerodeSyllabus(año, periodo);

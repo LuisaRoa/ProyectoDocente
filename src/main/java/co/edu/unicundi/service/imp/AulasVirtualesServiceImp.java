@@ -1,5 +1,6 @@
 package co.edu.unicundi.service.imp;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,13 @@ public class AulasVirtualesServiceImp implements IAulaVirtualService{
 
 	
 	public void guardar(AulasVirtuales aulas) throws Exception {
+		
+		LocalDate fecha = LocalDate.parse(aulas.getFechacambio());
+    	if((fecha.getMonthValue()>=1)&&(fecha.getMonthValue()<=6)) {
+    		aulas.setPeriodo("1");
+    	}else {
+    		aulas.setPeriodo("2");
+    	}
 		this.repo.save(aulas);
 	}
 
@@ -73,5 +81,17 @@ public class AulasVirtualesServiceImp implements IAulaVirtualService{
 		}
          return aulasVirtuales;
     }
+
+	 
+	
+	@Override
+	public List<AulasVirtuales> mostrarAulasVirtuales(String año, String periodo) {
+		return this.repo.aulasperiodo(año, periodo);
+	}
+
+	@Override
+	public List<AulasVirtuales> mostrarAulasVirtualesA(String año) {
+		return this.repo.numerodeAulas(año);
+	}
 
 }

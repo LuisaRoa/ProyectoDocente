@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicundi.entity.Actas;
 import co.edu.unicundi.entity.Productos;
+import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IProductoRepo;
 
 @Service
@@ -36,6 +38,12 @@ public class ProductoService {
     	e.setComite(evid.getComite());
     	e.setNombre(evid.getNombre());
     	e.setProducto(evid.getProducto());
+    	LocalDate fecha = LocalDate.parse(evid.getFechaElaboración());
+    	if((fecha.getMonthValue()>=1)&&(fecha.getMonthValue()<=6)) {
+    		e.setPeriodo_aca("1");
+    	}else {
+    		e.setPeriodo_aca("2");
+    	}
         repo.save(e);
     }
     public void save(Productos evi){
@@ -60,4 +68,10 @@ public class ProductoService {
 		}
          return actas;
     }
+    public List<Productos> mostrarProductos(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.productosperiodo(año, periodo);
+	}
+    public List<Productos> mostrarProductosA(String año) throws ModelNotFoundException {
+		return this.repo.numerodeProductos(año);
+	}
 }

@@ -24,6 +24,7 @@ public class Productos {
 	private String fechaElaboracion;
 	private String tipoArchivo;
 	private String tamaño;
+	private String periodo_aca;
 	
 	@ManyToOne
 	@JoinColumn(name = "comite_comi_id", nullable = true, foreignKey = @ForeignKey(name = "comi_id"))
@@ -33,7 +34,7 @@ public class Productos {
 	}
 
 	public Productos(int id, String name, String productoUrl, String productoId, String producto, String nombre,
-			String fechaElaboracion, String tipoArchivo, String tamaño, Comite comite) {
+			String fechaElaboracion, String tipoArchivo, String tamaño, Comite comite, String periodo_aca) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -45,6 +46,16 @@ public class Productos {
 		this.tipoArchivo = tipoArchivo;
 		this.tamaño = tamaño;
 		this.comite = comite;
+		this.periodo_aca = periodo_aca;
+	}
+
+	
+	public String getPeriodo_aca() {
+		return periodo_aca;
+	}
+
+	public void setPeriodo_aca(String periodo_aca) {
+		this.periodo_aca = periodo_aca;
 	}
 
 	public int getId() {
