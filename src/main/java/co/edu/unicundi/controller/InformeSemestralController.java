@@ -38,10 +38,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/informeSemestral")
-<<<<<<< HEAD
 //@PreAuthorize("hasAuthority('docente')")
-=======
->>>>>>> 1650041c3c48027c053b64d4a5797a9a8c400116
 @CrossOrigin
 public class InformeSemestralController {
 	@Autowired
