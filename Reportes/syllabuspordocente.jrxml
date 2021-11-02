@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="formacionestudiante" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3dde7f15-dd19-4c19-b9bb-a6dcc20ef145">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<style name="Table_TH" mode="Opaque" backcolor="#6495ED">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFD6FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="c8cf3f07-f5bd-4704-ae0a-4b71d1f549ab">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+		<queryString language="SQL">
+			<![CDATA[SELECT  docente.doce_id, docente.doce_nombre, docente.doce_codigo, COUNT(syllabus.id) FROM syllabus, docente where doce_id = syllabus.docente_doce_id GROUP BY docente.doce_id, docente.doce_nombre, docente.doce_codigo ]]>
+		</queryString>
+		<field name="DOCE_ID" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="DOCE_ID"/>
+			<property name="com.jaspersoft.studio.field.label" value="DOCE_ID"/>
+		</field>
+		<field name="DOCE_NOMBRE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="DOCE_NOMBRE"/>
+			<property name="com.jaspersoft.studio.field.label" value="DOCE_NOMBRE"/>
+		</field>
+		<field name="DOCE_CODIGO" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="DOCE_CODIGO"/>
+			<property name="com.jaspersoft.studio.field.label" value="DOCE_CODIGO"/>
+		</field>
+		<field name="COUNT(SYLLABUS.ID)" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="COUNT(SYLLABUS.ID)"/>
+			<property name="com.jaspersoft.studio.field.label" value="COUNT(SYLLABUS.ID)"/>
+		</field>
+		<group name="DOCE_NOMBRE">
+			<groupExpression><![CDATA[$F{DOCE_NOMBRE}]]></groupExpression>
+		</group>
+		<group name="DOCE_CODIGO">
+			<groupExpression><![CDATA[$F{DOCE_CODIGO}]]></groupExpression>
+		</group>
+		<group name="COUNT(SYLLABUS.ID)">
+			<groupExpression><![CDATA[$F{COUNT(SYLLABUS.ID)}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<summary>
+		<band height="275" splitType="Stretch">
+			<componentElement>
+				<reportElement x="10" y="50" width="200" height="150" uuid="5f3c4a7c-ac72-4884-b885-f161e3af6186">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="0f4ab8b8-7f67-4280-8e0f-8bcc7934b4ef">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="66" uuid="553e6568-3656-4820-96dc-3b7c342d515d">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="66" height="30" uuid="5d2b1cb7-d10b-43e5-82e1-31c0f89e1c52"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[NOMBRE DOCENTE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="66" height="30" uuid="8fc798ca-f619-4006-896c-651b180112ab"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{DOCE_NOMBRE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="66" uuid="f2fc851f-6a01-4c5d-9e3c-7d095bfbabf9">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="66" height="30" uuid="a8eb2554-7178-4a49-b64b-e1ee2c08c3df"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[CODIGO DOCENTE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="66" height="30" uuid="ccfee81d-5e78-4506-9aca-f15dfcbb38b8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{DOCE_CODIGO}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="66" uuid="a74f4ae4-2ac1-45d6-89ad-f9703d8c8d6b">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="66" height="30" uuid="2cc272de-16cd-4fbb-aba8-cd7459bda504"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[CANTIDAD SYLLABUS]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="66" height="30" uuid="08bab2b3-6335-49dc-9656-57e0dc9e4ada"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{COUNT(SYLLABUS.ID)}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<stackedBarChart>
+				<chart evaluationTime="Report">
+					<reportElement x="330" y="50" width="200" height="200" uuid="f81c4fe4-0ea5-444c-9940-96f476ec6640"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="Dataset1" uuid="dc95f596-8747-4840-958d-4c99fefaaa4e"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{COUNT(SYLLABUS.ID)}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{DOCE_NOMBRE}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{COUNT(SYLLABUS.ID)}]]></valueExpression>
+						<labelExpression><![CDATA[$F{DOCE_NOMBRE}]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</stackedBarChart>
+			<staticText>
+				<reportElement x="50" y="10" width="360" height="30" uuid="9fec819b-96fb-4c21-a3b5-be7be4bd6aac"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO DE SYLLABUS POR DOCENTE]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

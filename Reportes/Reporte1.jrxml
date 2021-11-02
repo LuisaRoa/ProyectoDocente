@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reporte1" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a805968a-310b-42bd-8aea-ba5c5bb28698">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<style name="Table_TH" mode="Opaque" backcolor="#7FFF00">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#DFFFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="26d14016-3287-42ad-801b-5a5e707a62c6">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+		<queryString language="SQL">
+			<![CDATA[SELECT *  FROM ASESORIA ]]>
+		</queryString>
+		<field name="NOMBRE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="NOMBRE"/>
+			<property name="com.jaspersoft.studio.field.label" value="NOMBRE"/>
+		</field>
+		<field name="NUCLEO" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="NUCLEO"/>
+			<property name="com.jaspersoft.studio.field.label" value="NUCLEO"/>
+		</field>
+		<field name="SEMESTRE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="SEMESTRE"/>
+			<property name="com.jaspersoft.studio.field.label" value="SEMESTRE"/>
+		</field>
+		<field name="FECHA" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="FECHA"/>
+			<property name="com.jaspersoft.studio.field.label" value="FECHA"/>
+		</field>
+		<field name="DOCENTE_DOCE_ID" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="DOCENTE_DOCE_ID"/>
+			<property name="com.jaspersoft.studio.field.label" value="DOCENTE_DOCE_ID"/>
+		</field>
+		<group name="NOMBRE">
+			<groupExpression><![CDATA[$F{NOMBRE}]]></groupExpression>
+		</group>
+		<group name="NUCLEO">
+			<groupExpression><![CDATA[$F{NUCLEO}]]></groupExpression>
+		</group>
+		<group name="SEMESTRE">
+			<groupExpression><![CDATA[$F{SEMESTRE}]]></groupExpression>
+		</group>
+		<group name="FECHA">
+			<groupExpression><![CDATA[$F{FECHA}]]></groupExpression>
+		</group>
+		<group name="DOCENTE_DOCE_ID">
+			<groupExpression><![CDATA[$F{DOCENTE_DOCE_ID}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<summary>
+		<band height="361" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="40" width="300" height="200" uuid="bd60e8ac-aa2e-48ce-862c-21ac7dc62f74">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="ba6ea49c-a86a-44d2-b132-cc0e51a3826d">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="60" uuid="6f393a82-77ce-4a30-ba20-50357ddc9a2a">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="df223369-2d70-420c-85a7-8aff550be701"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[NOMBRE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="d55d7d07-2839-4582-840c-c09c59805b4a"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="959cbc64-43ba-4fa2-aa72-97d0bf49009e">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="44e3c334-c92f-4eba-8879-d78108a8a4f0"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[NUCLEO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="131f879c-bb63-4108-bccc-159d97c2a05b"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{NUCLEO}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="8f7377fd-7f53-46fc-a733-01c55e13f6d9">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="403ae122-a442-4aa4-a80f-e53badc5f006"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[SEMESTRE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="c41e851f-6ce8-47bb-a196-04e0d63bedea"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{SEMESTRE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="74b8ac95-c25a-4a36-aee6-3ba80086dd62">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="a40a7a18-d63e-46bc-bf63-291a365f95d6"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[FECHA]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="0bf641de-8f45-49ba-879a-2b5689c82bc3"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{FECHA}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="050a3ff2-4071-421b-81e7-6579ce4acf25">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="917fb763-c553-411f-97f2-3e7e0b8000a6"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[DOCENTE_DOCE_ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="9ea99152-e44a-4f46-bf49-1a225a24cef2"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{DOCENTE_DOCE_ID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="120" y="0" width="318" height="30" uuid="736297c8-57bb-418b-982a-cf95c471e9e0"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE ASESORIAS]]></text>
+			</staticText>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="310" y="70" width="250" height="200" uuid="42222eea-c0ae-49c3-adc8-3ca23c32ad31"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="Dataset1" uuid="d50200ac-cfd8-466e-9252-d5f3e0fa3d3c"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{NOMBRE}]]></keyExpression>
+					<valueExpression><![CDATA[$V{SEMESTRE_COUNT}]]></valueExpression>
+					<labelExpression><![CDATA[$F{SEMESTRE}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>

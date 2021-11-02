@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.unicundi.entity.Actas;
 import co.edu.unicundi.entity.AdjuntarEvidencia;
 import co.edu.unicundi.entity.Asesoria;
+import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IActasRepo;
 import co.edu.unicundi.repo.IAdjuntarEvidenciasRepo;
 
@@ -32,11 +34,18 @@ public class ActasService {
     public void update (Actas evid) {
     	Actas e = getOne(evid.getId()).get();
     	e.setNombre(evid.getNombre());
+    	e.setPeriodo(evid.getPeriodo());
     	e.setLugar(evid.getLugar());
     	e.setFecha(evid.getFecha());
     	e.setTipoArchivo(evid.getTipoArchivo());
     	e.setTamaño(evid.getTamaño());
     	e.setComite(evid.getComite());
+    	LocalDate fecha = LocalDate.parse(evid.getFecha());
+    	if((fecha.getMonthValue()>=1)&&(fecha.getMonthValue()<=6)) {
+    		e.setPeriodo("1");
+    	}else {
+    		e.setPeriodo("2");
+    	}
         repo.save(e);
     }
     public void save(Actas evi){
@@ -61,4 +70,11 @@ public class ActasService {
 		}
          return actas;
     }
+    
+    public List<Actas> mostrarActas(String año) throws ModelNotFoundException {
+		return this.repo.numerodeActas(año);
+	}
+    public List<Actas> mostrarActasP(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.actasperiodo(año, periodo);
+	}
 }

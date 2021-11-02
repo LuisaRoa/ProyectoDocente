@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="salidasacademicas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a8b125e5-d33c-44d8-8e9e-cc2e6bfd5eea">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFF00">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#F3F70C">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="29aa10e0-fe8c-430e-8c61-38583062224c">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+		<queryString language="SQL">
+			<![CDATA[SELECT  docente.doce_id, docente.doce_nombre, docente.doce_codigo, solicitudsalidas.sosa_semestre, COUNT(solicitudsalidas.sosa_id) FROM solicitudsalidas, docente where doce_id = solicitudsalidas.docente_doce_id and solicitudsalidas.sosa_estado = 'aprobado' GROUP BY docente.doce_id, docente.doce_nombre, docente.doce_codigo, solicitudsalidas.sosa_semestre]]>
+		</queryString>
+		<field name="DOCE_ID" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="DOCE_ID"/>
+			<property name="com.jaspersoft.studio.field.label" value="DOCE_ID"/>
+		</field>
+		<field name="DOCE_NOMBRE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="DOCE_NOMBRE"/>
+			<property name="com.jaspersoft.studio.field.label" value="DOCE_NOMBRE"/>
+		</field>
+		<field name="DOCE_CODIGO" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="DOCE_CODIGO"/>
+			<property name="com.jaspersoft.studio.field.label" value="DOCE_CODIGO"/>
+		</field>
+		<field name="SOSA_SEMESTRE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="SOSA_SEMESTRE"/>
+			<property name="com.jaspersoft.studio.field.label" value="SOSA_SEMESTRE"/>
+		</field>
+		<field name="COUNT(SOLICITUDSALIDAS.SOSA_ID)" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="COUNT(SOLICITUDSALIDAS.SOSA_ID)"/>
+			<property name="com.jaspersoft.studio.field.label" value="COUNT(SOLICITUDSALIDAS.SOSA_ID)"/>
+		</field>
+		<group name="DOCE_NOMBRE">
+			<groupExpression><![CDATA[$F{DOCE_NOMBRE}]]></groupExpression>
+		</group>
+		<group name="DOCE_CODIGO">
+			<groupExpression><![CDATA[$F{DOCE_CODIGO}]]></groupExpression>
+		</group>
+		<group name="SOSA_SEMESTRE">
+			<groupExpression><![CDATA[$F{SOSA_SEMESTRE}]]></groupExpression>
+		</group>
+		<group name="COUNT(SOLICITUDSALIDAS.SOSA_ID)">
+			<groupExpression><![CDATA[$F{COUNT(SOLICITUDSALIDAS.SOSA_ID)}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="0a7afa67-bd65-4bd0-8e27-dd7276e5c22b">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+		<queryString language="SQL">
+			<![CDATA[SELECT solicitudsalidas.sosa_semestre, COUNT(solicitudsalidas.sosa_id) FROM solicitudsalidas where solicitudsalidas.sosa_estado = 'aprobado' GROUP BY  solicitudsalidas.sosa_semestre]]>
+		</queryString>
+		<field name="SOSA_SEMESTRE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="SOSA_SEMESTRE"/>
+			<property name="com.jaspersoft.studio.field.label" value="SOSA_SEMESTRE"/>
+		</field>
+		<field name="COUNT(SOLICITUDSALIDAS.SOSA_ID)" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="COUNT(SOLICITUDSALIDAS.SOSA_ID)"/>
+			<property name="com.jaspersoft.studio.field.label" value="COUNT(SOLICITUDSALIDAS.SOSA_ID)"/>
+		</field>
+		<group name="SOSA_SEMESTRE">
+			<groupExpression><![CDATA[$F{SOSA_SEMESTRE}]]></groupExpression>
+		</group>
+		<group name="COUNT(SOLICITUDSALIDAS.SOSA_ID)">
+			<groupExpression><![CDATA[$F{COUNT(SOLICITUDSALIDAS.SOSA_ID)}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<summary>
+		<band height="333" splitType="Stretch">
+			<staticText>
+				<reportElement x="70" y="0" width="360" height="30" uuid="a293c0a0-d751-437e-ad4d-c6225824f2b0"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALIDAS ACADEMICAS POR SEMESTRE]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="20" y="57" width="200" height="178" uuid="ced62ce7-ec4b-47f3-9fcc-385c34074e67">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset2" uuid="b037a8c3-86a9-4f94-a2bf-dc2fcd136ba1">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="100" uuid="66e4f795-9bde-4569-b9ff-724690540c5a">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="100" height="30" uuid="04cbd0a3-3f32-4a3f-a453-3ddc5868fb2c"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[SEMESTRE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="30" uuid="5ba1e748-013c-42de-b46b-3725ea807ce1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{SOSA_SEMESTRE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="1cdcb8b2-4f60-44c7-b699-428abcba07e1">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="100" height="30" uuid="91bd28d8-4ce6-4b22-8438-18d88ac1c06b"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[CANTIDAD SALIDAS POR SEMESTRE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="30" uuid="e78e5b68-fd02-4ece-ad4f-ba708b2e15d5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{COUNT(SOLICITUDSALIDAS.SOSA_ID)}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<pie3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="330" y="70" width="200" height="200" uuid="c30cb041-6867-4916-a1f9-ff20691845f4"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="Dataset2" uuid="00c70c34-986d-49f5-9b7d-4e7df1654291"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{COUNT(SOLICITUDSALIDAS.SOSA_ID)}]]></keyExpression>
+					<valueExpression><![CDATA[$F{COUNT(SOLICITUDSALIDAS.SOSA_ID)}]]></valueExpression>
+					<labelExpression><![CDATA[$F{SOSA_SEMESTRE}]]></labelExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
+	</summary>
+</jasperReport>

@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import co.edu.unicundi.dto.Mensaje;
 import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.InformeSemestral;
+import co.edu.unicundi.entity.Syllabus;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.AsesoriaService;
 import co.edu.unicundi.service.CloudinaryService;
@@ -109,6 +110,18 @@ public class InformeSemestralController {
 	@GetMapping("/listarDocente/{id}")
 	public ResponseEntity<List<InformeSemestral>> listarDocente(@PathVariable int id) {
 		List<InformeSemestral> list = adjuntar.listarDocente(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/reporte/{año}/{periodo}")
+	public ResponseEntity<List<InformeSemestral>> InformeSemestralP(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<InformeSemestral> list = adjuntar.mostrarInformeP(año, periodo);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/reporteanual/{año}")
+	public ResponseEntity<List<InformeSemestral>> InformeSemestralA(@PathVariable String año) throws ModelNotFoundException {
+		List<InformeSemestral> list = adjuntar.mostrarInforme(año);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }

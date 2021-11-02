@@ -1,5 +1,6 @@
 package co.edu.unicundi.service.imp;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -63,7 +64,12 @@ public class SolicitudSalidaServiceImp implements ISolicitudSalidaService{
 				p.setSolicitudSalida(soli);
 			}
 		}
-		
+		LocalDate fecha = LocalDate.parse(soli.getFechaTerminación());
+    	if((fecha.getMonthValue()>=1)&&(fecha.getMonthValue()<=6)) {
+    		soli.setPeriodo("1");
+    	}else {
+    		soli.setPeriodo("2");
+    	}
 		this.repo.save(soli);
 	}
 		
@@ -126,4 +132,16 @@ public class SolicitudSalidaServiceImp implements ISolicitudSalidaService{
 		}
 		return lista;
 	}
+
+	@Override
+	public List<SolicitudSalidas> mostrarSolicitudes(String año) throws ModelNotFoundException {
+		return this.repo.numerodeSolicitudSalidas(año);
+	}
+
+	@Override
+	public List<SolicitudSalidas> mostrarSolicitudesP(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.SolicitudSalidasperiodo(año, periodo);
+	}
+	
+	
 }

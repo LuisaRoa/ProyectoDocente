@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="actasentregadas" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5dc1ffcd-f1bb-4a82-ac55-fed07ce6e25b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<subDataset name="Dataset1" uuid="c8a86ec1-06e1-46c3-bbe2-f9ed270672c0">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+		<queryString language="SQL">
+			<![CDATA[SELECT  comite.nombre, COUNT(actas.comite_comi_id) FROM comite, actas where comite.id= actas.comite_comi_id GROUP BY comite.nombre]]>
+		</queryString>
+		<field name="NOMBRE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="NOMBRE"/>
+			<property name="com.jaspersoft.studio.field.label" value="NOMBRE"/>
+		</field>
+		<field name="COUNT(ACTAS.COMITE_COMI_ID)" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="COUNT(ACTAS.COMITE_COMI_ID)"/>
+			<property name="com.jaspersoft.studio.field.label" value="COUNT(ACTAS.COMITE_COMI_ID)"/>
+		</field>
+		<group name="NOMBRE">
+			<groupExpression><![CDATA[$F{NOMBRE}]]></groupExpression>
+		</group>
+		<group name="COUNT(ACTAS.COMITE_COMI_ID)">
+			<groupExpression><![CDATA[$F{COUNT(ACTAS.COMITE_COMI_ID)}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<summary>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="8" width="430" height="30" uuid="7ca8c56c-2b00-4135-ba8d-4ab259efac9d"/>
+				<textElement>
+					<font size="16" isBold="false"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE ACTAS ENTREGADAS Y FIRMADAS]]></text>
+			</staticText>
+			<stackedBarChart>
+				<chart evaluationTime="Report">
+					<reportElement x="10" y="60" width="520" height="230" uuid="ce091ba1-4561-4376-8eca-19bf86c872ea"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="Dataset1" uuid="ae73561c-3ccc-44e9-995f-7a6429f8e580"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{COUNT(ACTAS.COMITE_COMI_ID)}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{NOMBRE}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{COUNT(ACTAS.COMITE_COMI_ID)}]]></valueExpression>
+						<labelExpression><![CDATA[$F{NOMBRE}]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</stackedBarChart>
+		</band>
+	</summary>
+</jasperReport>

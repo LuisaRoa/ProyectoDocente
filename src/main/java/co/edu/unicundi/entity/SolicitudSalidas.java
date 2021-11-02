@@ -56,6 +56,9 @@ public class SolicitudSalidas {
 	@Column(name = "sosa_tipo", length = 40, nullable = false)
 	private String tipo;
 	
+	@Column(name = "sosa_periodo", length = 40, nullable = true)
+	private String periodo;
+	
 	@Column(name = "sosa_numeroestudiantes", length = 30, nullable = false)
 	private int noEstudiantes;
 	
@@ -81,7 +84,7 @@ public class SolicitudSalidas {
 
 	public SolicitudSalidas(Integer sosa_id, String fechaSolicitud, String estado, String semestre,
 			String registradoPor, String fechaCambio, String fechaInicio, String fechaTerminacion, String nombre,
-			String tipo, int noEstudiantes, String tematica, Docente docente,
+			String tipo,String periodo, int noEstudiantes, String tematica, Docente docente,
 			ProgramaAcademico programaacademico, List<MateriaSalida> materiaSalida) {
 		super();
 		this.sosa_id = sosa_id;
@@ -94,11 +97,22 @@ public class SolicitudSalidas {
 		this.fechaTerminacion = fechaTerminacion;
 		this.nombre = nombre;
 		this.tipo = tipo;
+		this.periodo = periodo;
 		this.noEstudiantes = noEstudiantes;
 		this.tematica = tematica;
 		this.docente = docente;
 		this.programaacademico = programaacademico;
 		this.materiaSalida = materiaSalida;
+	}
+
+	
+	
+	public String getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
 	}
 
 	public Integer getSosa_id() {

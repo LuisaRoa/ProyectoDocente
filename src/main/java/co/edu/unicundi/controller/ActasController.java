@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import co.edu.unicundi.dto.Mensaje;
 import co.edu.unicundi.entity.Actas;
 import co.edu.unicundi.entity.AdjuntarEvidencia;
+import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.ActasService;
 import co.edu.unicundi.service.AdjuntarEvidenciaService;
@@ -37,6 +38,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/actas")
+//@PreAuthorize("hasAuthority('docente')")
 @CrossOrigin
 public class ActasController {
 	
@@ -64,7 +66,7 @@ public class ActasController {
         Actas evidencia =
                 new Actas(0,(String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null, null, null, null, null, null);
+                        (String)result.get("public_id"), null, null, null, null, null, null, null);
                        /* (String)result.get("size")*/
         actas.save(evidencia);
         return new ResponseEntity<Actas>(evidencia, HttpStatus.OK);
@@ -110,6 +112,18 @@ public class ActasController {
 	@GetMapping("/listarComite/{id}")
 	public ResponseEntity<List<Actas>> listarComite(@PathVariable int id) {
 		List<Actas> list = actas.listarComite(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/reporteanual/{año}")
+	public ResponseEntity<List<Actas>> actasReporte(@PathVariable String año) throws ModelNotFoundException {
+		List<Actas> list = actas.mostrarActas(año);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
+	public ResponseEntity<List<Actas>> aactasReporteP(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<Actas> list = actas.mostrarActasP(año, periodo);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }

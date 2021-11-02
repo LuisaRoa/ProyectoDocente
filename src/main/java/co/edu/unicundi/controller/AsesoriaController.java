@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.edu.unicundi.dto.Mensaje;
+import co.edu.unicundi.entity.AcuerdoPedagogico;
 import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.AsesoriaService;
@@ -35,6 +36,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/asesoria")
+//@PreAuthorize("hasAuthority('docente')")
 @CrossOrigin
 public class AsesoriaController {
 	@Autowired
@@ -61,7 +63,7 @@ public class AsesoriaController {
         Asesoria asesoria =
                 new Asesoria(0,(String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null, null, null, null, null, null, null);
+                        (String)result.get("public_id"), null, null, null, null, null, null, null, null);
                        /* (String)result.get("size")*/
         adjuntar.save(asesoria);
         return new ResponseEntity<Asesoria>(asesoria, HttpStatus.OK);
@@ -107,6 +109,18 @@ public class AsesoriaController {
 	@GetMapping("/listarDocente/{id}")
 	public ResponseEntity<List<Asesoria>> listarDocente(@PathVariable int id) {
 		List<Asesoria> list = adjuntar.listarDocente(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/reporteanual/{año}")
+	public ResponseEntity<List<Asesoria>> asesoriaReporte(@PathVariable String año) throws ModelNotFoundException {
+		List<Asesoria> list = adjuntar.mostrarAsesoria(año);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
+	public ResponseEntity<List<Asesoria>> asesoriaReporte(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<Asesoria> list = adjuntar.mostrarAsesoriaP(año, periodo);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }
