@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.edu.unicundi.dto.Mensaje;
+import co.edu.unicundi.entity.Actas;
 import co.edu.unicundi.entity.AdjuntarEvidencia;
 import co.edu.unicundi.entity.Imagen;
 import co.edu.unicundi.exception.ModelNotFoundException;
@@ -64,7 +65,7 @@ public class AdjuntarEvidenciaController {
         AdjuntarEvidencia evidencia =
                 new AdjuntarEvidencia(0,(String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null, null, null, null, null, null);
+                        (String)result.get("public_id"), null, null, null, null, null, null, null);
                        /* (String)result.get("size")*/
         adjuntar.save(evidencia);
         return new ResponseEntity<AdjuntarEvidencia>(evidencia, HttpStatus.OK);
@@ -120,5 +121,16 @@ public class AdjuntarEvidenciaController {
 		return new ResponseEntity(lista, HttpStatus.OK);
 	}
 	
+	@GetMapping("/reporteanual/{año}")
+	public ResponseEntity<List<AdjuntarEvidencia>> evidenciasReporte(@PathVariable String año) throws ModelNotFoundException {
+		List<AdjuntarEvidencia> list = adjuntar.mostrarEvidencias(año);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
+	public ResponseEntity<List<AdjuntarEvidencia>> evidenciasReporteP(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<AdjuntarEvidencia> list = adjuntar.mostrarEvidenciasP(año, periodo);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
 	
 }

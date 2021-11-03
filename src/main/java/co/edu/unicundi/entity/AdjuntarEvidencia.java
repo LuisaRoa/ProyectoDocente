@@ -22,6 +22,7 @@ public class AdjuntarEvidencia {
 		private String nombre;
 		private String fechaModificacion;
 		private String corte;
+		private String periodo;
 		private String tipoArchivo;
 		private String tamaño;
 		
@@ -34,8 +35,9 @@ public class AdjuntarEvidencia {
 		}
 		
 
-		public AdjuntarEvidencia(int id, String name, String eviendeciaUrl, String evidenciaId, String nombre, String fechaModificacion, String corte, String tipoArchivo,
-				AulasVirtuales aulasvirtuales, String tamaño) {
+		public AdjuntarEvidencia(int id, String name, String eviendeciaUrl, String evidenciaId, String nombre,
+				String fechaModificacion, String corte, String periodo, String tipoArchivo, String tamaño,
+				AulasVirtuales aulasvirtuales) {
 			super();
 			this.id = id;
 			this.name = name;
@@ -44,11 +46,21 @@ public class AdjuntarEvidencia {
 			this.nombre = nombre;
 			this.fechaModificacion = fechaModificacion;
 			this.corte = corte;
+			this.periodo = periodo;
 			this.tipoArchivo = tipoArchivo;
 			this.tamaño = tamaño;
 			this.aulasvirtuales = aulasvirtuales;
 		}
 
+
+		public String getPeriodo() {
+			return periodo;
+		}
+
+
+		public void setPeriodo(String periodo) {
+			this.periodo = periodo;
+		}
 
 
 		public int getId() {

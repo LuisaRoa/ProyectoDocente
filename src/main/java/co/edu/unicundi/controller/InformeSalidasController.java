@@ -25,12 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.edu.unicundi.dto.Mensaje;
+import co.edu.unicundi.entity.InformeHorasNoLectivas;
 import co.edu.unicundi.entity.InformeSalidas;
-import co.edu.unicundi.entity.InformeSemestral;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.CloudinaryService;
 import co.edu.unicundi.service.InformeSalidasService;
-import co.edu.unicundi.service.InformeSemestralService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -63,7 +62,7 @@ public class InformeSalidasController {
         InformeSalidas informeSalidas =
                 new InformeSalidas(0 , (String)result.get("original_filename"),
                         (String)result.get("url"),
-                        (String)result.get("public_id"), null, null, null, null, null, null);
+                        (String)result.get("public_id"), null, null, null, null, null, null, null);
                        /* (String)result.get("size")*/
         adjuntar.save(informeSalidas);
         return new ResponseEntity<InformeSalidas>(informeSalidas, HttpStatus.OK);
@@ -109,6 +108,20 @@ public class InformeSalidasController {
 	@GetMapping("/listarDocente/{id}")
 	public ResponseEntity<List<InformeSalidas>> listarDocente(@PathVariable int id) {
 		List<InformeSalidas> list = adjuntar.listarDocente(id);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@PreAuthorize("hasAuthority('Administrativo')")
+	@GetMapping("/reporteanual/{año}")
+	public ResponseEntity<List<InformeSalidas>> infoReporte(@PathVariable String año) throws ModelNotFoundException {
+		List<InformeSalidas> list = adjuntar.mostrarInformeA(año);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@PreAuthorize("hasAuthority('Administrativo')")
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
+	public ResponseEntity<List<InformeSalidas>> infosReporteP(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<InformeSalidas> list = adjuntar.mostrarInforme(año, periodo);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }

@@ -21,6 +21,7 @@ public class InformeSalidas {
 	private String informeId;
 	private String nombre;
 	private String fecha;
+	private String periodo;
 	private String tipoArchivo;
 	private String tamaño;
 	
@@ -36,8 +37,10 @@ public class InformeSalidas {
 		
 	}
 	
+	
+
 	public InformeSalidas(int id, String name, String informeUrl, String informeId, String nombre, String fecha,
-			String tipoArchivo, String tamaño, SolicitudSalidas solicitudSalida, Docente docente) {
+			String periodo, String tipoArchivo, String tamaño, SolicitudSalidas solicitudSalida, Docente docente) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -45,11 +48,25 @@ public class InformeSalidas {
 		this.informeId = informeId;
 		this.nombre = nombre;
 		this.fecha = fecha;
+		this.periodo = periodo;
 		this.tipoArchivo = tipoArchivo;
 		this.tamaño = tamaño;
 		this.solicitudSalida = solicitudSalida;
 		this.docente = docente;
 	}
+
+
+	public String getPeriodo() {
+		return periodo;
+	}
+
+
+
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
+	}
+
+
 
 	public int getId() {
 		return id;

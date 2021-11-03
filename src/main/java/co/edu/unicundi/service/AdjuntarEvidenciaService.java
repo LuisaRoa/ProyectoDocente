@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,12 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicundi.entity.AdjuntarEvidencia;
-import co.edu.unicundi.entity.AulasVirtuales;
-import co.edu.unicundi.entity.Docente;
-import co.edu.unicundi.entity.Imagen;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IAdjuntarEvidenciasRepo;
-import co.edu.unicundi.repo.IAulasVirtualesRepo;
 
 
 @Service
@@ -40,6 +37,12 @@ public class AdjuntarEvidenciaService {
     	e.setTipoArchivo(evid.getTipoArchivo());
     	e.setTamaño(evid.getTamaño());
     	e.setAulasvirtuales(evid.getAulaVirtual());
+    	LocalDate fecha = LocalDate.parse(evid.getFechaModificacion());
+    	if((fecha.getMonthValue()>=1)&&(fecha.getMonthValue()<=6)) {
+    		e.setPeriodo("1");
+    	}else {
+    		e.setPeriodo("2");
+    	}
         repo.save(e);
     }
     public void save(AdjuntarEvidencia evi){
@@ -75,4 +78,12 @@ public class AdjuntarEvidenciaService {
 		}
          return evidencia;
     }
+    
+    public List<AdjuntarEvidencia> mostrarEvidencias(String año) throws ModelNotFoundException {
+		return this.repo.numerodeEvidencias(año);
+	}
+    public List<AdjuntarEvidencia> mostrarEvidenciasP(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.evidenciasperiodo(año, periodo);
+	}
+    
 }

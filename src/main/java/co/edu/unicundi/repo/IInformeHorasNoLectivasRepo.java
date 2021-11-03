@@ -15,9 +15,9 @@ public interface IInformeHorasNoLectivasRepo extends JpaRepository<InformeHorasN
 
 	List<InformeHorasNoLectivas> findByOrderById();
 	
-	@Query(value="SELECT * FROM informehorasnolectivas where informehorasnolectivas.fecha LIKE %?1%", nativeQuery = true)
+	@Query(value="SELECT * FROM informehorasnolectivas where informehorasnolectivas.fecha_elaboración LIKE %?1%", nativeQuery = true)
 	public List<InformeHorasNoLectivas>numerodeHoras(@Param("año") String año);
 	
-	@Query(value="SELECT * FROM informehorasnolectivas where informehorasnolectivas.fecha LIKE %?1% and informehorasnolectivas.periodo_aca=?2", nativeQuery = true)
+	@Query(value="SELECT * FROM informehorasnolectivas where informehorasnolectivas.fecha_elaboración LIKE %?1% and informehorasnolectivas.periodo_aca=?2", nativeQuery = true)
 	public List<InformeHorasNoLectivas>horasperiodo(@Param("año") String año, @Param("periodo") String periodo);
 }

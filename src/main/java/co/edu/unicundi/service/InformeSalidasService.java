@@ -1,5 +1,6 @@
 package co.edu.unicundi.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,12 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.unicundi.entity.Asesoria;
 import co.edu.unicundi.entity.Docente;
 import co.edu.unicundi.entity.InformeSalidas;
-import co.edu.unicundi.entity.InformeSemestral;
-import co.edu.unicundi.entity.Materia;
-import co.edu.unicundi.entity.ProgramaAcademico;
 import co.edu.unicundi.entity.SolicitudSalidas;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.repo.IDocenteRepo;
@@ -55,6 +52,12 @@ public class InformeSalidasService {
     	e.setFecha(informeSalida.getFecha());
     	e.setDocente(docente);
     	e.setSolicitudSalida(salida);
+    	LocalDate fecha = LocalDate.parse(informeSalida.getFecha());
+    	if((fecha.getMonthValue()>=1)&&(fecha.getMonthValue()<=6)) {
+    		e.setPeriodo("1");
+    	}else {
+    		e.setPeriodo("2");
+    	}
         repo.save(e);
     }
     public void save(InformeSalidas informeSalida){
@@ -79,4 +82,11 @@ public class InformeSalidasService {
 		}
          return lista;
     }
+    
+    public List<InformeSalidas> mostrarInforme(String año, String periodo) throws ModelNotFoundException {
+		return this.repo.salidasperiodo(año, periodo);
+	}
+    public List<InformeSalidas> mostrarInformeA(String año) throws ModelNotFoundException {
+		return this.repo.salidasaño(año);
+	}
 }
