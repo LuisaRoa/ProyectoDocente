@@ -105,6 +105,19 @@ public class AulasVirtualesController {
 				
 
 	}
-
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
+	@GetMapping("/reporteanual/{año}")
+	public ResponseEntity<List<AulasVirtuales>> aulasVirtualesReporte(@PathVariable String año) throws ModelNotFoundException {
+		List<AulasVirtuales> list = service.mostrarAulasVirtualesA(año);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
+	public ResponseEntity<List<AulasVirtuales>> aulasVirtualesReporteP(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<AulasVirtuales> list = service.mostrarAulasVirtuales(año, periodo);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
 
 }

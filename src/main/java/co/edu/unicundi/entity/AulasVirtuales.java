@@ -39,6 +39,9 @@ public class AulasVirtuales {
 
 	@Column(name = "auvi_sede", length = 30, nullable = false)
 	private String sede;
+	
+	@Column(name = "auvi_periodo_aca", length = 30, nullable = false)
+	private String periodo;
 
 	@Column(name = "auvi_registradopor", length = 30, nullable = false)
 	private String registradoPor;
@@ -58,7 +61,7 @@ public class AulasVirtuales {
 	public AulasVirtuales() {
 	}
 
-	public AulasVirtuales(Integer auvi_id, String nombre, Integer grupo, String semestre, String sede,
+	public AulasVirtuales(Integer auvi_id, String nombre, Integer grupo, String semestre, String sede,String periodo,
 			String registradopor, String fechacambio, Docente docente, Materia materia) {
 		super();
 		this.auvi_id = auvi_id;
@@ -66,12 +69,23 @@ public class AulasVirtuales {
 		this.grupo = grupo;
 		this.semestre = semestre;
 		this.sede = sede;
+		this.periodo = periodo;
 		this.registradoPor = registradopor;
 		this.fechaCambio = fechacambio;
 		this.docente = docente;
 		this.materia = materia;
 
 	}	
+
+	
+	
+	public String getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
+	}
 
 	public Integer getAuvi_id() {
 		return auvi_id;

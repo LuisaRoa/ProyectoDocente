@@ -110,4 +110,18 @@ public class InformeHorasNoLectivasController {
 		List<InformeHorasNoLectivas> list = adjuntar.listarDocente(id);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
+	@GetMapping("/reporteanual/{año}")
+	public ResponseEntity<List<InformeHorasNoLectivas>> infoReporte(@PathVariable String año) throws ModelNotFoundException {
+		List<InformeHorasNoLectivas> list = adjuntar.mostrarInformeA(año);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
+	
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo')")
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
+	public ResponseEntity<List<InformeHorasNoLectivas>> infosReporteP(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
+		List<InformeHorasNoLectivas> list = adjuntar.mostrarInforme(año, periodo);
+		return new ResponseEntity(list, HttpStatus.OK);
+	}
 }

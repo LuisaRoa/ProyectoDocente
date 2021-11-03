@@ -18,5 +18,9 @@ public interface IAulaVirtualService {
 	public void eliminar(int id) throws ModelNotFoundException;
 	
 	public List<AulasVirtuales>listarDocente(int id) ;
+	
+	public List<AulasVirtuales> mostrarAulasVirtuales(String año, String periodo) ;
+	
+	public List<AulasVirtuales> mostrarAulasVirtualesA(String año) ;
 
 }
