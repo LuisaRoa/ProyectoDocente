@@ -113,13 +113,15 @@ public class AcuerdoPedagogicoController {
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 	
-	//@PreAuthorize("hasAuthority('docente') AND hasAuthority('Administrativo')")
-	@GetMapping("/reporte/{año}/{periodo}")
+	@PreAuthorize("hasAuthority('Administrativo')")
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
 	public ResponseEntity<List<AcuerdoPedagogico>> acuerdoreporte(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
 		List<AcuerdoPedagogico> list = adjuntar.mostrarAcuerdoPedagogico(año, periodo);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
-	@GetMapping("/reporteAnual/{año}")
+	
+	@PreAuthorize("hasAuthority('Administrativo')")
+	@GetMapping("/reporteanual/{año}")
 	public ResponseEntity<List<AcuerdoPedagogico>> acuerdoreportea(@PathVariable String año) throws ModelNotFoundException {
 		List<AcuerdoPedagogico> list = adjuntar.mostrarAcuerdoPedagogicoA(año);
 		return new ResponseEntity(list, HttpStatus.OK);

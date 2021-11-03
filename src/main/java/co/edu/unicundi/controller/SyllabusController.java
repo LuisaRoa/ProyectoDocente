@@ -116,12 +116,14 @@ public class SyllabusController {
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("/reporte/{año}/{periodo}")
+	@PreAuthorize("hasAuthority('Administrativo')")
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
 	public ResponseEntity<List<Syllabus>> syllabusreporte(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
 		List<Syllabus> list = adjuntar.mostrarSyllabus(año, periodo);
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasAuthority('Administrativo')")
 	@GetMapping("/reporteanual/{año}")
 	public ResponseEntity<List<Syllabus>> syllabusReporte(@PathVariable String año) throws ModelNotFoundException {
 		List<Syllabus> list = adjuntar.mostrarSyllabusA(año);

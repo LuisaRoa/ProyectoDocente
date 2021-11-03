@@ -113,7 +113,7 @@ public class InformeSemestralController {
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("/reporte/{año}/{periodo}")
+	@GetMapping("/reporteperiodo/{año}/{periodo}")
 	public ResponseEntity<List<InformeSemestral>> InformeSemestralP(@PathVariable String año, @PathVariable String periodo) throws ModelNotFoundException {
 		List<InformeSemestral> list = adjuntar.mostrarInformeP(año, periodo);
 		return new ResponseEntity(list, HttpStatus.OK);
