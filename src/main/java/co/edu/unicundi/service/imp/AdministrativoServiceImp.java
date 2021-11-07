@@ -67,11 +67,10 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 			}
 
 		} else {
-			Rol rol = repoRol.findById(2).orElseThrow(() -> new ModelNotFoundException("rol no  exontrado"));
+			Rol rol = repoRol.findById(admi.getRol().getRol_id()).orElseThrow(() -> new ModelNotFoundException("rol no  exontrado"));
 			admi.setRol(rol);
 			admi.setPassword(bcrypt.encode(admi.getDocumento()));
 
-			admi.setPassword(admi.getDocumento());
 			this.repo.save(admi);
 		}
 	}
@@ -136,4 +135,5 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 		pro.setPassword(bcrypt.encode(password));
 		this.repo.save(pro);
 	}
+
 }

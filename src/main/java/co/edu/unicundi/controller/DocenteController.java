@@ -113,7 +113,7 @@ public class DocenteController {
 
 	}
 	
-	@PreAuthorize("hasAuthority('Administrador') OR hasAuthority('Administrativo')")
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo') OR hasAuthority('Administrador')")
 	@GetMapping("/retornarTodos")
 	@ApiOperation(value="Metodo que retorna todos los docentes creados")
 	public ResponseEntity<List<Docente>> retornarTodos() throws ModelNotFoundException{

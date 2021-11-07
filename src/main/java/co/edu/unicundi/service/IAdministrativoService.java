@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import co.edu.unicundi.entity.Administrativo;
 import co.edu.unicundi.entity.Docente;
+import co.edu.unicundi.entity.Rol;
 import co.edu.unicundi.exception.ModelNotFoundException;
 
 
@@ -17,6 +18,7 @@ public interface IAdministrativoService {
 	public List<Administrativo>mostrarAdministrativos() throws ModelNotFoundException;
 	
 	public void guardar(Administrativo admi) throws Exception;
+	
 	
 	public void editar(Administrativo admi) throws Exception, ModelNotFoundException;
 	

@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import co.edu.unicundi.entity.Administrativo;
 import co.edu.unicundi.entity.Docente;
+import co.edu.unicundi.entity.Rol;
 import co.edu.unicundi.exception.ModelNotFoundException;
 import co.edu.unicundi.service.CloudinaryService;
 import co.edu.unicundi.service.IAdministrativoService;
@@ -70,6 +71,8 @@ public class AdministrativoController {
 			
 	}
 	
+	
+	
 	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping("/editar")
     @ApiOperation(
@@ -104,7 +107,7 @@ public class AdministrativoController {
 
 	}
 	
-	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrador')")
+	@PreAuthorize("hasAuthority('Docente') OR hasAuthority('Administrativo') OR hasAuthority('Administrador')")
 	@GetMapping("/retornarTodos")
 	@ApiOperation(value="Metodo que retorna todos los Administrativo creados")
 	public ResponseEntity<List<Administrativo>> retornarTodos() throws ModelNotFoundException{
