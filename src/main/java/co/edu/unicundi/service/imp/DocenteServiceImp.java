@@ -192,7 +192,7 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 			if(f) {
 				
 			}else {
-				new ModelNotFoundException("Password no encontrada");
+				 throw new ModelNotFoundException("Password no encontrada");
 			}
 		}
 	}

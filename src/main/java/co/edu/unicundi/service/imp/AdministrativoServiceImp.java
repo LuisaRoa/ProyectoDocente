@@ -144,7 +144,7 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 			if(f) {
 				
 			}else {
-				new ModelNotFoundException("Password no encontrada");
+				throw new ModelNotFoundException("Password no encontrada");
 			}
 		}
 		
