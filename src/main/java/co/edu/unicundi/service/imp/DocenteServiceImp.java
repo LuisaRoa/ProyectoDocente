@@ -66,7 +66,7 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 
 		}
 		// docentes.add(docente);
-		Rol rol = repoRol.findById(docente.getRol().getRol_id()).orElseThrow(() -> new ModelNotFoundException("rol no  exontrado"));
+		Rol rol = repoRol.findById(22).orElseThrow(() -> new ModelNotFoundException("rol no  exontrado"));
 		docente.setRol(rol);
 
 		docente.setPassword(bcrypt.encode(docente.getDocumento()));
