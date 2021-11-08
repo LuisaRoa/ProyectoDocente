@@ -165,5 +165,11 @@ public class DocenteController {
 		return new ResponseEntity<List<Docente>>(service.listarNoMiembros(id), HttpStatus.OK);
 
 	}
+	@PreAuthorize("hasAuthority('Docente')")
+	@GetMapping("/buscarPassword/{id}/{password}")
+    public ResponseEntity<?> buscar(@PathVariable int id, @PathVariable String password)throws ModelNotFoundException, Exception {
+        service.buscarPassword(id, password);
+		return new ResponseEntity<Object>("", HttpStatus.OK);
+    }
 
 }

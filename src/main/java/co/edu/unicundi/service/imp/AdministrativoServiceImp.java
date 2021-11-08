@@ -136,4 +136,18 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 		this.repo.save(pro);
 	}
 
+	@Override
+	public void buscarPassword(int idAdministrativo, String password) throws ModelNotFoundException {
+		Administrativo pro = this.buscarId(idAdministrativo);
+			String pass = bcrypt.encode(password);
+			if(pass.equals(pro.getPassword())) {
+				
+			}else {
+				new ModelNotFoundException("Password no encontrada");
+			}
+		
+	}
+	
+	
+
 }

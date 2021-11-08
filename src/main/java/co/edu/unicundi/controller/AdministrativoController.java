@@ -133,7 +133,6 @@ public class AdministrativoController {
 		Administrativo admin = service.buscarCorreo(correo);
 		return new ResponseEntity<Administrativo>(admin, HttpStatus.OK);	
 				
-
 	}
 	
 	@PreAuthorize("hasAuthority('Administrativo')")
@@ -141,6 +140,13 @@ public class AdministrativoController {
     public ResponseEntity<?> cambiarPassword(@PathVariable int id, @PathVariable String password)throws ModelNotFoundException, Exception {
         service.cambiarPassword(id, password);
 		return new ResponseEntity<Object>("", HttpStatus.CREATED);
+    }
+	
+	@PreAuthorize("hasAuthority('Administrativo')")
+	@GetMapping("/buscarPassword/{id}/{password}")
+    public ResponseEntity<?> buscar(@PathVariable int id, @PathVariable String password)throws ModelNotFoundException, Exception {
+        service.buscarPassword(id, password);
+		return new ResponseEntity<Object>("", HttpStatus.OK);
     }
 
 }
