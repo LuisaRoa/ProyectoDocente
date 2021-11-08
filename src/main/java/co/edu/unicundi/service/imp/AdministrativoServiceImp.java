@@ -139,12 +139,14 @@ public class AdministrativoServiceImp implements IAdministrativoService {
 	@Override
 	public void buscarPassword(int idAdministrativo, String password) throws ModelNotFoundException {
 		Administrativo pro = this.buscarId(idAdministrativo);
-			String pass = bcrypt.encode(password);
-			if(pass.equals(pro.getPassword())) {
+		if(password != null) {
+			boolean f= bcrypt.matches(password, pro.getPassword());
+			if(f) {
 				
 			}else {
 				new ModelNotFoundException("Password no encontrada");
 			}
+		}
 		
 	}
 	

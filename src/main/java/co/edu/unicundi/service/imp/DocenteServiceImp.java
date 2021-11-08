@@ -185,14 +185,16 @@ public class DocenteServiceImp implements IDocenteService, UserDetailsService {
 	}
 
 	public void buscarPassword(int idDocente, String password) throws ModelNotFoundException {
+		
 		Docente pro = this.buscarId(idDocente);
-			String pass = bcrypt.encode(password);
-			if(pass.equals(pro.getPassword())) {
+		if(password != null) {
+			boolean f= bcrypt.matches(password, pro.getPassword());
+			if(f) {
 				
 			}else {
 				new ModelNotFoundException("Password no encontrada");
 			}
-		
+		}
 	}
 	
 	
